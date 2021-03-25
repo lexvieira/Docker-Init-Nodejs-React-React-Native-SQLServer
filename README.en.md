@@ -1,10 +1,10 @@
-# NLW1 - Ecoleta na Tailândia - Com Docker e SQL Server Container
+# Init Projects Backend (Node.js), Frontend (React) and Mobile (React Native) using Docker and Docker Compose.
 
 Read this in other languages: [English](README.en.md), [Portuguese](README.md).
 
-Esse projeto foi baseado no Projeto `Ecoleta` da :rocket:[Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack) :wave:, projeto **Show**. Muito felizmente bate com o projeto da minha monografia, que trata sobre como usar tecnologia, como Apps, IoT, Big Data para melhorar o processo de reciclágem no Brasil.
+This project was based on the `Ecoleta` Project by: rocket: [Rocketseact] (https://github.com/rocketseat-education/nlw-01-omnistack): wave :, project **Show**. Very happily it matches the project of my monograph, which deals with how to use technology, such as Apps, IoT, Big Data to improve the recycling process in Brazil.
 
-Projeto Desenvolvido com as seguintes tecnologias, feito do zero, tendo algumas diferenças do projeto inicial:
+Project Developed with the following technologies, made from scratch, with some differences from the initial project:
 
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
@@ -13,85 +13,63 @@ Projeto Desenvolvido com as seguintes tecnologias, feito do zero, tendo algumas 
 - [NPM (Gerenciador de Pacotes)](https://www.npmjs.com/)
 - [Typescript]()
 
-Adicional para quem está aprendendo Docker.
+Additional for those who are learning Docker.
 
-- [Docker](https://www.docker.com/) - **Nova Feature** (Rodo todo o projeto usando Docker, instalando somente o `Docker` na sua máquina)
-- [SQL Server using Docker](https://hub.docker.com/_/microsoft-mssql-server/) - **Nova Feature** (SQL Server em segundos com apenas alguns comandos)
+- [Docker](https://www.docker.com/) - **New Feature** (Run the entire project using Docker, installing only `Docker` on your machine)
+- [SQL Server using Docker](https://hub.docker.com/_/microsoft-mssql-server/) - **New Feature** (SQL Server in seconds with just a few commands)
 
-<p align="center">
-  <img alt="Ecoleta Docker" title="#Ecoleta" src="img/ecoletaproject.png" width="600px"/>
-</p>
+The objective of the project is to create a complete environment using [Docker] (https://www.docker.com/) and [Docker-compose] (https://docs.docker.com/compose), without the need to have that create the complete environment on your machine.
 
-## 💻 Projeto Ecoleta com Docker e Docker Compose
+Docker allows us to create compact images of various types of systems with specific functions, see a little more in this other Github article / project [Docker-Sql-Server] (https://github.com/lexvieira/Docker-Sql-Server ) that explains more about docker and shows in practice how to upload and restore a SQL Server database using docker. Available in English and Portuguese. 
 
-Projeto para conectar a comunidade à pontos de reciclágem espalhados na cidade. Cadastre pontos de coleta e encontre-os utilizando seu smartphone.
+Feel free to test and contribute.
 
-## :rocket: Tecnologias
+Our project will be created using the following technologies:
 
-## 🔖 Layout
+* [Docker] (https://www.docker.com/) - Create container and run projects without having to create the entire environment on your machine.
+* [Docker-compose] (https://docs.docker.com/compose) - Raise the entire environment with just the `docker-compose up` command.
+* [Node.js] (https://nodejs.org/en/) - Backend of our application, responsible for the business part
+* [React] (https://reactjs.org) - Frontend, responsible for the interaction with the user.
+* [React Native] (https://facebook.github.io/react-native/) - Mobile app developed for multiplatform, Android and IOS.
+* [Expo] (https://expo.io/), responsible for compiling the mobile project.
+* [SQL Server] (https://hub.docker.com/_/microsoft-mssql-server/) Microsoft relational database.
+* [NPM (Package Manager)] (https://www.npmjs.com/) to install the packages in our 3 applications.
 
-
-## 🤔 Como contribuir
-
-- Faça um fork desse repositório;
-- Cria uma branch com a sua feature: `git checkout -b minha-feature`;
-- Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
-- Faça push para a sua branch: `git push origin minha-feature`.
-
-Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
-
-## :memo: Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
----
-
-## Ecoleta usando NodeJS (Backend), React (Web) and React Native (Mobile) e Banco de Dados rodando com Docker e Docker Compose. 
-
----
-O objetivo the projeto é criar um ambiente completo usando [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), sem a necessidade de ter que criar o ambiente completo em sua máquina. 
-
-O Docker nos permite criar imagens compactas de variados tipos de sistemas com funções especificas, veja em pouco mais nesse outro artigo/projeto do Github [Docker-Sql-Server](https://github.com/lexvieira/Docker-Sql-Server) que explica mias sobre docker e mostra na prática como subir e restaurar um banco de dados SQL Server usando docker. Disponível em Inglês e em Português. Sinta-se à vontade para testar e contribuir.
-
-Nosso projeto será criado utilizando as seguintes tecnologias: 
-
-* [Docker](https://www.docker.com/) - Cria container e rode projetos sem precisar criar todo o ambiente na sua máquina. 
-* [Docker-compose](https://docs.docker.com/compose) - Suba todo o ambiente com somente comando `docker-compose up`. 
-* [Node.js](https://nodejs.org/en/) - Backend da nossa aplicação, responsável pela parte de negócios
-* [React](https://reactjs.org) - Frontend, responsável pela interação com o usuário. 
-* [React Native](https://facebook.github.io/react-native/) - Mobile app desenvolvido para multiplataforma, Android e IOS. 
-* [Expo](https://expo.io/), responsável por compilar o projeto mobile.
-* [SQL Server](https://hub.docker.com/_/microsoft-mssql-server/) Banco de dados relacional da Microsoft.
-* [NPM (Gerenciador de Pacotes)](https://www.npmjs.com/) para instalarmos os pacotes nas nossas 3 aplicações.
-
-## Agora, mãos na massa. `Now, hands on.`  
+## `Now, hands on.`  
 
 ## [Summary](#summary)
 
-1. [Criar DockerFile para rodar os projetos Backend, Frontend e Mobile.](createdockerfile) `Create Docker File`
-2. [Projeto Backend usando Docker Backend Project using Docker](#Initiatebackendproject).
+1. [Create Dockerfile to run the Backend, Frontend and Mobile projects.](#createdockerfile) `Create Docker File`
+2. [Backend Project using Docker](#initiatebackendproject).
    
-    2.1 [Iniciando projeto backend com NPM init Starting backend project with NPM init](#Initiatebackendproject) 
+    2.1 [Init backend project with NPM](#createbackendwithdocker) 
 
-    2.2. [Crie docker-compose.yml e adicione configuração de back-end Create docker-compose.yml and add backend configuration](#Createdockercompose). 
+    2.2. [Create docker-compose.yml and add backend configuration](#createdockercomposebackend). 
 
-    2.3. [Configurar docker com SQL Server](). `Configure Docker with SQL Server`
+    2.3. [Configure Docker with SQL Server](#createdockerwithsqlserver).
 
-    2.4. [Adicionar SQL Server ao Docker Compose](). `Configure Docker with SQL Server`
+    2.4. [Add SQL Server to Docker Compose](#createdockercomposesql). 
   
-3. [Iniciar FrontEnd com React usando Dockerfile]()
+3. [Start FrontEnd with React using Dockerfile](#initiatefrontendproject)
+   
+    3.1. [Adding Frontend configuration in the docker-compose.yml.](#createdockercomposefrontend). 
 
-4. [Iniciar Mobile](), `Initiate Projects Backend, FrontEnd and Mobile using Docker`
+4. [Start Mobile Project with Expo](#initiatemobileproject), 
     
+    4.1. [Adding Mobile configuration to docker-compose.yml and Run all projects together](#createdockercomposemobile).     
 
+5. [Connect Project Backend (server) with SQL Server and return Data to Frontend (web)](#connectallprojects)
+
+
+<br><br>
 
 ---
+## 1 - <a id="createdockerfile">Create Dockerfile and Build the Image for initiate the Backend, FrontEnd and Mobile</a> 
+[Comeback](#summary)
 
-## 1 - <a id="createdockerfile">Criando nosso Dockerfile para rodar comandos no nosso Backend, Frontend e Mobile. `Create Dockerfile and Build the Image for initiate the Backend, FrontEnd and Mobile`</a> [Comeback](#summary)
+Create a file at the root folder of your project with the name `Dockerfile` and insert the below code.
 
-Crie um arquivo na pasta raiz do seu projeto com o nom `Dockerfile` e insira o código abaixo. `Create a file at the root folder of your project with the name `Dockerfile` and insert the below code.` 
-
-* Obs: O Dockerfile será utilizado a principio para rodar os 3 projetos, porque é mais fácil para executar os commandos e ambos os projetos utilizam **Node.js** e o **NPM** na mesma versão, porém ao final será a base somente para o projeto mobile que necessita utilizar o **expo-cli**.Para ambos Backend e Frontend nós vamos utilizar o **docker-compose** para rodar nosso projeto. `Obs: The Dockerfile will be used at the beginning to run both 3 projects, because is easy to run the commands and both projects use **Node.js** and **NPM** at the same version, however at the end only the last project will use the image buit using the Dockerfile that need to use the **expo-cli**. For both, Backend and Frontend we will use the **docker-compose** to run our project` 
+* Note: The Dockerfile will be used at the beginning to run both 3 projects, because is easy to run the commands and both projects use **Node.js** and **NPM** at the same version, however at the end only the last project will use the image buit using the Dockerfile that need to use the **expo-cli**. For both, Backend and Frontend we will use the **docker-compose** to run our project.
 
 ```
 FROM node:12.20.2
@@ -109,7 +87,7 @@ USER 1000
 CMD ["node", "-v"]
 ```
 
-Rodar o comando para construir a imagem docker do projeto. Nome da imagem deve ser em minúsculo [DockerFile](https://docs.docker.com/engine/reference/builder/). `Run the command below to build the project's docker image. Image name must be lowercase` [DockerFile](https://docs.docker.com/engine/reference/builder/) .
+Run the command below to build the project's docker image. Image name must be lowercase [DockerFile](https://docs.docker.com/engine/reference/builder/ .
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ docker build -t nlw1ecoleta:v01 .
@@ -143,7 +121,7 @@ Successfully built 9a595b4dbf07
 Successfully tagged nlw1ecoleta:v01
 ```
 
-Crie 3 pastas para as aplicações backend (server), web (web), mobile (mobile). É importante criar as pastas antes de rodar os comandos no docker para que a pasta não fique com permissões de root, não permitindo criar novos arquivos dentro delas. `Create 3 folders for the aplications backend (server), web (web), mobile (mobile). It is important to create the folders before run the docker commands for that the folders don't stay with root permissions, not allowing to create new files inside them`
+Create 3 folders for the aplications backend (server), web (web), mobile (mobile). It is important to create the folders before run the docker commands for that the folders don't stay with root permissions, not allowing to create new files inside them.
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer mkdir server & mkdir web & mkdir mobile 
@@ -154,9 +132,9 @@ Crie 3 pastas para as aplicações backend (server), web (web), mobile (mobile).
 Dockerfile  mobile/  README.md  server/  web/
 ```
 
-Para criarmos/iniarmos cada um dos projetos **backend, web e mobile**, rodaremos alguns comandos para cada tipo de projeto, sendo: 
+To create / start each of the ** backend, web and mobile ** projects, we will run some commands for each type of project, being:
 
-* **backend** - Iniciar projeto backend
+* **backend** - Start backend project
 ```
   npm init -y 
 ```
@@ -173,29 +151,39 @@ Basicamente com esses 3 comandos você pode iniciar um projeto Backend, Frontend
 
 Não se preocupe, vamos passar por cada um dos ambientes detalhadamente rodando os comandos dentro de um **docker container** :)
 
-# 2 - <a id="startbackendwithdockerfile">Projetos Backend usando Docker. `2 - Inicitiate backend using Docker`</a> [Come Back](#summary).
+---
+# 2 - <a id="initiatebackendproject"> Backend Project using Docker</a> 
+[Come Back](#summary).
 
-Nesse caso vamos executer o **docker run** para criar um container temporário e rodar nossos comandos. `In this case let's use the **docker run** to create a temporary container to run our commands`
+In this case let's use the **docker run** to create a temporary container to run our commands
 
 ```
   docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash
   node@70184f946a9a:/opt/ui$
 ```
-* **docker run** - Cria um container temporário e roda os comandos dentro dele e para o container quando terminado. ` creates a temporary container, executes the command in it and stops the container when it is done.`
-* **-ti** - Modo interativo, permite rodar comandos de texto no terminal. `Interative mode, allowing to run text commands in the terminal` 
-* **-v "$(pwd)":/opt/ui** - Cria um volume dividido em duas partes. Antes do :(colon), pasta na sua máquina. Depois dos :, pasta dentro do container. $(pwd), retorna o seu diretório atual (word directory). `Create a volume divided in 2 parts. Before :(colon), your local folder. After :, folder inside the container. $(pwd), returns your local directory (work directory)`
-* **nlw1ecoleta:v01** - Nome da imagem (sempre em minúsculo) e tag, depois dos :(dois pontos). [Tags](https://docs.docker.com/engine/reference/commandline/tag/) podem indicar versões, como :v01 ou :ultima, :latest, :v01.test.  `Image name (always lowercase) and tag, after :(colon). [Tags](https://docs.docker.com/engine/reference/commandline/tag/) can indicate versions, like :v01 or :latest, :v01.test.` 
-* **/bin/bash** -  **shell** mais comum usado como shell padrão para login do usuário do sistema linux. O nome do shell é um acrônimo para **Bourne-again shell**. `most common **shell** used as default shell for user login of the linux system. The shell's name is an acronym for **Bourne-again shell**.` 
+* **docker run** - Creates a temporary container, executes the command in it and stops the container when it is done.
+* **-ti** - Interative mode, allowing to run text commands in the terminal.
+* **-v "$(pwd)":/opt/ui** - Create a volume divided in 2 parts. Before :(colon), your local folder. After :, folder inside the container. $(pwd), returns your local directory (work directory).
+* **nlw1ecoleta:v01** - Image name (always lowercase) and tag, after :(colon). [Tags](https://docs.docker.com/engine/reference/commandline/tag/) can indicate versions, like :v01 or *:latest, :v01.test*. 
+* **/bin/bash** -  **shell** - Most common **shell** used as default shell for user login of the linux system. The shell's name is an acronym for **Bourne-again shell**.
 
-## 2.1 - <a id="Initiatebackendproject">**Iniciando Projeto Backend com NPM. Initiating backend project with NPM**</a> [Comeback](#summary)
+## 2.1 - <a id="createbackendwithdocker">Starting backend project with NPM init</a> 
+[Comeback](#summary)
 
 * **npm vs yarn** (https://stackoverflow.com/questions/62806728/how-to-tell-if-a-project-uses-yarn)
 
-Como saber se um projeto usa Yarn ou NPM? Ambos contêm um arquivo package.json, embora as dependências do Yarn contenham um arquivo na pasta chamada yarn.lock. `How does one know if a project uses Yarn or NPM? Both contain a package.json file, although Yarn dependencies contain a file in the folder called yarn.lock.` 
+How does one know if a project uses Yarn or NPM? Both contain a package.json file, although Yarn dependencies contain a file in the folder called yarn.lock. 
 
-Ambos usam package.json com o mesmo formato JSON, mas o NPM 5 gera um arquivo package-lock.json, enquanto o Yarn gera um arquivo yarn.lock.`Both use package.json with the same JSON format, but NPM 5 generates a package-lock.json file, whereas Yarn generates a yarn.lock file.`
+Both use package.json with the same JSON format, but NPM 5 generates a package-lock.json file, whereas Yarn generates a yarn.lock file.
 
-* `npm init -y` - Cria um projeto com as opções padrão. `Create project with default options`
+If you have not yet accessed your docker container, access it with the following command in your **project's root folder**:
+
+```
+  docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash
+  node@70184f946a9a:/opt/ui$
+```
+
+* `npm init -y` - Create project with default options
 
 ```
 node@70184f946a9a:/opt/ui$ ls
@@ -222,23 +210,23 @@ Wrote to /opt/ui/server/package.json:
 
 ```
 
-Para conseguirmos rodar nosso **backend** com sucesso precisaremos instalar mais alguns pacotes(packages). Não se preocupe, para cada pacote instalado teremos uma pequena explicação. `Para conseguirmos rodar nosso ** backend ** com precisaremos instalar mais alguns pacotes (packages). Não se preocupe, para cada pacote instalado teremos uma pequena explicação.`
+Para conseguirmos rodar nosso ** backend ** com precisaremos instalar mais alguns pacotes (packages). Não se preocupe, para cada pacote instalado teremos uma pequena explicação.
 
-Agora que você iniciou seu projeto você pode sair do terminal digitando **exit**.
+Now that you have started your project you can exit the terminal by typing **exit**.
 
 ```Shell
 node@70184f946a9a:/opt/ui$ exit
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗
 ```
 
-Acesse a **pasta server** dentro do seu projeto. Access the **server folder** within your project. Existem outras formas de executar os comandos direto da pasta root, mas nesse para facilitar vamos rodar os comandos dentro da pasta de cada projeto, **Backend (server), Web e Mobile**. Access the ** server folder ** within your project. Access the ** server folder ** within your project. There are other ways to execute the commands directly from the root folder, but in this one we will run the commands inside the folder of each project, **Backend (server), Web and Mobile**. 
+Access the **server folder** within your project. Access the **server folder** within your project. There are other ways to execute the commands directly from the root folder, but in this one we will run the commands inside the folder of each project, **Backend (server), Web and Mobile**. Access the **server folder** within your project. Access the **server folder** within your project. There are other ways to execute the commands directly from the root folder, but in this one we will run the commands inside the folder of each project, **Backend (server), Web and Mobile**.
 
 ```
   ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ cd server
   ➜  server git:(master) ✗ ls
 ```
 
-Agora conseguimos subir nosso servidor com apenas um comando, alem disso podemos rodar outros comandos e adicionar novos pacotes da mesma forma. somente adicionando o comando necessário como último **parametro** do commando. `Now we can run our server with only one command, beyond this, we can run other commands and add new packages of the same way, only adding the command necessary as the last **parameter** of the command.`
+Now we can run our server with only one command, beyond this, we can run other commands and add new packages of the same way, only adding the command necessary as the last **parameter** of the command.
 
 No exemplo abaixo já estariamos rodando o nosso servidor, adicionando a porta de entrada e saída, o volume e o comando **npm run dev** para rodar o servidor. 
 
@@ -246,115 +234,142 @@ No exemplo abaixo já estariamos rodando o nosso servidor, adicionando a porta d
 ➜  docker run -ti -p 81:3333 -v "$(pwd)/server":/opt/ui nlw1ecoleta:v01 npm run dev 
 ```
 
-Nesse caso, o container é iniciado, executa os comandos necessários e depois **encerra o container**. Veja mais em: [Docker Exec Command With Examples](https://devconnected.com/docker-exec-command-with-examples/#:~:text=The%20difference%20between%20%E2%80%9Cdocker%20run,container%20when%20it%20is%20done). `In this case, the container is started, execute the commands and after **stops the container**. See more at: [Docker Exec Command With Examples](https://devconnected.com/docker-exec-command-with-examples/#:~:text=The%20difference%20between%20%E2%80%9Cdocker%20run,container%20when%20it%20is%20done)`
+In this case, the container is started, execute the commands and after **stops the container**. See more at: [Docker Exec Command With Examples](https://devconnected.com/docker-exec-command-with-examples/#:~:text=The%20difference%20between%20%E2%80%9Cdocker%20run,container%20when%20it%20is%20done)
 
 Vamos simplificar os comandos usando docker, uma vez que os comandos começarão ficarão um pouco grandes, quando começarmos a adicionar, volume, portas, envio de variaveis etc.
 
-Por exemplo, ser formos adicionar o pacote para trabalhar com o Banco de Dados Sql Server, você precisa  
+For example, if we are going to add the package to work with the Sql Server Database, you need to use `npm install mssql`.
 
 ```
 docker run -ti -v $(pwd)/server:/opt/ui nlw1ecoleta:v01 npm install mssql
 ```
 
-OK, o comando é executado, mas é um pouco grande, as vezes podemos esquecer algum parâmetro e por ai vai, porém é bem fácil resolver isso com o  **Alias (nome curto para um comando)** . `OK, the command is executed, but it is a little big, sometimes we can forget some parameter and so on, but it is very easy to solve this with the **Alias (short name for a command)**`
+OK, the command is executed, but it is a little big, sometimes we can forget some parameter and so on, but it is very easy to solve this with the **Alias (short name for a command)**
 
 Embora você possa sempre repetir esses comandos sempre que precisar :stuck_out_tongue_winking_eye:.
 
-### Usando Alias `Using Alias` veja mais em [Github Semana Omnistack 10 #Alias Bonus](https://github.com/lexvieira/semana-omnistack-10/tree/run_on_docker#alias-bonus target="_blank") `see more in [Github Semana Omnistack 10 #Alias Bonus](https://github.com/lexvieira/semana-omnistack-10/tree/run_on_docker#alias-bonus target="_blank")`
+### Using Alias, see more in [Github Semana Omnistack 10 #Alias Bonus](https://github.com/lexvieira/semana-omnistack-10/tree/run_on_docker#alias-bonus target="_blank").
 
-Execute o comando no terminal ou adicione ao seu arquivo **.bashrc | .zshrc** dependendo do seu tipo de terminal. `Execute the command in your terminal or add into your file **.bashrc | .zshrc** depending on your type of terminal.
+Execute the command in your terminal or add into your file **.bashrc | .zshrc** depending on your type of terminal.
 
 ```
 alias dockerNlw1server='docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01'
 ```
 
-* Observações: 
-  * O commando alias é **temporário**, significa que você terá que rodar o comando novamente quando fazer o login novamente na sua máquina, ou a melhor opção é adicionar o comando ã um dos arquivos **.bashrc | .zshrc**. `The alias command is ** temporary **, it means that you will have to run the command again when you log in to your machine again, or the best option is to add the command to one of the files **. Bashrc | .zshrc **.`
+* Notes: 
+  * The alias command is ** temporary **, it means that you will have to run the command again when you log in to your machine again, or the best option is to add the command to one of the files **. Bashrc | .zshrc **.
   
-  * O comando adionado ao alias deve estar com entre (') aspas ou (") aspas duplas. `The command added to the alias must be enclosed in (') quotation marks or (") double quotation marks.`
+  * The command added to the alias must be enclosed in (') quotation marks or (") double quotation marks.
 
-  * Não incluímos as portas para acessar nosso container no **Alias** porque usaremos o **docker-compose** para fazer isso. `We did not include the ports to access our container in ** Alias ** because we will use ** docker-compose ** to do this.` 
+  * We did not include the ports to access our container in ** Alias ** because we will use ** docker-compose ** to do this.
 
-Nesse caso você reduziu o nome do seu comando para apenas o alias **dockerNlw1server** e agora quando precisar executar algum comando é só digitar o nome do **alias** e o comando desejado na frente. Exemplo: `In this case you have reduced the name of your command to just the alias **dockerNlw1server** and now when you need to execute a command just type the name of the **alias** and the desired command in front. Example:`
+In this case you have reduced the name of your command to just the alias **dockerNlw1server** and now when you need to execute a command just type the name of the **alias** and the command in front. We can also use another name as **dockerNlw1**, since we will use it in Web and Mobile projects, but in this case our alias will be **dockerNlw1server**.
+Example:
 
 ```
+cd server
 ➜  server git:(master) ✗ dockerNlw1server ls                                                           
 Output: node_modules  package-lock.json  package.json  src  tsconfig.json
 ➜  server git:(master) ✗ 
 ```
 
-Agora você pode instalar os pacotes apenas digitando: `➜  dockerNlw1server npm install [nome do pacote]`. Now  you can **install the packages** just by typing: `➜ dockerNlw1server npm install [package name]`.
+Now  you can **install the packages** just by typing: `➜ dockerNlw1server npm install [package name]`.
 
-Vamos continuar nosso projeto e já executando os comandos com o Alias **dockerNlw1server**. `We will continue our project and already running the commands with Alias **dockerNlw1server**.`
+We will continue our project and already running the commands with Alias **dockerNlw1server**.
 
 Let's Go!
-Na pasta root do seu projeto 
+In your project's root folder, access the **server** folder.
 
-* `npm install express` - Microframework para lidar com rotas no Node.js `Microframework to handle with routes in Node.js.`
+```
+cd server
+➜  server git:(master) ✗ 
+```
+
+We will talk a little more about packages in the other projects, but now we are going to execute just give a brief explanation about the commands and run them in practice. If you have doubts about the commands, you can check the link https://www.npmjs.com/package/express, the name of the package will always be at the end.
+
+Commands at the terminal using the docker:
+
+* `npm install express` - Microframework to handle with routes in Node.js.
 
 ```
 dockerNlw1server npm install express
 ``` 
 
-No seu arquivo **/src/server.ts** você terá que importar o **express**
+In your **/src/server.ts** file you will have to import **express**.
 
 ```Typescript
     import express from 'express';
 ```
 
-* npm install @types - Definition Types Typescript - significa que iremos instalar as *definições de tipos* da biblioteca, trazendo informações da biblioteca/package que você está instalando no seu projeto, como tipos de variáveis, funções, parametros, retornos e outros. Algumas bibliotecas já vem com a definição de tipos instaladas e outras não. para as que não vem é só instalalas usando o comando abaixo sendo que depois da "/" é só informar o nome da biblioteca, ex `npm install @types/express -D`. Veja mais em https://www.typescriptlang.org/docs/handbook/2/type-declarations.html. `it means that we will install the * type definitions * of the library, bringing information from the library / package that you are installing in your project, such as types of variables, functions, parameters, returns and others. Some libraries already come with the definition of types installed and others do not. for those that do not come, just install them using the command below and after "/" just enter the name of the library, ex `npm install @ types / express -D`. See more at`
+* `npm install @types` - Definition Types Typescript - it means that we will install the * type definitions * of the library, bringing information from the library / package that you are installing in your project, such as types of variables, functions, parameters, returns and others. Some libraries already come with the definition of types installed and others do not. for those that do not come, just install them using the command below and after "/" just enter the name of the library, ex `npm install @ types / express -D`. See more at https://www.typescriptlang.org/docs/handbook/2/type-declarations.html
 
-* -D option = () (-D) **DEVELOPER DEPENDENCY** - significa que somente será utilizada durante a fase de desenvolvimento. `means that will be only used when you are developing the app` 
+* -D option = () (-D) **DEVELOPER DEPENDENCY** - means that will be only used when you are developing the app.
 
-`npm install @types/express -D` - Definição de tipos do express. `Definition types express.`
+`npm install @types/express -D` - Definition types express.
+
 ```
 dockerNlw1server npm install @types/express -D
 ``` 
 
-`npm install typescript -D` - Typescript para trabalhar com Node.js, uma vez que o node somente entende Javascript. `Typescript to work with NodeJs, once node just understand Javascript`
+`npm install typescript -D` - Typescript to work with NodeJs, once node just understand Javascript.
+
 ```
 dockerNlw1server npm install typescript -D
 ``` 
 
-* `npx tsc --init` - Cria arquivo de configuração Typescript **tsconfig.ts**, necessário para trabalhar com Typescript no projeto. `Creates Typescript configuration file **tsconfig.ts**, needed to work with Typescript 
+`npx tsc --init` - Creates Typescript configuration file ** tsconfig.ts **, needed to work with Typescript.
+
 ```
 dockerNlw1server npx tsc --init
 ``` 
 <img src="img/tsconfigfile.png" alt="tsconfig.ts file">
 
-* `npm install ts-node -D` - Já que o Node somente entende Javascript, você precisa instalar o ts-node como dependência de desenvolvimento para poder rodar seus scripts.ts. `Once Node just understand Javascript, you need to install the ts-node as Developer Dependency to run your scripts.ts.` 
+`npm install ts-node -D` - Once Node just understand Javascript, you need to install the ts-node as Developer Dependency to run your scripts.ts.
+
 ```
 dockerNlw1server npm install ts-node -D
 ``` 
-* First Route
+
+* First Route using the Express: File `/src/server.ts`
   
 ```TypeScript
-  apt.get('/users', () => {
-    response.send('Retorno para o usuário');
+  import express, {Response} from 'express';
+
+  const app = express();
+
+  app.get('/users', (request, response: Response) => {
+      response.send('Server is Running');
   })
+
+  app.listen(3333);  
+
+  console.log('Server is Running');
 ```
 
-`npx ts-node src/server.ts` - Este comando irá rodar nosso app. O **npx** tem a função de executar um pacote(package) instalado no nosso projeto, nesse caso o ts-node. `this command will run our app. **npx** has the function of execute a installed package, in this case ts-node.` 
+`npx ts-node src/server.ts` - This command will run our app. **npx** has the function of execute a installed package, in this case ts-node. 
 
-* Nosso Output, servidor está funcionando. Our output, server is running.
+* Our output, server is running.
+
 ``` 
   dockerNlw1server npx ts-node src/server.ts
   Server is Running  
 ``` 
 
- `npm install ts-node-dev -D` - Serve para ficar observando o codigo e caso tenha uma alteração, reinicia o serviço. `Keep observing the code and when there is a change, restart the service.`
+ `npm install ts-node-dev -D` - Keep observing the code and when there is a change, restart the service.
+ 
 ``` 
   dockerNlw1server npm install ts-node-dev -D
 ``` 
 
-* `package.json` - Adicione a linha ao arquivo package.json na pasta raiz do seu projeto. Add the line to the file package.json at the root folder of your project.
+* `package.json` - Add the line to the file package.json at the root folder of your project.
+
 ```json
 "scripts": { "dev": "ts-node-dev src/server.ts" } () => {
     //Add the line "dev" to the script flag inside of package.json
 }
 ```
 
-`npm run dev` -  Uma vez que você adicionou a linha no arquivo **package.json** para rodar o script para rodar agora você pode rodar o servidor apenas com o comando **npm run dev**, `dev` é referente à referência dev que você adicionou ao seu package.json. `Once you have added the line in the **package.json** file to run the script to run now you can run the server only with the command **npm run dev**, `dev` refers to the reference dev that you added to your package.json.` 
+`npm run dev` -  Once you have added the line in the **package.json** file to run the script to run now you can run the server only with the command **npm run dev**, `dev` refers to the reference dev that you added to your package.json.
 
 ```
   dockerNlw1server npm run dev
@@ -362,29 +377,30 @@ dockerNlw1server npm install ts-node -D
   Server is Running   
 ```
 
-* Expondo portas no Docker. `Exposing ports on Docker`
+* Exposing ports on Docker
 
-Nesse momento se você tentar acessar o site, a resposta será negativa porque quando executamos o comando Run, nos não falamos que portas estavamos expondo para o usuário adicionando a opção **-p 81:3333**, Note que a porta que estamos usando externamente é a porta *81* e internamente é *3333*, logo podemos enxergar desssa forma *-p foradocontainer:dentrodocontainer* fora do container e dentro do container.
-Veja mais em: https://docs.docker.com/config/containers/container-networking/. `At this point, if you try to access the site, the answer will be negative because when we run the Run command, we do not say which ports we were exposing to the user by adding the option ** - p 81: 3333 **, Note that the port we are using externally it is port * 81 * and internally it is * 3333 *, so we can see this form * -p outsidecontainer: insidecontainer * outside the container and inside the container.
-See more at: https://docs.docker.com/config/containers/container-networking/.`
+At this point, if you try to access the site, the answer will be negative because when we run the Run command, we do not say which ports we were exposing to the user by adding the option **- p 81:3333**, Note that the port we are using externally it is port *81* and internally it is *3333*, so we can see this form *-p outsidecontainer: insidecontainer*, outside the container and inside the container.
+See more at: https://docs.docker.com/config/containers/container-networking/.
 
 <img src="img/servercantbereached.png" alt="This site can't be reached">
 
-Para resolver isso vamos sair do nosso docker container com o comando **exit** e adicionar uma nova configuração para ao rodar comando **docker run** 
+To resolve this we will exit our docker container with the command **exit** and add a new configuration for running the command **docker run**.
 
-Como disse anteriormente vamos usar o **docker-compose** para rodar o nosso servidor backend. Da mesma maneira os outros projetos Web e Mobile. As I said before, we will use **docker-compose** to run our back-end server. Likewise the other Web and Mobile projects.
+As I said earlier, we will use **docker-compose** to run our backend server. In the same way the other Web and Mobile projects. As I said before, we will use **docker-compose** to run our back-end server. Likewise the other Web and Mobile projects.
 
-However, caso não queiram utilizar o docker-compose vocês também podem rodar o seu servidor executando o comando abaixo dentro da pasta **server**
+However, if you don't want to use the docker-compose you can also run your server by running the command below inside the **server** folder.
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ cd server
-➜  server git:(master) ✗ docker run -ti -p 81:3333 -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm run server
+➜  server git:(master) ✗ docker run -ti -p 81:3333 -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm run dev
 Server is Running
 ```
 
-* Note que você continua informando no **volume** do docker container somente $(pwd):/opt/ui, mas para isso agora você precisa acessar a pasta **server** dentro da pasta do seu projeto. `Note that you continue to inform in the ** volume ** of the docker container only $(pwd):/opt/ui, but for that you now need to access the ** server ** folder within your project folder.` 
+The last parameter **dev** concerns the line you added in **package.json**, minutes ago: `scripts": {"dev": ....}`
 
-Em qualquer momento se você quiser acessar o docker container para executar um ou mais comandos você apenas precisar executar o **docker run** e adicionar como parametro final **/bin/bash**. Nesse caso adicionamos também o parâmetro **-p 81:3333** para poder executar o servidor web e visualizar a página na sua máquina.
+* Note that you continue to inform in the **volume** of the docker container only $(pwd):/opt/ui, but for that you now need to access the **server** folder within your project folder.
+
+At any time if you want to access the docker container to execute one or more commands you just need to execute **docker run** and add as final parameter **/bin/bash**. In this case we also add the parameter **-p 81:3333** to be able to run the web server and view the page on your machine.
 
 ```
 ➜  server git:(master) ✗ docker run -ti -p 81:3333 -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash 
@@ -400,24 +416,24 @@ Server is Running
 ```
 <img src="img/serverisrunning.png" alt="Server is running">
 
-Nesse caso rodamos o comando completo porque tivemos que adicionar o parâmetro com a **porta de entrada e saída** `-p 81:3333` ao nosso comando **docker run**. Nosso Alias não tem o parâmetro de porta disponível porque vamos configurar o docker-compose e utilizaremos as configurações de porta lá. Se adicionarmos no Alias e estivermos utilizando em qualquer um dos casos, receberemos uma mensagem de que a porta já está sendo utilizada por outro serviço ou container.
+In this case we ran the full command because we had to add the parameter with the ** input and output port ** `-p 81: 3333` to our **docker run** command. Our Alias does not have the available port parameter because we are going to configure the docker-compose and use the port settings there. If we add it to Alias and we are using it in either case, we will receive a message that the port is already being used by another service or container.
 
-* Exemplo Terminal 1:
+* Example Terminal 1:
 <img src="img/portallocated1.png" alt="Server Running">
 
-* Exemplo Terminal 2:
+* Example Terminal 2:
 <img src="img/portallocated0.png" alt="Port alread allocated">
 
-Para trabalharmos com a questão das portas de uma maneira mais fácil, vamos utilizar o docker-compose para configurar nossos serviços e deixa-los ativos enquanto estivermos utilizando-os, inclundo o serviço do SQL Server que usamos com o nosso Backend para retornar os dados para os usuários.
-
+To work with the issue of ports in an easier way, we will use the docker-compose to configure our services and leave them active while we are using them, including the SQL Server service that we use with our Backend to return the data for users.
 
 ## OK, GENIAL! OK, GREAT!
 
-Bacana, servidor web com Docker funcionado 100%. `Cool, web server with 100% Docker.` 
+Cool, web server with Docker, working 100%.
 
-## 2.2. Create docker-compose.yml and add backend configuration <a id="Createdockercompose" href="summary">Come Back</a>
+## 2.2. <a id="createdockercomposebackend">Create docker-compose.yml and add backend configuration..</a> 
+[Comeback](#summary)
 
-Crie o arquivo **docker-compose.yml** na pasta raiz do seu projeto. Abra o arquivo e inclua as seguintes linhas
+Create the file **docker-compose.yml** in your project's root folder. Open the file and include the following lines:
 
 ```Dockerfile
 version: "3.5"
@@ -434,9 +450,9 @@ services:
     user: "1000"
 ```
 
-Como falamos anteriormente, as configurações de porta estão adicionadas no docker-compose.yml que ficará ativo enquanto criamos o código do nosso projeto.
+As we mentioned earlier, the port settings are added to the docker-compose.yml which will be active while creating the code for our project.
 
-Salve o arquivo e na pasta raiz do seu projeto digite:
+Save the file and in the root folder of your project type:
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ docker-compose up --build 
@@ -444,35 +460,36 @@ Salve o arquivo e na pasta raiz do seu projeto digite:
 
 <img src="img/dockercomposebackend.png" alt="Docker Compose up">
 
-Agora seu servidor Web está rodando sem parar em um terminal e você pode continuar com o código em outro terminal tranquilamente.
+Now your web server is running nonstop on one terminal and you can continue with the code on another terminal with ease.
 
-No seu terminal clique no sinal de <kbd>+<kbd> ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
+In your terminal click on the <kbd> + <kbd> sign or on the option to split the terminal to open a new terminal and be able to enter new commands.
 
 <img src="img/terminaloptions.png" alt="Terminal options">
 
-## 2.3 - Configurar docker e docker-compose.yml com SQL Server 
+## <a id="createdockerwithsqlserver">Configure Docker with SQL Server</a>
+[Come back](#summary) 
 
-O conteúdo com o Docker SQL Server já está disponível no Github no link <a href="https://github.com/lexvieira/Docker-Sql-Server" target="_blank">https://github.com/lexvieira/Docker-Sql-Server</a>, inclusive com a opção de restauração de base de dados com docker.
+The content with Docker SQL Server is already available on Github at <a href="https://github.com/lexvieira/Docker-Sql-Server" target="_blank"> https://github.com/lexvieira / Docker-Sql-Server </a>, including the option of **database restoring** with docker.
 
-Aqui vamos rodar os comandos básicos para configurar o banco de dados sql server e acessa-lo com nossa aplicação backend.
+Here we will run the basic commands to configure the sql server database and access it with our backend application.
 
-Em outro terminal, dentro da pasta root do projeto digite ou <kbd>Ctrl</kbd> + <kbd>C</kbd>, <kbd>Ctrl</kbd> + <kbd>V</kbd>:
+In another terminal, inside the project's root folder type or <kbd>Ctrl</kbd> + <kbd>C</kbd>, <kbd>Ctrl</kbd> + <kbd>V</kbd>:
 
 ```
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YOUR_PASSWORD" -p 1433:1433 --name sqlserverV2017 -v $(pwd)/data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
-Escolha uma senha e adicione o caminho para a pasta que pretende armazenar os arquivos do banco de dados.
-Por exemplo se deseja adicionar um caminho absoluto, você pode incluir na opção:
+Choose a password and add the path to the folder where you want to store the database files.
+For example, if you want to add an absolute path, you can include in the option:
 
-* `-v /home/myuser/data:/var/opt/mssql`. lembrando que do lado esquerdo do ":" é o diretório na sua máquina ou servidor de arquivos e o endereço no lado direito é o endereço dentro do container. Não altere no lado direito pois está é a pasta default do SQL Server.
-* `-v ../data:/var/opt/mssql ` - **../data:** Nesse caso informamos que queremos voltar um nível na hierarquia das pastas e adicionar os dados do banco de dados dentro da pasta **data** disponível nesse nível anterior. 
+* `-v /home/myuser/data:/var/opt/mssql`.remembering that on the left side of ":" is the directory on your machine or file server and the address on the right side is the address inside the container. **Do not change on the right side as this is the default SQL Server folder**.
+* `-v ../data:/var/opt/mssql ` - **../data:** In this case, we inform you that we want to go back one level in the folder hierarchy and add the data from the database inside the **data** folder available in that previous level. 
 
-* Na opção **name** adicionamos um nome que é fácil de relacionar com a imagem existem, nesse caso **sqlserverV2017**.
+* In the option **name** we add a name that is easy to relate to the image, in this case **sqlserverV2017**.
 
 ## START|STOP SQL SERVER
 
-Depois de rodar o primeiro comando você pode iniciar ou parar o serviço quando desejar com o comando: *docker start|stop*. Ainda é possível criar um Alias para rodar esses comandos, como foi explicado anteriormente.
+After running the first command, you can start or stop the service whenever you want with the command: *docker start|stop*. It is still possible to create an Alias to run these commands, as explained previously.
 
 ```
 docker start sqlserverV2017
@@ -480,12 +497,13 @@ docker stop sqlserverV2017
 ```
 
 ## 2.3 - Adicionando a configuração do SQL Server ao docker-compose.yml. 
+[Come back](#summary) 
 
-Agora que aprendemos como configurar o docker para subir um container com o SQL Server, agora vamos subir os dois serviços simultâneamente usando o **docker-compose.yml**.
+Now that we have learned how to configure the docker to upload a container with SQL Server, now we are going to upload both services simultaneously using **docker-compose.yml**.
 
-Pare o serviço do docker-compose que está rodando o seu backend com um <kbd>Ctrl</kbd> + <kbd>C</kbd>. 
+Stop the docker-compose service that is running your backend with a <kbd>Ctrl</kbd> + <kbd>C</kbd>. 
 
-No seu arquivo **docker-compose.yml** adicione as seguintes linhas:
+In your file **docker-compose.yml** add the following lines:
 
 ```Dockerfile
   sqlserver:
@@ -500,39 +518,39 @@ No seu arquivo **docker-compose.yml** adicione as seguintes linhas:
       - ${PWD}/data/sqlserver:/var/opt/mssql    
 ```
 
-Em volume, a opção **${PWD}**, indica seu **diretório atual**
+In **volume**, the option **${PWD}**, indicates your **current directory**
 
-* IMPORTANTE! IMPORTANT!
+* IMPORTANT!
   
-Da mesma forma que fizemos nos projetos backend, web e mobile, será necessário criar a **pasta data**, **sqlserver**, ou outro qualquer fora do container. Por quê? 
+In the same way that we did in the backend, web and mobile projects, it will be necessary to create the**pasta data**, **sqlserver**, or any other outside the container. Why? 
 
-Quando você criar a pasta dentro do container, a pasta virá com permissões de **root**, logo quando você precisar criar algum arquivo dentro da pasta não consiguirá. 
+When you create the folder inside the container, the folder will come with **root permissions**, so when you need to create a file inside the folder you will not be able to.
 
 <img src="img/folderpermissions.png" alt="Folder Permissions Root">
 
-Você também pode optar por salvar os dados em outra pasta como por exemplo, como a de outro projeto, como no exemplo abaixo:
+You can also choose to save the data in another folder, for example, as in another project, as in the example below:
 
 ```
     volumes: 
       - ../DockerSqlserver/data/sqlserver:/var/opt/mssql
 ```
 
-Nesse caso, estavamos voltando um diretório e salvando na pasta **DockerSqlserver**, você pode usar essa opção caso tenha vários projetos e queira disponibilizar a mesmo container SQL Server para todos os projetos que você tenha usando SQL Server, MySQL ou outros banco de dados. A localização dos arquivos é indiferente para o banco de dados e para o container, contanto que ambos tenham permissão de escrita nas pastas.
+In this case, we were going back to a directory and saving it in the folder **DockerSqlserver**, you can use this option if you have several projects and want to make the same SQL Server container available for all projects you have using **SQL Server, MySQL** or other databases. Dice. The location of the files is indifferent for the database and the container, as long as both have permission to write to the folders.
 
-## Voltando um pouco ao Backend.
+## Going back a little to the Backend.
 
-No serviço de backend, adicione a opção **depends_on sqlserver** no arquivo **docker-compose.yml**, que indica que o serviço de backend depende do serviço de banco de dados, da mesma forma que o serviço de **frontend** dependerá do serviço de **backend**. 
+In the backend service, add the option **depends_on sqlserver** to the file **docker-compose.yml**, which indicates that the backend service depends on the database service, in the same way as the service **frontend** will depend on the **backend** service.
 
 ```Dockerfile
     depends_on: 
       - "sqlserver"
 ```
 
-O aquivo ficará dessa forma:
+The file will look like this:
 
 <img src="img/dockercomposebackendsqlserver.png" alt="Docker Compose SQL Server">
 
-Execute novamente o `docker-compose up --build`
+Run `docker-compose up --build` again:
 
 ``` 
   ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ docker-compose up --build
@@ -540,24 +558,25 @@ Execute novamente o `docker-compose up --build`
 
 <img src="img/dockercomposerunbackendeserver.png" alt="Docker compose Backend and SQL Server Running">
 
-Show, agora você tem Backend e Banco de dados configurados e rodando sem problemas.
+Show, now you have Backend and Database configured and running smoothly.
 
-Nas próximas etapas faremos algumas inclusões de dados e conectaremos o **backend** ao banco de dados **sql server**, mas por agora, vamos proseguir iniciando o **Frontend** e **Mobile**. 
+In the next steps we will make some data inclusions and connect the **backend** to the database **sql server**, but for now, we will proceed by starting **Frontend** and **Mobile**.
 
 ---
-# 3 - **Iniciando Projeto Web. `Initiating web project**  <a id="Initiatewebproject" href="summary">Come Back</a>
+## 3 - <a id="initiatefrontendproject">Start FrontEnd with React using Dockerfile</a>
+[Come Back](#summary)
 
-Estamos a 2 passos de subir um projeto completo com Docker com Node.js, SQL Server, React e React Native. Então, Let's Go!.
+We are 2 steps away from run a complete Docker project with Node.js, SQL Server, React and React Native. So, Let's Go!.
 
-Agora para criar o projeto Web e mobile será mais simples, somente teremos que alterar alguns parâmetros para rodar nosso Docker relacionado com cada um dos projetos, web e mobile. `Now to create the Web and mobile project it will be simpler, we will only have to change some parameters to run our Docker related to each of the projects, web and mobile.`
+Now to create the Web and mobile project it will be simpler, we will only have to change some parameters to run our Docker related to each of the projects, web and mobile.
 
-Iniciando projeto com o Docker container.
+Starting project with Docker container.
 
-* MODO FÁCIL, EASYWAY 
+* EASYWAY! 
 
-Nosso Alias **dockerNlw1server** que após tanto digitar eu notei que poderia se chamar somente **dockerNlw1** ou o nome mais significante dependendo do seu projeto ;).
+Our Alias **dockerNlw1server** that after typing so much I noticed that it could just be called **dockerNlw1** or the most significant name depending on your project :D.
 
-Então vamos usar nosso alias aqui para iniciar nosso projeto React com apenas um comando na pasta raiz. Se você não criou, somente não se esqueça de criar a pasta **web**, com `mkdir web` na raiz do projeto, novamente por questões de permissões de usuário.
+So let's use our **alias** here to start our React project with just one command in the root folder. If you haven't created it, just don't forget to create the folder **web**, with `mkdir web` at the root of the project, again for reasons of user permissions.
 
 ```
   dockerNlw1server npx create-react-app web --template typescript --use-npm
@@ -565,16 +584,16 @@ Então vamos usar nosso alias aqui para iniciar nosso projeto React com apenas u
 
 <img src="img/createprojectusingalias.png" alt="Create Web Project with Docker Alias" > 
 
-* MODO NÃO TÃO DIFÍCIL :),  NOT SO HARD WAY :) 
+* NOT SO HARD WAY :D 
 
-Se você estiver logado em algum container, saia com o comando **exit**
+If you are logged into any container, exit with the command **exit**
 
 ```
 node@392c8d1638ba:/opt/ui$ exit
 exit
 ```
 
-Na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo comando que rodamos para criar o **projeto backend**.
+In the root folder of the project I run the command below, this is the same command that we ran to create the **backend project**.
 
 ```
   docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash
@@ -582,21 +601,26 @@ Na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo comando que roda
   Dockerfile  README.md  mobile  server  web  
 ```
 
-Note que você continua visualizando as mesmas pastas de quando iniciamos o projeto, **server, web e mobile**. `Note that you continue to view the same folders as when we started the project, server, web and mobile.`
+Note that you continue to view the same folders as when we started the project, **server, web and mobile**.
 
-Então agora rode o comando dentro do docker:
+So now run the command inside the docker:
 
 ```
 node@62dd1fb8db48:/opt/ui$ npx create-react-app web --template typescript --use-npm
 ```
 
+* npx create-react-app - Command to create the project
+* web - Installation folder
+* --template typescript - Project template
+* --use-npm - Using npm as a package manager
+
 <img src="img/reactappinstall.png" alt="Install React App">
 
-O Projeto criado com **NPM**. O nosso output é o mesmo, tanto usando o alias **dockerNlw1server** ou o comando completo, que também **recomendo** para aprendizado.
+Our output is the same, either using the alias **dockerNlw1server** or the complete command, which I also **recommend** for learning.
 
 <img src="img/reactappcreated.png" alt="Project React Created">
 
-Saia do container com o comando **exit**
+Exit the container with the command **exit**
 
 ```
 Happy hacking!
@@ -605,7 +629,12 @@ exit
 ```
 
 * IMPORTANT!
-  * Como estamos utilizando somente um **Alias** para rodar os comandos dentro dos projetos, você só precisa se lembrar que temos que **iniciar o projeto sempre na pasta root do projeto** e depois do projeto iniciado com a configuração inicial, podemos **executar os comandos dentro das pastas dos projetos** ***backend, web e mobile*** 
+  
+  As we are using only one **Alias** to run the commands within the projects, you just need to remember that we have to:
+    * **always start the project in the project's root folder** 
+  
+  And after the project started with the initial configuration, we can: 
+    * **execute the commands inside the project folders** ***backend, web and mobile***
 
 ### Executando Web Server React usando o Alias que acabamos de criar
 
@@ -615,11 +644,12 @@ Como Alias não aceita parametros no meio do comando, como por exemplo **adicion
 ➜  cd web
 dockerNlw1server npm start
 ```
-Receberemos o retorno de que o projeto está rodando, porém no nosso navegador teremos o famoso:
+
+We will receive feedback that the project is running, but in our browser we will have the famous:
 
 <img src="img/webcantbereached.png" alt="Web Can't be Reached">
 
-Resolvemos isso rodando o comando diretamente no nosso terminal:
+We solved this by running the command directly on our terminal:
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ cd web 
@@ -630,13 +660,14 @@ Resolvemos isso rodando o comando diretamente no nosso terminal:
 
 <img src="img/webreactserver.png" alt="Run React Web Server">
 
-React Web app rodando na porta **80**. Você não irá ver **http://localhost:80** porque a **porta 80** é a porta padrão para qualquer site **HTTP**, logo seu navegador traduz como **http://localhost** ou somente **localhost**.
+React Web app running on port **80**. You will not see **http://localhost:80** because **port 80** is the default port for any website **HTTP**, so your browser translates as **http://localhost** or just **localhost **.
 
 <img src="img/reactwebpage.png" alt="Run React Web Server">
 
-## 3.1. Adicionado o Frontend ao docker-compose.yml e iniciando os docker-compose <a id="Createdockercomposefrontend" href="summary">Come Back</a>
+### 3.1. <a id="createdockercomposefrontend">Adding Frontend configuration in the docker-compose.yml.</a>
+[Come Back](#summary)
 
-Edite o arquivo **docker-compose.yml** na pasta raiz do seu projeto. Adicione as seguintes linhas referente ao seu **Frontend**. 
+Edit the **docker-compose.yml** file in your project's root folder. Add the following lines for your **Frontend**.
 
 ```Dockerfile
   nlw1_frontend:
@@ -653,9 +684,9 @@ Edite o arquivo **docker-compose.yml** na pasta raiz do seu projeto. Adicione as
     user: "1000"    
 ```
 
-Como falamos anteriormente, as configurações de porta estão adicionadas no docker-compose.yml que ficará ativo enquanto criamos o código do nosso projeto.
+As we mentioned earlier, the port settings are added to the docker-compose.yml which will be active while creating the code for our project.
 
-Salve o arquivo e na pasta raiz do seu projeto digite:
+Save the file and in the root folder of your project type:
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ docker-compose up --build 
@@ -663,17 +694,18 @@ Salve o arquivo e na pasta raiz do seu projeto digite:
 
 <img src="img/dockercomposerunfrontend.png" alt="Docker Compose up">
 
-Agora seu servidor Web está rodando sem parar em um terminal e você pode continuar com o código em outro terminal tranquilamente.
+Now your web server is running nonstop on one terminal and you can continue with the code on another terminal easily.
 
-No seu terminal clique no sinal de <kbd>+<kbd> ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
+In your terminal click on the <kbd>+<kbd> sign or on the option to split the terminal to open a new terminal and be able to enter new commands.
 
 <img src="img/terminaloptions.png" alt="Terminal options">
 
-### 4 **Iniciando Projeto Mobile com React Native e Typescript. `Initiating Mobile project with React Native and Typescript** 
+## 4. <a id="initiatemobileproject">Starting Mobile project with React Native and Typescript</a> 
+[Come Back](#summary)
 
-O último e não menos importante projeto, que é o nosso mobile app vai seguir os mesmos parametros dos anteriores com algumas excessões.
+The last and not least project, which is our mobile app, will follow the same parameters as the previous ones with some exceptions.
 
-Normalmente na sua máquina você necessita instalar o **expo-cli globalmente** com o comando `npm install -g expo-cli`. nesse caso não precisaremos fazer isso pois já adicionamos essa etapa ao arquivo **Dockerfile**. 
+Usually on your machine you need to install **expo-cli globally** with the command `npm install -g expo-cli`. in this case we won't have to do that because we have already added this step to the **Dockerfile** file.
 
 ```Dockerfile
   RUN apt-get update 
@@ -687,13 +719,13 @@ Logo nesse caso a única coisa que necessitamos fazer é iniciar nosso container
 
 Iniciando projeto com o Docker container.
 
-E novamente:
+And Again:
 
-* MODO FÁCIL, EASYWAY 
+* EASYWAY! :D
 
-Nosso Alias **dockerNlw1server** que após tanto digitar eu notei que poderia se chamar somente **dockerNlw1** ou o nome mais significante dependendo do seu projeto ;).
+Our Alias **dockerNlw1server** that after typing so much I noticed that it could just be called **dockerNlw1** or the most significant name depending on your project: D.
 
-Então vamos usar nosso alias aqui para iniciar nosso projeto React com apenas um comando na pasta raiz. Se você não criou, somente não se esqueça de criar a pasta **mobile**, com `mkdir mobile` na raiz do projeto, novamente por questões de permissões de usuário.
+So let's use our alias here to start our React project with just one command in the root folder. If you haven't created it, just don't forget to create the folder **mobile**, with `mkdir mobile` at the root of the project, again for reasons of user permissions.
 
 ```
   dockerNlw1server expo init mobile --npm
@@ -701,22 +733,22 @@ Então vamos usar nosso alias aqui para iniciar nosso projeto React com apenas u
 
 <img src="img/createreactnative.png" alt="Install React App">
 
-Selecione a opção blank (Typescript) para trabalharmos com o mesmo no projeto.
+Select the blank option **Typescript** to work with it in the project.
 
 <img src="img/createreactnative1.png" alt="Project React Native Created">
 
-Seu **React Native** project será criado na pasta **mobile**.
+Your **React Native** project will be created in the **mobile** folder.
 
-* MODO NÃO TÃO DIFÍCIL :),  NOT SO HARD WAY :) 
+* NOT SO HARD WAY :D 
 
-Se você estiver logado em algum container, saia com o comando **exit**
+If you are logged into any container, exit with the command **exit**
 
 ```
 node@392c8d1638ba:/opt/ui$ exit
 exit
 ```
 
-Novamente, na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo comando que rodamos para criar o projeto backend e frontend.
+Again, in the project's root folder, run the command below, this is the same command we ran to create the backend and frontend project.
 
 ```
   docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash
@@ -724,15 +756,15 @@ Novamente, na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo coman
   Dockerfile  README.md  mobile  server  web  
 ```
 
-Note que você continua visualizando as mesmas pastas de quando iniciamos o projeto, server, web e mobile. `Note that you continue to view the same folders as when we started the project, server, web and mobile.`
+Note that you continue to view the same folders as when we started the project, **server, web and mobile**.
 
-Então agora rode o comando dentro do docker (utilizaremos a opção **--npm** porque estamos trabalhando com o gerenciador de pacotes **NPM** ao invés do **YARN**).:
+So now run the command inside the docker (we will use the option **-- npm** because we are working with the package manager **NPM** instead of **YARN**):
 
 ```
 node@d468a50ba3f4:/opt/ui$ expo init mobile --npm
 ```
 
-Se o projeto demorar muito para ser criado, cancele usando <kbd>Ctrl</kbd> + <kbd>C</kbd> e rode novamente o comando. Caso necessário exclua o conteúdo da pasta. Talvez por questões de internet lenta ou algo do tipo.
+If the project takes too long to create, cancel using <kbd>Ctrl</kbd> + <kbd>C</kbd> and run the command again. If necessary, delete the contents of the folder. Maybe for reasons of slow internet or something.
 
 Saia do container com o comando **exit**
 
@@ -741,21 +773,21 @@ node@392c8d1638ba:/opt/ui$ exit
 exit
 ```
 
-Para rodar qualquer comando dentro do projeto mobile, somente precisamos acessar a pasta e usar o mesmo Alias que criamos para o projeto Backend. Por exemplo, podemos adicionar o **@react-navigation/native** com o comando 
+To run any command within the mobile project, we just need to access the folder and use the same Alias that we created for the Backend project. For example, we can add **@ react-navigation/native** with the command:
 
 ```
   ➜  mobile git:(master) ✗ dockerNlw1server npm install @react-navigation/native
 ```
 
-## Rodando projeto Mobile usando **docker run**
+## Running Mobile project using **docker run**
 
-Já para rodar o projeto **mobile** no nosso celular e carregar o **Expo** no nosso Navegador, temos mais alguns parametros, como as **portas** e o arquivo **.env**.
+In order to run the **mobile** project on our mobile phone and load the **Expo** in our browser, we have a few more parameters, such as the **ports** and the **.env** file.
 
-A porta padrão para o projeto mobile, no caso para carregar o Expo no navegador é a porta **19002**. 
+The default port for the mobile project, in the case to load the Expo in the browser, is the port **19002**.
 
-* Criando nosso **.env file** para conseguirmos passar variáveis de ambiente para nosso container Mobile. Crie um arquivo .env file na pasta root do projeto e adicione as informações abaixo.
+* Creating our **.env file** to be able to pass environment variables to our Mobile container. Create an .env file in the project's root folder and add the information below.
 
-Note que no seu **.env** file você tem o endereço de ip que deve ser substituído pelo ip da sua máquina. No **Linux e Mac** você pode usar o **ifconfig** para encontrar o ip e no **Windows** você pode usar o **ipconfig** 
+Note that in your **.env** file you have the ip address that must be replaced with your machine's ip. On **Linux and Mac** you can use **ifconfig** to find the ip and on **Windows** you can use **ipconfig**
 
 **.env File**
 ```
@@ -771,10 +803,9 @@ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env
 
 <img src="img/dockerrunexporeactnative.png" alt="Running Expo React Native">
 
-Agora seu React Native web está rodando e você pode acessa-lo usando o App do Expo instalado no seu Smartphone, se você não tem instalado, você pode baixa-lo na [PlayStore](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en_US&gl=US) ou na [Apple Store](https://apps.apple.com/us/app/expo-go/id982107779) 
+Now your React Native web is running and you can access it using the Expo App installed on your Smartphone, if you don't have it installed, you can download it from [PlayStore] (https://play.google.com/store /apps/details?id=host.exp.exponent&hl=en_US&gl=US) or the [Apple Store] (https://apps.apple.com/us/app/expo-go/id982107779)
 
-
-No seu navegador no endereço do seu local ip, na porta **19002** você conseguirá acessar o emulador do Expo. 
+In your browser at the address of your local ip, on port **19002** you will be able to access the Expo emulator.
 
 <img src="img/dockerexpoemulator.png" alt="Expo Emulator">
 
@@ -782,14 +813,15 @@ No seu navegador no endereço do seu local ip, na porta **19002** você consegui
 
 <img src="img/reactnativeapp.jpg" alt="Docker and React Native" width="300">
 
-## 4.1. Adicionado o Mobile ao docker-compose.yml e iniciando os docker-compose com todos os projetos <a id="Createdockercomposefrontend" href="summary">Come Back</a>
+### 4.1. <a id="createdockercomposemobile">Adding Mobile configuration in the docker-compose.yml</a>
+[Come Back](#summary)
 
-Observações ao rodar Serviço React Native Expo.
-   > Usando o Docker Expo Developer Tools para emular o mobile app Android ou IOS, no caso do React Native. Este docker não será utilizado em produção.
-  - Para podermos rodar a aplicação no celular e usar o *Expo Developer Tools* em nosso navegador temos que adicionar algumas configurações extras que poderiam estar em nosso *DockerFile*, porem teriamos maiores problemas para altera-lo tendo que fazer o rebuild toda vez que trocassemos de IP por exemplo.
-  - Para lidar com isso, podemos usar o **.env** arquivo e adicionar as variáveis que precisamos acessar dentro do container.
+Notes when running React Native Expo Service.
+   > Using Docker Expo Developer Tools to emulate the Android or IOS mobile app, in the case of React Native. This docker will not be used in production.
+  - In order to run the application on the phone and use the * Expo Developer Tools * in our browser we have to add some extra settings that could be in our *DockerFile*, but we would have greater problems to change it having to do the rebuild every time we change of IP for example.
+  - To deal with this, we can use the **.env** file and add the variables that we need to access inside the container.
 
-Edite o arquivo **docker-compose.yml** na pasta raiz do seu projeto. Adicione as seguintes linhas referente ao seu **Mobile**. Você pode adiciona-lo antes do serviço do **SQL Server**.
+Edit the **docker-compose.yml** file in your project's root folder. Add the following lines for your **Mobile**. You can add it before **SQL Server** service.
 
 ```Dockerfile
   nlw1_expo:
@@ -811,9 +843,9 @@ Edite o arquivo **docker-compose.yml** na pasta raiz do seu projeto. Adicione as
 ```
 
 
-Nesse caso o serviço **Mobile** depende do serviço **backend**, devido as APIs que estamos utilizando.  
+In this case the **Mobile** service depends on the **backend** service, due to the APIs we are using.
 
-* `Dockerfile` - Note que diferente dos outros serviços que utilizam o parâmetro image, nós estamos utilizando o parâmetro build e utilizando nosso **Dockerfile** como base para nosso serviço, isso é porque estamos adicionado algumas configurações adicionais no nosso Dockerfile que não existe na image do node:12.20.2 que utilizamos para o serviço **backend** e **frontend**.
+* `Dockerfile` - Note that unlike the other services that use the image parameter, we are using the build parameter and using our **Dockerfile** as the basis for our service, this is because we have added some additional settings in our Dockerfile that do not exist in the  image **node:12.20.2** that we use for the **backend** and **frontend** service.
 
 ```
     build: 
@@ -821,7 +853,7 @@ Nesse caso o serviço **Mobile** depende do serviço **backend**, devido as APIs
       dockerfile: Dockerfile
 ```
 
-Como foi dito anteriormente, estamos adicionando o **expo-cli** *globalmente* que nos permite rodar o nosso projeto **React Native**.
+As previously mentioned, we are adding **expo-cli** *globally* that allows us to run our **React Native** project.
 
 ```Dockerfile
   RUN apt-get update 
@@ -830,7 +862,8 @@ Como foi dito anteriormente, estamos adicionando o **expo-cli** *globalmente* qu
 
   ENV PATH="$(npm global bin):$PATH"
 ```
-OK, agora com os 4 docker containers rodando e funcionando temos que simplicar as coisas para não ter que ficar rodando varios comandos para subir as 4 instâncias, logo temos o **docker-compose.yml**. Um unico arquivo com a nossa estrutura inteira rodando.
+
+OK, now with the 4 docker containers running and working we have to simplify things so we don't have to be running several commands to go up the 4 instances, so we have **docker-compose.yml**. A single file with our entire structure running.
 
 ### Building e rodando o docker-compose
 
@@ -849,21 +882,44 @@ OU
 docker-compose down
 ```
 
-Next time, somente
+Next time, only.
 
 ```
 docker-compose up
 ```
-Finalmente.
 
-Com certeza, depois de criar as imagens utilizando o **docker-compose --build** você precisará rodar novos commandos, adicionar novos pacotes em sua aplicação, então você pode rodar os commandos dentro do docker acessando o *bash* com o *docker run*. Contudo, agora você pode acessar também as imagens geradas pelo **docker-compose**,.
+Of course, if you change any settings you can run ** - build ** again.
 
-Se você quiser verificar se suas aplicações estão rodando corretamente você também pode rodar o comando:
+Finally.
+
+Of course, after creating the images using **docker-compose --build** you will need to run new commands, add new packages to your application, so you can run the commands inside the docker by accessing *bash* with *docker run*. However, now you can also access the images generated by **docker-compose**.
+
+If you want to check if your applications are running correctly you can also run the command:
+
+```
+➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗  docker images 
+REPOSITORY                                    TAG                 IMAGE ID            CREATED             SIZE
+nlw1_ecoleta_docker_sqlserver_nlw1_expo       latest              9a595b4dbf07        6 days ago          1.15GB
+nlw1_ecoleta_docker_sqlserver_nlw1_backend    latest              9a595b4dbf07        6 days ago          1.15GB
+sqlhtml                                       v01                 9a595b4dbf07        6 days ago          1.15GB
+nlw1_ecoleta_docker_sqlserver_nlw1_frontend   latest              5cf07abc153a        6 days ago          1.16GB
+<none>                                        <none>              cdc439acf93c        2 weeks ago         1.22GB
+node                                          12.20.2             af3e1e2da75b        5 weeks ago         918MB
+node                                          12.14.1             839a5e8f04b4        13 months ago       913MB
+mcr.microsoft.com/mssql/server                2017-latest         d9b9b96627b7        20 months ago       1.36GB
+mysql                                         5.7.22              6bb891430fb6        2 years ago         372MB
+```
+
+Você pode chegar que as imagens foram geradas pelo **docker-compose** são compostas por parte do nome da **pasta do seu projeto** e parte no dado a imagem no arquivo **docker-compose.yml**.  
+
+If you want to check if your applications are running correctly you can also run the command:
 
 ```
 sudo lsof -i -P -n | grep LISTEN
 ```
-ou criar um Alias para o mesmo
+
+Or create an Alias for the same:
+
 ```
 alias ListenPorts='sudo lsof -i -P -n | grep LISTEN'
 ListenPorts
@@ -871,9 +927,16 @@ ListenPorts
 
 ![ListenPorts](img/listenports.png)
 
-# Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web) Connect Project Backend (server) with SQL Server and return Data to Frontend (web)
+See the complete dockers documentation at:
+https://docs.docker.com/engine/reference/commandline/start/
+https://docs.docker.com/compose/gettingstarted/
 
-`await`, under construction
+## Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web) Connect Project Backend (server) with SQL Server and return Data to Frontend (web)
+[Come Back](#summary)
+
+The project with the commands to connect to the database and return the first data on the frontend will be ready in the next few days, in the meantime you can access the complete code made from scratch. In the meantime you can see the complete project at the links below:
+
+Complete project with App available on Github https://github.com/lexvieira/NLW1_Ecoleta_Docker_SQLServer. Based on the Rocketseat project https://github.com/rocketseat-education/nlw-01-omnistack.
 
 # CREDITOS
 
@@ -911,9 +974,3 @@ Como normalmente, as vezes temos alguns problemas para configurar um ambiente, e
 - [Get started with Docker Compose](https://docs.docker.com/compose/gettingstarted/)
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 - [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax#headings)
-
-# Comments
-
-Nova feature que permite rodar o projeto inteiro usando Docker ou Docker-compose, sem a necessidade de instalar qualquer framework no computador. 
-
-Adequado para pessoas que estão aprendendo a trabalhar com Docker ou que estão aprendendo a trabalhar com muitas tecnologias e não pretendem instalar vários ambientes como NodeJS, MongoDB, Ruby, PHP, Webservers e outros. Também é útil para usuários que tenham um PC ou Laptop com poucos recursos, como memória, processador e disco. Embora seja necessário estar atendo a quantidade de imagens que são baixadas para não comprometer o espaço do sistema operacional.
