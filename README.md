@@ -4,6 +4,10 @@ Leia em outros idiomas (Read in other languages): [English](README.en.md), [Port
 
 Esse projeto foi baseado no Projeto `Ecoleta` da :rocket:[Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack) :wave:, projeto **Show**. Muito felizmente bate com o projeto da minha monografia, que trata sobre como usar tecnologia, como Apps, IoT, Big Data para melhorar o processo de reciclágem no Brasil.
 
+<p align="center">
+  <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="50%" height="50%">
+</p>
+
 Projeto Desenvolvido com as seguintes tecnologias, feito do zero, tendo algumas diferenças do projeto inicial:
 
 - [Node.js](https://nodejs.org/en/)
@@ -18,7 +22,11 @@ Adicional para quem está aprendendo Docker.
 - [Docker](https://www.docker.com/) - **Nova Feature** (Rodo todo o projeto usando Docker, instalando somente o `Docker` na sua máquina)
 - [SQL Server using Docker](https://hub.docker.com/_/microsoft-mssql-server/) - **Nova Feature** (SQL Server em segundos com apenas alguns comandos)
 
-O objetivo the projeto é criar um ambiente completo usando [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), sem a necessidade de ter que criar o ambiente completo em sua máquina. 
+O objetivo the projeto é criar um ambiente **backend Node.js conectando com banco de dados SQL Server, Web com React, e mobile com React Native**. Para não termos a necessidade de ter que criar o ambiente completo em sua máquina, como instalar plataformas, frameworks e outros, utilizaremos somente o  [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), supondo que você já tenha o mesmo instalado em sua máquina. 
+
+Esse projeto serve tanto para Linux, Mac e Windows, although para Windows, caso você tenha algum problema com a instalação, como configuração de BIOS, você pode consultar o link:
+
+* https://docs.docker.com/docker-for-windows/troubleshoot/#virtualization
 
 O Docker nos permite criar imagens compactas de variados tipos de sistemas com funções especificas, veja em pouco mais nesse outro artigo/projeto do Github [Docker-Sql-Server](https://github.com/lexvieira/Docker-Sql-Server) que explica mias sobre docker e mostra na prática como subir e restaurar um banco de dados SQL Server usando docker. Disponível em Inglês e em Português. 
 
@@ -336,9 +344,9 @@ dockerNlw1server npm install ts-node -D
   import express, {Response} from 'express';
 
   const app = express();
-
+  dir = [1, 2, 3, 4, 5]
   app.get('/users', (request, response: Response) => {
-      response.send('Server is Running');
+      response.send(`Server is Running ${dir[2]});
   })
 
   app.listen(3333);  
@@ -462,7 +470,7 @@ Salve o arquivo e na pasta raiz do seu projeto digite:
 
 Agora seu servidor Web está rodando sem parar em um terminal e você pode continuar com o código em outro terminal tranquilamente.
 
-No seu terminal clique no sinal de <kbd>+<kbd> ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
+No seu terminal clique no sinal de **+** ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
 
 <img src="img/terminaloptions.png" alt="Terminal options">
 
@@ -891,6 +899,8 @@ docker-compose up
 Claro que se mudar alguma configuração você pode executar o **--build** novamente.
 
 Finalmente.
+
+<img src="img/dockercomposecomplete.png" alt="Docker Compose Complete" >
 
 Com certeza, depois de criar as imagens utilizando o **docker-compose --build** você precisará rodar novos commandos, adicionar novos pacotes em sua aplicação, então você pode rodar os commandos dentro do docker acessando o *bash* com o *docker run*. Contudo, agora você pode acessar também as imagens geradas pelo **docker-compose**.
 
