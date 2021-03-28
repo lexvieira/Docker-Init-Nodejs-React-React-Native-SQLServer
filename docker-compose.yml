@@ -10,3 +10,15 @@ services:
     command: npm run dev
     working_dir: /opt/ui
     user: "1000"
+    depends_on: 
+      - "sqlserver"
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    container_name: sqlserverV2017
+    environment:
+        SA_PASSWORD: "YOUR_PASSOWORD"
+        ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"      
+    volumes: 
+      - ${PWD}/data/sqlserver:/var/opt/mssql     

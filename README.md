@@ -518,7 +518,7 @@ No seu arquivo **docker-compose.yml** adicione as seguintes linhas:
     image: "mcr.microsoft.com/mssql/server:2017-latest"
     container_name: sqlserverV2017
     environment:
-        SA_PASSWORD: "JHu@hGTWSK@9t63"
+        SA_PASSWORD: "YOUR_PASSWORD"
         ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"      
