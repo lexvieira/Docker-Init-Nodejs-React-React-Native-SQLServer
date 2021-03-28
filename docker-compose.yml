@@ -1,0 +1,12 @@
+version: "3.5"
+services: 
+  backend:
+    container_name: testeBackend
+    image: node:12.20.2
+    ports: 
+      - 81:3333
+    volumes: 
+      - ${PWD}/backend:/opt/ui
+    command: npm run dev
+    working_dir: /opt/ui
+    user: "1000"
