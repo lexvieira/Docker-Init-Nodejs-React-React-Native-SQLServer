@@ -1,7 +1,7 @@
 version: "3.5"
 services: 
   backend:
-    container_name: testeBackend
+    container_name: backend
     image: node:12.20.2
     ports: 
       - 81:3333
@@ -12,13 +12,41 @@ services:
     user: "1000"
     depends_on: 
       - "sqlserver"
+  frontend:
+    container_name: frontend
+    image: node:12.20.2 
+    ports:
+      - 80:3000
+    volumes: 
+      - ${PWD}/web:/opt/ui
+    command: npm run start
+    depends_on: 
+      - "backend"  
+    working_dir: /opt/ui
+    user: "1000"    
+  expo:
+    container_name: expo
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    ports: 
+      - 19000:19000
+      - 19001:19001
+      - 19002:19002
+      - 19006:19006
+    volumes:
+      - ${PWD}/mobile:/opt/ui
+    command: npm run start
+    depends_on: 
+      - "backend"          
   sqlserver:
     image: "mcr.microsoft.com/mssql/server:2017-latest"
     container_name: sqlserverV2017
     environment:
-        SA_PASSWORD: "YOUR_PASSOWORD"
+        SA_PASSWORD: "Y@UR@STR0NG@PASS1OWORD_"
         ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"      
     volumes: 
-      - ${PWD}/data/sqlserver:/var/opt/mssql     
+      - ${PWD}/data:/var/opt/mssql     
