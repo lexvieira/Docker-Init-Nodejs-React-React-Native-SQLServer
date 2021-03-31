@@ -5,7 +5,7 @@ const newDate = () => {
     var DateDiff = require('date-diff');
 
     const dateDob = new Date(faker.date.between('1950-01-01', '2011-01-01'));
-    var diff = new DateDiff(Date.now(),dateDob);
+    var diff = new DateDiff(Date.now(), new Date(dateDob));
     const ageUser = parseInt(diff.years());
     return { dob: dateDob, age: ageUser }
 }
