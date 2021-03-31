@@ -5,7 +5,7 @@ Leia em outros idiomas (Read in other languages): [English](README.en.md), [Port
 Esse projeto foi baseado no Projeto `Ecoleta` da :rocket:[Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack) :wave:, projeto **Show**. Muito felizmente bate com o projeto da minha monografia, que trata sobre como usar tecnologia, como Apps, IoT, Big Data para melhorar o processo de reciclágem no Brasil.
 
 <p align="center">
-  <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="50%" height="50%">
+  <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>
 
 Projeto Desenvolvido com as seguintes tecnologias, feito do zero, tendo algumas diferenças do projeto inicial:
@@ -42,6 +42,7 @@ Nosso projeto será criado utilizando as seguintes tecnologias:
 * [Expo](https://expo.io/), responsável por compilar o projeto mobile.
 * [SQL Server](https://hub.docker.com/_/microsoft-mssql-server/) Banco de dados relacional da Microsoft.
 * [NPM (Gerenciador de Pacotes)](https://www.npmjs.com/) para instalarmos os pacotes nas nossas 3 aplicações.
+* [KNEX Query Builder for Node.js](http://knexjs.org/)
 
 ## Agora, mãos na massa. 
 
@@ -67,7 +68,10 @@ Nosso projeto será criado utilizando as seguintes tecnologias:
     4.1. [Adicionando configuração de Mobile ao docker-compose.yml e Rodar todos os projetos juntos](#createdockercomposemobile).     
 
 5. [Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)](#connectallprojects)
-
+    5.1. [Configurar conexão com o banco de dados usando Knex](#configureconectionusingknex).   
+    5.2. [Retornando dados do Banco de dados usando uma API](#returndatausingapi)
+    5.3. [Acessando API com Front End](#acessingapiwithfrontend)
+    5.4. [Acessando API com o Mobile App](#acessingapiwithmobile)
 
 <br><br>
 
@@ -545,6 +549,17 @@ Você também pode optar por salvar os dados em outra pasta como por exemplo, co
 
 Nesse caso, estavamos voltando um diretório e salvando na pasta **DockerSqlserver**, você pode usar essa opção caso tenha vários projetos e queira disponibilizar a mesmo container SQL Server para todos os projetos que você tenha usando **SQL Server, MySQL** ou outros banco de dados. A localização dos arquivos é indiferente para o banco de dados e para o container, contanto que ambos tenham permissão de escrita nas pastas.
 
+### SQL Password validation 
+
+Ao criar a senha do SQL Server ou qualquer outro banco de dados, sempre utilize senhas fortes para que não recebe uma mensagem de erro de **Password Validation**, informando que sua senha não cumpre os requerimentos necessários.  
+
+```sql
+2021-03-29 01:01:19.69 spid21s     ERROR: Unable to set system administrator password: Password validation failed. The password does not meet SQL Server password policy requirements because it is not complex enough. The password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols..
+2021-03-29 01:01:19.74 spid21s     An error occurred during server setup. See previous errors for more information.
+2021-03-29 01:01:19.74 spid21s     SQL Trace was stopped due to server shutdown. Trace ID = '1'. This is an informational message only; no user action is required.
+sqlserverV2017 exited with code 1
+```
+
 ## Voltando um pouco ao Backend.
 
 No serviço de backend, adicione a opção **depends_on sqlserver** no arquivo **docker-compose.yml**, que indica que o serviço de backend depende do serviço de banco de dados, da mesma forma que o serviço de **frontend** dependerá do serviço de **backend**. 
@@ -941,12 +956,533 @@ Veja a documentação completa do dockers em:
 https://docs.docker.com/engine/reference/commandline/start/
 https://docs.docker.com/compose/gettingstarted/
 
-## <a id="connectallprojects">Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)</a>
+## 5. <a id="connectallprojects">Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)</a>
 [Come Back](#summary)
 
-O projeto com os comandos para conectar no banco de dados e retornar os primeiros dados no frontend estará pronto nos próximos dias, enquanto isso você pode acessar o código completo feito do scratch (zero). Enquanto isso você pode ver o projeto completo nos links abaixo:
+Os próximos passos serão retornar dados para o frontend e mobile utilizando uma Api criada no backend. Para isso teremos que adicionar e configurar alguns componentes no nosso projeto, começando pelo [knex](http://knexjs.org/), query builder, utilizado para retornar dados de banco de dados relacionais no **Node.js**. Depois configurando **Axios** no frontend, [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) para permitir acesso do frontend a nossa API entre outros. 
 
-Projeto completo com App disponível no Github https://github.com/lexvieira/NLW1_Ecoleta_Docker_SQLServer. Baseado no projeto da Rocketseat https://github.com/rocketseat-education/nlw-01-omnistack.
+No entanto isso só é uma introdução, exite muito mais para explorar, mas você pode acessar outros projetos com mais informações nos links abaixo: 
+
+Projeto completo com App disponível no Github https://github.com/lexvieira/NLW1_Ecoleta_Docker_SQLServer. Baseado no projeto da Rocketseat https://github.com/rocketseat-education/nlw-01-omnistack. 
+Também em https://github.com/lexvieira/TSQLtoHTMLTable, projeto que permite retornar dados do SQL Server em formato HTML e renderizar no React. 
+
+## Let's Go!
+
+    5.1. [Configurar conexão com o banco de dados usando Knex](#configureconectionusingknex). 
+
+    Para accessarmos os dados no nosso banco de dados vamos utilizar um pacote(package) para Node.js chamado **Knex**, que permite construir consultas(queries) e retornar dados de forma amigável para o nosso backend.
+
+`npm install knex` - Usando o nosso docker dentro da pasta de **backend(server)**, digite o comando:
+```
+   dockerNlw1server npm install knex --save
+```     
+
+Uma observação sobre o Knex. No projeto [NLW1 Ecoleta Docker SQL Server](https://github.com/lexvieira/NLW1_Ecoleta_Docker_SQLServer), baseado no [NLW1 Ecoleta](https://github.com/rocketseat-education/nlw-01-omnistack) da Rocketseat, estamos trabalhando com o `"knex": "^0.21.17"` e nesse projeto, estamos trabalhando com o `"knex": "^0.95.4"`. Na versão `^0.95.0` e superiores, temos que adicionar o pacote(package) [tediousjs](https://tediousjs.github.io/tedious/installation.html) para lidar com conexões do SQL Server. Caso tenha problemas de conexão, verifique as versões dos pacotes(packages). 
+
+`npm install mssql` - Também instale o SQL Server :
+```
+   dockerNlw1server npm install mssql --save
+```     
+
+`npm install --save tedious`
+```
+   dockerNlw1server npm install tedious --save
+```
+
+### Configurando a Conexão
+
+Primeiro para facilitar nosso acesso ao IP do servidor que as vezes pode mudar dependendo da nossa rede, vamos criar uma módulo chamado **environment** que terá algumas informação úteis, como **IP**, **porta do servidor** e **endereço do servidor**. Crie o arquivo `index.ts` na pasta *src/environments/* e insira o seguinte código:
+
+```Typescript
+export const apiAddr = () => {
+    return `${environment.protocol}${environment.ipServer}:${environment.port}`; 
+}
+
+export const environment = {
+    ipServer: '192.168.1.70',
+    protocol:  'http://',
+    port: '81'    
+};
+```
+
+O módulo acima nos permitirá acessar as informação do servidor de uma forma mais fácil, sem ter que ficar alterando em vários arquivos toda vez que o **IP do servidor** mudar. Para acessar os dados do servidor somente importe nosso módulo enrironment e retorne o ip chamando a variável `environment.ipServer` ou por exemplo a função `apiAddr` que retorna o endereço completo do servidor.
+
+```Typescript 
+import { environment } from './src/environments/index';
+      
+const ip = `${environment.ipServer}`,
+```
+
+Quando utilizamos o Knex, temos que criar um arquivo de configuração chamado **knexfile.ts** que fica na pasta root do projeto, com a seguinte código:
+
+```Typescript
+import { environment } from './src/environments/index';
+import path from 'path';
+
+module.exports = {
+    client: 'mssql',
+    connection: {
+      host : `${environment.ipServer}`,
+      user : 'SA',
+      password : 'Q5zA4@5?25wCy8',
+      database : 'DB_NLW1'        
+    },
+    migrations: {
+      directory: path.resolve(__dirname, 'src', 'database', 'migrations')
+    },
+    seeds: {
+      directory: path.resolve(__dirname, 'src', 'database', 'seeds')
+    }, 
+    useNullAsDefault: true,
+};
+```
+Em seguida vamos criar nosso arquivo de conexão que utilizaremos para acessar nosso banco de dados. Note que também estamos importando nosso **módulo environments** e retornando o **ip do servidor**. 
+
+```Typescript
+import { environment } from './../environments/index';
+import knex from 'knex';
+
+const connection = knex({
+    client: 'mssql',
+    connection: {
+      host : `${environment.ipServer}`,
+      user : 'SA',
+      password : 'JHu@hGTWSK@9t63',
+      database : 'MY_DB'
+    }
+});
+  
+export default connection;
+```
+
+Depois de criarmos nosso arquivo de conexão agora nos resta criar nossos arquivos de Migrations e Seeds:
+
+* **Migrations:** Módulo que permite criar, alterar, deletar tabelas, entre outras coisas no banco de dados. Basicamente nós criamos um **script de migração** e depois executamos o comando para rodar a migração no servidor. Se tudo estiver correto as tabelas são criadas no servidor e conseguimos acessa-las tranquilamente. Histórico do banco de ados.
+
+* **Seeds** Script que permite inserir dados nas tabelas do banco de dados. Muito utilizado quando temos valores iniciais padrão para nossa aplicação.
+
+Nosso arquivos de **migration** estão na pasta `src\database\migrations` e os de **seeds** na pasta `src\database\seeds`. Nesse caso podemos criar o arquivos manualmente como qualquer script porém podemos criar o *arquivo inicial das migrations* com o comando: 
+
+```
+➜  backend git:(master) ✗ dockerNlw1server npx knex migrate:make initUsers --env development
+Requiring external module ts-node/register
+Created Migration: /opt/ui/src/database/migrations/20210330145952_initUsers.ts
+```
+
+Se você preferir você pode se renomear o inicio do arquivo numerando-o para ficar mais organizado com o comando `mv`, caso não queira não é obrigatório.
+
+```
+➜  backend git:(master) ✗ cd src/database/migrations 
+➜  migrations git:(master) ✗ mv 20210330145952_initUsers.ts 01_20210330145952_initUsers.ts
+```
+
+Nosso arquivo criado com o resultado do comando acima. Para saber os tipos de dados quando estiver criando as tabelas veja: [Schema](https://devhints.io/knex#schema) ou [Knex cheatsheet](https://devhints.io/knex)
+
+```Typescript
+import { Knex } from "knex";
+
+export async function up(knex: Knex): Promise<void> {
+  await knex.schema.createTable("users", table => {
+    table
+      .increments("user_id")
+      .unsigned()
+      .primary();
+    table
+      .string("email")
+      .unique()
+      .notNullable();
+    table.string("first_name").notNullable();
+    table.string("last_name").notNullable();
+    table.date("dob").notNullable();
+    table.date("age").notNullable();
+  });
+}
+
+export async function down(knex: Knex): Promise<void> {
+  await knex.schema.dropTable("users");
+}
+```
+
+Para rodar nossa **migration** ou seja, para que nossas tabelas sejam repassadas para o banco de dados utilizaremos o comando. 
+
+```
+dockerNlw1server knex --knexfile knexfile.ts migrate:latest
+```
+
+ou também com o script que criamos no `package.json`
+
+```json
+    "knex:seed": "knex --knexfile knexfile.ts seed:run",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest"
+```
+
+Nesse caso criamos dois scripts, um para o **migration** e outro para o **seeds**.
+
+Para rodar o nosso migrate somente digite:
+
+```
+➜  backend git:(master) ✗ dockerNlw1server npm run knex:migrate
+
+> backend@1.0.0 knex:migrate /opt/ui
+> knex --knexfile knexfile.ts migrate:latest
+
+Requiring external module ts-node/register
+Batch 1 run: 4 migrations
+```
+
+* Lembrando que estamos rodando nossos comandos dentro de um **docker container** logo nosso `dockerNlw1server` é um atalho para `docker run -ti -v $(pwd):/opt/ui nlw1ecoleta:v01 npm run dev`
+
+### Erros com **Migrations**:
+
+Tome cuidado com a ordem e o nome que os arquivos de migração são nomeados, pois podemos nos deparar com erros de migração ou de banco de dados. No caso abaixo tivemos um erro porque nomeei/renomeei os nomes dos arquivos e acidentamente coloquei os nomes dos arquvios de `01_create_points.ts`, `02_create_items.ts`, `03_create_point_items.ts` para  `01_create_point_items.ts`, `02_create_items.ts`, `03_create_points.ts`. Note que o primeiro arquivo é o `01_create_point_items.ts`, nesse caso quando rodamos o nosso migrate recebemos a mensagem que a migração falhou com o erro:  **Could not create constraint or index**. Isso porque as tabelas **points** e **items** ainda não foram criadas.
+
+```sql
+➜  backend git:(master) ✗ dockerNlw1server npm run knex:migrate                            
+
+> backend@1.0.0 knex:migrate /opt/ui
+> knex --knexfile knexfile.ts migrate:latest
+
+Requiring external module ts-node/register
+migration file "02_create_point_items.ts" failed
+migration failed with error: 
+  CREATE TABLE [point_items] 
+    ([id] int identity(1,1) not null primary key,
+    [point_id] int not null,
+    [item_id] int not null,
+    CONSTRAINT [point_items_point_id_foreign] FOREIGN KEY ([point_id]) REFERENCES [points] ([id]),
+    CONSTRAINT [point_items_item_id_foreign] FOREIGN KEY ([item_id]) REFERENCES [items] ([id]))
+  - Could not create constraint or index. See previous errors.
+```
+
+Se rodamos nosso código no banco de dados recebemos o erro: 
+
+```sql
+	Msg 1767, Level 16, State 0, Line 1
+Foreign key 'point_items_point_id_foreign' references invalid table 'points'. 
+	
+	Msg 1750, Level 16, State 1, Line 1
+Could not create constraint or index. See previous errors. 
+``` 
+
+<img src="img/createtableerror.png" alt="Create table error" >
+
+Isso entra um pouco mais na parte de banco de dados, que vamos deixar para outros projetos :D.
+
+### Rollaback 
+
+Você ainda pode dar um Rollback, que significa voltar os passos anteriores, caso tenha se esquecido de algo.  
+
+```
+ ➜  backend git:(master) ✗ dockerNlw1server npx knex migrate:rollback
+Requiring external module ts-node/register
+Batch 1 rolled back: 3 migrations
+```
+
+O **rollback** nesse caso executará o código para dar um **DROP** na tabela **users**. Drop nesse caso significa deletar a tabela. 
+
+```typescript
+export async function down(knex: Knex): Promise<void> {
+  await knex.schema.dropTable("users");
+}
+```
+
+Nesse caso, se você fez um rollback das suas migrações é só rodar novamente com o comando:
+
+```sql
+➜  backend git:(master) ✗ dockerNlw1server npm run knex:migrate 
+``` 
+
+### Inserindo dados fictícios no banco de dados para teste.
+
+Nesse caso vamos inserir alguns dados fakes de usuário para testar nossa base de dados utizando o [faker.js](https://github.com/Marak/faker.js). Veja o artigo: [Seeding your Database with Thousands of Users using Knex.js and Faker.js](https://blog.bitsrc.io/seeding-your-database-with-thousands-of-users-using-knex-js-and-faker-js-6009a2e5ffbf).
+
+Agora vamos adicinar o **faker.js** ao nosso projeto, porém com a opção **-D**, que significa *dependência de desenvolvimento*. Também é possível utilizar a versão online em [FakerCloud](https://fakercloud.com/api). Também adicionamos o **date-diff**, uma biblioteca para realizar calculo de datas usando javascript. 
+
+```
+dockerNlw1server npm install faker -D 
+dockerNlw1server npm install date-diff
+```
+
+Basicamente criamos um base de 100 usuários para retornarmos os dados pela nossa API. O código está disponível na pasta `src\database\seeds\create_users.ts`.
+
+E nosso resultado é:
+
+<img src="img/seedsinsertusersdatabase.png" alt="Seed new users Database">
+
+## 5.2. [Retornando dados do Banco de dados usando uma API](#returndatausingapi)
+
+Agora que nossa base de dados está funcional, já criamos nossas tabelas, e finalmente já incluímos nossos dados, dados ficticios usando o faker. Agora vamos retornar alguns de nossos usuários utilizando nossa API.
+
+Primeiro vamos criar nossa controller para retornar nossos dados e depois criaremos uma rota para retornar os dados para o frontend, no caso essa será a url utilizada para acessar os dados do usuário.
+
+Nossa **Users Controller** está utlizando a conexão a partir do **Knex** que já comentamos e retornando os dados do usuário com um limite de 30 usuários. no nosso caso, inserimos 100 registros no banco de dados, mas não precisamos retornar todos no momento. `usersController.ts` criada na pasta `src\controllers\usersController.ts`:
+
+```typescript
+import { Request, Response } from "express";
+import knex from "../database/connection"; 
+
+class UsersController {
+    async index(request: Request, response: Response) {
+
+        const users = await knex('users').select("*").limit(30);
+
+        const serialItems = users.map(user => {
+            return {
+                email: user.email,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                dob: user.dob,
+                age: user.age,
+            };
+        });
+
+        return response.json(serialItems);
+    }
+}
+
+export default UsersController;
+```
+
+Depois de criar a controller temos que adicionar uma **rota** para a controller para que possamos retornar os dados no **frontend**. Uma rota é como se fosse o endereço completo para cada solicitação que você precisa fazer na sua aplicação. Toda vez que criamos uma rota para nossa aplicação, temos que pensar na semântica do item que estamos criando, por exemplo, se queremos retornar os **dados do usuário**, näo existe lógica em criarmos uma rota como http://localhost:81/items, o correto seria criar a rota da nossa aplicação como http://localhost:81/users. 
+
+No código abaixo, no arquivo `/src/server.ts` modificamos a nossa primeira rota que anteiormente somente retornava uma mensagem para o usuário, contudo agora estamos retornando os dados do usuário através da rota `app.get('/users',usersController.index)`.
+
+Traduzindo para o usuário final quando escrevemos isso `app.get('/users',usersController.index);` enxergamos `http://localhost:81/users`.
+
+```typescript
+import express, {Response} from 'express';
+import UsersController from "./controllers/usersController";
+
+const app = express();
+
+const usersController = new UsersController();
+
+app.get('/users',usersController.index);
+
+app.listen(3333);  
+
+console.log('Server is Running');
+```
+
+Quando carregarmos a aplicação no endereço web http://localhost:81/users teremos o retorno abaixo.
+
+<img src="img/userscontrollerindex.png" alt="Data from User Controller">
+
+Não abordarei a questão de APIs Restfull e como testa-las porque irá sair muito do escopo, mas se quiserem testar suas APIs, você podem utilizar o [Insomnia](https://insomnia.rest/) ou o [Postman](https://www.postman.com/). Com eles você pode fazer testar suas APIs, fazendo requests do tipo **GET, POST, PUT, PATCH, DELETE**, além de poder fazer testes com envios de arquivos também.
+
+## 5.3. [Acessando API com Front End](#acessingapiwithfrontend)
+
+Ok Galera, agora chegou a parte de trazer os dados que geramos para o mundo real. logo vamos fazer nossa aplicação frontend enxergar os dados gerados pelo backend.
+
+Para isso vamos criar um serviço(service) que irá se conectar com o nosso backend e retornar os dados em Json para que possamos utiliza-lo.
+
+Primeiro vamos adicionar o **axios**, biblioteca ou pacote(package) para realizar requisições http para Rest Endpoints para realizar operações CRUD (Create, Read, Update e Delete).
+
+`npm install axios`
+```typescript  
+➜  web git:(master) ✗ dockerNlw1server npm install axios
+npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.13.12 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ axios@0.21.1
+added 1 package from 1 contributor and audited 1960 packages in 15.323s
+
+135 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+Depois de adicionar o **axios** vamos criar nosso service na pasta `/src/services/api.tsx` com o código:
+
+```typescript
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API_ADDR,
+});
+
+export default api;
+```
+
+A variável de ambiente `process.env.REACT_APP_API_ADDR` que você está vendo está vindo do arquivo `.env` na pasta raiz do nosso projeto:
+
+```typescript
+REACT_APP_API_ADDR='http://192.168.1.70:81'
+```
+
+Nesse caso, a(s) variável(is) de ambiente são carregadas assim que o projeto é iniciado. Facilita muito para que você não tenha que ficar trocando o IP do site em desenvolvimento toda vez que trocar de IP na sua máquina, logo, você só precisa alterar em um único lugar.
+
+Adicionamos o **Axios** e o arquivo **.env**, agora vamos criar nossa página para retornar os dados para o frontend.
+
+Primeiro vamos criar nossa página UserList em `scr/pages/UserList/index.tsx` e também vamos incluir o arquivo `styles.css` na mesma pasta. Posteriormente o `UserList` pode virar um componente reutilizável por várias páginas na aplicação.
+
+
+`react-router-dom` e `npm install @types/react-router-dom` - Roteador de transações entre componentes do React - Router way to do the transitions between components
+`npm install react-icons` - Variedade de icones disponíveis para usar em Aplicações React.
+```
+➜  web git:(master) ✗ dockerNlw1server npm install react-router-dom
+➜  web git:(master) ✗ dockerNlw1server npm install @types/react-router-dom -D
+➜  web git:(master) ✗ dockerNlw1server npm install react-icons
+```
+
+Criamos nossa simples home page na pasta `src/pages/home/index.tsx` e nossa Lista de Usuários na pasta `src/pages/UserList/index.tsx`. Da mesma forma que no **backend**, no **frontend** com React também temos que criar Rotas para as nossas páginas. Nesse casso criamos um arquivo de rotas dentro da nossa pasta `src/routes.tsx`.
+
+`src/pages/home/index.tsx` - Aqui criamos nossa home page que será acessada através do endereço **http://localhost** ou **http://ip_da_sua_maquina**
+```typescript
+import React from "react";
+import { Link } from "react-router-dom";
+import { FiLogIn } from "react-icons/fi";
+
+const Home = () => {
+    return (
+        <>
+            <h1>
+                Home Page Ecoleta / RecycleMinds
+            </h1>
+            <Link to="/user-list">
+                <span>
+                    <FiLogIn />
+                </span>
+                <strong>
+                    Acesse a lista de usuários
+                </strong>               
+            </Link>
+        </>
+    )
+}
+
+export default Home;
+```
+`src/pages/UserList/index.tsx` - E aqui é o ponto crucial do nosso projeto, onde acessamos os dados dos usuários e retornamos para o **frontend**. Não vou colocar o código todo aqui para não ficar muito grande, mas básicamente o que estamos utilizando aqui é o **UseEffect** que irá fazer a chamada da nossa api somente quando a página for inicializada. O **UseState** para armazenar e alterar os dados recebidos da nossa **Api backend** na constante **users**. Posteriormente discutiremos mais sobre useEffect e UseState e como eles interagem com a aplicação. Acesse o arquivo completo na pasta da aplicação para 
+
+```typescript
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
+
+const UserList = () => {
+    const [users, setUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        api.get('users').then(response => {
+            setUsers(response.data);        
+        })
+    }, []);
+
+}
+export default UserList;
+```
+
+Acessando dados do usuário utilizando a função `.map`. Usando a função map, conseguimos percorrer os dados dos usuários retornados pela nossa Api e apresenta-los em tela. 
+
+A imagem abaixo mostra como usamos uma `Arrow Function` para fazer um `loop`(laço de repetição) e gerar uma tabela `html` com os dados do usuário. 
+
+<img src="img/frontendmapusers.png" alt="Mapping Users" >
+
+Depois que criamos nossa **Home** e **Lista de Usuários**, temos que fazer as páginas ficarem disponíveis para os usuários, para isso vamos criar nosso arquivo de rotas, como já disse antes, basicamente no mesmo formato que no nosso backend. Nesse caso o nosso arquivo é bem compacto, então podemos adiciona-lo aqui.
+
+`src/routes.tsx`
+```typescript
+import React from "react";
+import { Route, BrowserRouter } from "react-router-dom";
+
+import Home from "./pages/Home";
+import UserList from "./pages/UserList";
+
+const Routes = () => {
+    return (
+        <BrowserRouter>
+            <Route component={Home} path="/" exact />
+            <Route component={UserList} path="/user-list" />
+        </BrowserRouter>
+    )
+}
+
+export default Routes;
+```
+Feito isso, rodamos nosso **backend**, **frontend** e **banco de dados**, você pode roda-los com o `docker-compose up` ou um a um com os comandos:
+
+```
+➜  backend git:(master) ✗ docker run -ti -v $(pwd):/opt/ui -p 81:3333 nlw1ecoleta:v01 npm run dev
+➜  web git:(master) ✗ docker run -ti -v $(pwd):/opt/ui -p 80:3000 nlw1ecoleta:v01 npm start
+```
+
+O banco de dados, como já criamos a nossa imagem, podemos apenas iniciar o `container` em qualquer pasta que estivermos com o commando:
+
+```
+➜  Docker-Init-Nodejs-React-React-Native-SQLServer git:(master) ✗ docker start sqlserverv2017
+```
+<img src="img/frontendbackendrun.png" alt="Run Frontend, Backend and DB">
+
+Quando rodamos nossos serviços frontend, backend e database podemos notar que conseguimos acessar nossa aplicação sem problemas e também retornar os dados da nossa Api.
+
+<img src="img/frontendapinodata.png" alt="Frontend with Api but no Cors">
+
+Contudo se prestarmos atenção a tela de Usuários, notaremos que os dados não foram renderizados na nossa aplicação. Isso é porque **aplicação backend** não está utilizando o CORS(Cross-Origin Resource Sharing) para permitir aplicações externas acessarem as api criadas.
+
+<img src="img/errorusingcors.png" alt="Backend Application without use CORS">
+
+Nesse caso instalaremos o `CORS` na nossa aplicação com o comando:
+```
+➜  backend git:(master) ✗ dockerNlw1server npm install cors
+➜  backend git:(master) ✗ dockerNlw1server npm install @types/cors -D
+```
+Isso irá permitir que nosso frontend se comunique com o backend. Talvez seja necessário reiniciar o servidor backend para que as alterações tenham efeito.
+
+```
+➜  backend git:(master) ✗ dockerNlw1server npm install cors
+npm WARN backend@1.0.0 No description
+npm WARN backend@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ cors@2.8.5
+added 1 package from 1 contributor and audited 289 packages in 3.415s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+➜  backend git:(master) ✗ dockerNlw1server npm install @types/cors -D
+npm WARN backend@1.0.0 No description
+npm WARN backend@1.0.0 No repository field.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ @types/cors@2.8.10
+added 1 package from 2 contributors and audited 290 packages in 3.126s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+Após a instalação teremos que adicionar uma linha de código à nossa **aplicação backend** no arquivo `src/server.ts`. Depois da linha `const app = express();` adicione o código `app.use(cors());`. Se necessário reinicie o servidor e teste sua aplicação. 
+
+```typescript
+import express, {Response} from 'express';
+import UsersController from "./controllers/usersController";
+import cors from "cors";
+
+const app = express();
+
+app.use(cors());
+```
+
+E novamente **Et Voilà**
+
+<img src="img/frontenduserlist.png" alt="User List">
+
+E agora só falta acessar os dados com a nossa aplicação Mobile.
+
+## 5.4. [Acessando API com o Mobile App](#acessingapiwithmobile)
 
 # CREDITOS
 

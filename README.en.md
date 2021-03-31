@@ -5,7 +5,7 @@ Read this in other languages: [English](README.en.md), [Portuguese](README.md).
 This project was based on the `Ecoleta` Project by: rocket: [Rocketseact] (https://github.com/rocketseat-education/nlw-01-omnistack): wave :, project **Show**. Very happily it matches the project of my monograph, which deals with how to use technology, such as Apps, IoT, Big Data to improve the recycling process in Brazil.
 
 <p align="center">
-  <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="50%" height="50%">
+  <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>
 
 Project Developed with the following technologies, made from scratch, with some differences from the initial project:
@@ -22,7 +22,6 @@ Additional for those who are learning Docker.
 - [Docker](https://www.docker.com/) - **New Feature** (Run the entire project using Docker, installing only `Docker` on your machine)
 - [SQL Server using Docker](https://hub.docker.com/_/microsoft-mssql-server/) - **New Feature** (SQL Server in seconds with just a few commands)
 
-
 The objective of the project is to create an environment **Node.js backend connecting with SQL Server database, Web with React, and mobile with React Native**. In order to avoid having to create the complete environment on your machine, such as installing platforms, frameworks and others, we will only use [Docker](https://www.docker.com/) and [Docker-compose](https://docs.docker.com/compose), assuming you already have it installed on your machine.
 
 This project works for both Linux, Mac and Windows, although for Windows, if you have any problems with the installation, like BIOS configuration, you can consult the link:
@@ -35,14 +34,15 @@ Feel free to test and contribute.
 
 Our project will be created using the following technologies:
 
-* [Docker] (https://www.docker.com/) - Create container and run projects without having to create the entire environment on your machine.
-* [Docker-compose] (https://docs.docker.com/compose) - Raise the entire environment with just the `docker-compose up` command.
-* [Node.js] (https://nodejs.org/en/) - Backend of our application, responsible for the business part
-* [React] (https://reactjs.org) - Frontend, responsible for the interaction with the user.
+* [Docker](https://www.docker.com/) - Create container and run projects without having to create the entire environment on your machine.
+* [Docker-compose](https://docs.docker.com/compose) - Raise the entire environment with just the `docker-compose up` command.
+* [Node.js](https://nodejs.org/en/) - Backend of our application, responsible for the business part
+* [React](https://reactjs.org) - Frontend, responsible for the interaction with the user.
 * [React Native] (https://facebook.github.io/react-native/) - Mobile app developed for multiplatform, Android and IOS.
-* [Expo] (https://expo.io/), responsible for compiling the mobile project.
-* [SQL Server] (https://hub.docker.com/_/microsoft-mssql-server/) Microsoft relational database.
-* [NPM (Package Manager)] (https://www.npmjs.com/) to install the packages in our 3 applications.
+* [Expo](https://expo.io/), responsible for compiling the mobile project.
+* [SQL Server](https://hub.docker.com/_/microsoft-mssql-server/) Microsoft relational database.
+* [NPM (Package Manager)](https://www.npmjs.com/) to install the packages in our 3 applications.
+* [KNEX Query Builder for Node.js](http://knexjs.org/)
 
 ## `Now, hands on.`  
 
@@ -68,7 +68,10 @@ Our project will be created using the following technologies:
     4.1. [Adding Mobile configuration to docker-compose.yml and Run all projects together](#createdockercomposemobile).     
 
 5. [Connect Project Backend (server) with SQL Server and return Data to Frontend (web)](#connectallprojects)
-
+    5.1. [Configuring a database connection using Knex](#configureconectionusingknex).   
+    5.2. [Return database data using an API ](#returndatausingapi)
+    5.3. [Accessing API with the Front End](#acessingapiwithfrontend)
+    5.4. [Accessing API with the Mobile App](#acessingapiwithmobile)
 
 <br><br>
 
@@ -546,6 +549,17 @@ You can also choose to save the data in another folder, for example, as in anoth
 
 In this case, we were going back to a directory and saving it in the folder **DockerSqlserver**, you can use this option if you have several projects and want to make the same SQL Server container available for all projects you have using **SQL Server, MySQL** or other databases. Dice. The location of the files is indifferent for the database and the container, as long as both have permission to write to the folders.
 
+### SQL Password validation 
+
+When creating the password for SQL Server or any other database, always use strong passwords so that you do not receive an error message of ** Password Validation **, stating that your password does not meet the necessary requirements.
+
+```sql
+2021-03-29 01:01:19.69 spid21s     ERROR: Unable to set system administrator password: Password validation failed. The password does not meet SQL Server password policy requirements because it is not complex enough. The password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols..
+2021-03-29 01:01:19.74 spid21s     An error occurred during server setup. See previous errors for more information.
+2021-03-29 01:01:19.74 spid21s     SQL Trace was stopped due to server shutdown. Trace ID = '1'. This is an informational message only; no user action is required.
+sqlserverV2017 exited with code 1
+```
+
 ## Going back a little to the Backend.
 
 In the backend service, add the option **depends_on sqlserver** to the file **docker-compose.yml**, which indicates that the backend service depends on the database service, in the same way as the service **frontend** will depend on the **backend** service.
@@ -942,12 +956,22 @@ See the complete dockers documentation at:
 https://docs.docker.com/engine/reference/commandline/start/
 https://docs.docker.com/compose/gettingstarted/
 
-## Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web) Connect Project Backend (server) with SQL Server and return Data to Frontend (web)
+## 5. Connect Project Backend (server) with SQL Server and return Data to Frontend (web)
 [Come Back](#summary)
 
-The project with the commands to connect to the database and return the first data on the frontend will be ready in the next few days, in the meantime you can access the complete code made from scratch. In the meantime you can see the complete project at the links below:
+The next steps will be to return data to the frontend and mobile using an Api created on the backend. For that we will have to add and configure some components in our project, starting with [knex](http://knexjs.org/), query builder, used to return data from relational database in **Node.js**. After configuring **Axios** in the frontend, [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) to allow frontend access to our API among others.
+
+However this is just an introduction, there is much more to explore, but you can access other projects with more information at the links below:
 
 Complete project with App available on Github https://github.com/lexvieira/NLW1_Ecoleta_Docker_SQLServer. Based on the Rocketseat project https://github.com/rocketseat-education/nlw-01-omnistack.
+Also at https://github.com/lexvieira/TSQLtoHTMLTable, a project that allows returning SQL Server data in HTML format and rendering in React.
+
+## Let's Go!
+
+    5.1. [Configuring a database connection using Knex](#configureconectionusingknex).   
+    5.2. [Return database data using an API ](#returndatausingapi)
+    5.3. [Accessing API with the Front End](#acessingapiwithfrontend)
+    5.4. [Accessing API with the Mobile App](#acessingapiwithmobile)
 
 # CREDITOS
 
