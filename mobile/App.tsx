@@ -2,14 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
+import Home from "./src/pages/Home";
+
 export default function App() {
   return (
     <>
-        <View style={styles.container}>
-          <Text style={styles.text1}>Nosso app usando Docker com React Native</Text>
-          <Image style={styles.image} resizeMode={'contain'} source={require('./assets/reactnative.png')}/>
-          <Text style={styles.text2}>Our app using Docker with React Native</Text>
-        </View>    
+      <Home />
     </>
   );
 }
