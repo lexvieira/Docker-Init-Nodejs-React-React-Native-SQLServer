@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { StyleSheet, View, ImageBackground, Text, Image } from "react-native";
+import React from "react";
+import { StyleSheet, View, ImageBackground, Text, Image, TouchableOpacity } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-
 const Home = () => {
 const navigation = useNavigation();
+// const route = useRoute();
 
+// const routeParams = route.params as Params;
 
 function handleNavigateToUsers(){
   navigation.navigate('Users')
+}
+
+function handleNavigateBack(){
+  navigation.goBack();
 }
 
 return (
@@ -18,7 +23,10 @@ return (
     <ImageBackground 
         source={require('../../assets/home-background.png')}
         style={styles.container}
-        imageStyle={{ width: 274, height: 368}}>    
+        imageStyle={{ width: 274, height: 368}}> 
+        <TouchableOpacity onPress={handleNavigateBack}> 
+            <Icon name="arrow-left" size={20} color="#34cb79" />
+        </TouchableOpacity>           
         <View style={styles.container}>
             <View style={styles.main}>
                 <Image source={require('../../assets/logo.png')}/>
@@ -30,7 +38,7 @@ return (
         </View>
 
         <View style={styles.footer}>
-            <RectButton style={styles.button}  onPress={(handleNavigateToUsers) => {}}> 
+            <RectButton style={styles.button}  onPress={handleNavigateToUsers}> 
                 <View style={styles.buttonIcon}>
                     <Text>
                         <Icon name="users" color="#FFF" size={24} />                        
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
     title: {
       color: '#322153',
       fontSize: 32,
-      fontFamily: 'Ubuntu_700Bold',
+      // fontFamily: 'Ubuntu_700Bold',
       maxWidth: 260,
       marginTop: 64,
     },
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
       color: '#6C6C80',
       fontSize: 16,
       marginTop: 16,
-      fontFamily: 'Roboto_400Regular',
+      // fontFamily: 'Roboto_400Regular',
       maxWidth: 260,
       lineHeight: 24,
     },
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       textAlign: 'center',
       color: '#FFF',
-      fontFamily: 'Roboto_500Medium',
+      // fontFamily: 'Roboto_500Medium',
       fontSize: 16,
     }
   });
