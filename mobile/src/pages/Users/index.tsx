@@ -3,12 +3,14 @@ import { StyleSheet, View, ImageBackground, TouchableOpacity ,Text, Image } from
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Feather as Icon } from "@expo/vector-icons";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import api from "../../services/api";
 
 interface Users {
     id: number,
     first_name: string,
     last_name: string,
+    email: string,
     dob: string,    
     age: number,
 }
@@ -16,16 +18,44 @@ interface Users {
 const Users = () => {
     const navigation = useNavigation();    
     const [users, setUsers] = useState<Users[]>([]);
-
+    const [dataUser,setDataUser] = useState([]);
+    const tableState = {
+      tableHead: ["First Name","Last Name","Email","Age"],
+      tableData: [
+        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 15],
+        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 16],
+        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 17],
+        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 18]
+      ]      
+    }
+    
     useEffect(() => {
         api.get('users').then(response => {
             setUsers(response.data);
-        })
-    })
+            const userData:any = [];
+            response.data.map((user: Users ) => {
+              userData.push([
+                  user.first_name,
+                  user.last_name,
+                  user.email,
+                  user.age                
+              ]);
+            });
+            setDataUser(userData);
+        });
+    },[])
 
     function handleNavigateBack(){
         navigation.goBack();
-      }
+    }
+
+
+   function handleNavigateToDetail(id: number){
+      navigation.navigate('UserDetail', { 
+          user_id: id,
+          myAnyOtherParam: ["item 1", "item 2..."]
+        });
+  }       
 
     return (
         <ImageBackground 
@@ -40,26 +70,20 @@ const Users = () => {
                 <View style={styles.main}>
                     <Image source={require("../../assets/logo.png")} />
                     <View>
-                        <Text style={styles.title}>Usuários Cadastros no Sisetma</Text>
+                        <Text style={styles.title}>Usuários Cadastrados no Sistema</Text>
                         <Text style={styles.description}>Usando React-native-table-component</Text>
                     </View>
-                </View>
-                <View style={styles.container}>
-                    {users.map(user => {
-                        return (
-                                <Text key={String(user.id)}>
-                                    {user.first_name}
-                                </Text>
-                            )                        
-                    })}
-                </View>
-
+                </View>          
             </View>
+            <View style={styles.container_table}>
+                  <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+                    <Row data={tableState.tableHead} style={styles.head} textStyle={styles.text}/>
+                    <Rows data={dataUser} textStyle={styles.text}/>
+                  </Table>
+            </View>                 
         </ImageBackground>
     )
-
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -130,7 +154,11 @@ const styles = StyleSheet.create({
       color: '#FFF',
     //   fontFamily: 'Roboto_500Medium',
       fontSize: 16,
-    }
+    },
+
+    container_table: { flex: 1, padding: 5, paddingTop: 5, backgroundColor: '#fff' },
+    head: { height: 40, backgroundColor: '#f1f8ff' },
+    text: { margin: 6 }    
   });
 
 export default Users;

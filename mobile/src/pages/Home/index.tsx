@@ -2,16 +2,14 @@ import React from "react";
 import { StyleSheet, View, ImageBackground, Text, Image, TouchableOpacity } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { Feather as Icon } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const Home = () => {
 const navigation = useNavigation();
-// const route = useRoute();
 
-// const routeParams = route.params as Params;
 
 function handleNavigateToUsers(){
-  navigation.navigate('Users')
+  navigation.navigate('Users');
 }
 
 function handleNavigateBack(){
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     title: {
       color: '#322153',
       fontSize: 32,
-      // fontFamily: 'Ubuntu_700Bold',
       maxWidth: 260,
       marginTop: 64,
     },
@@ -76,7 +73,6 @@ const styles = StyleSheet.create({
       color: '#6C6C80',
       fontSize: 16,
       marginTop: 16,
-      // fontFamily: 'Roboto_400Regular',
       maxWidth: 260,
       lineHeight: 24,
     },
