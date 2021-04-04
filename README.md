@@ -4,6 +4,15 @@ Leia em outros idiomas (Read in other languages): [English](README.en.md), [Port
 
 Esse projeto foi baseado no Projeto `Ecoleta` da :rocket:[Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack) :wave:, projeto **Show**. Muito felizmente bate com o projeto da minha monografia, que trata sobre como usar tecnologia, como Apps, IoT, Big Data para melhorar o processo de reciclágem no Brasil.
 
+# Contribua
+
+Compartilhem e contribuam, #ConhecimentoÉParaSerCompartilhado
+
+- Faça um fork desse repositório;
+- Cria uma branch com a sua feature: `git checkout -b minha-feature`;
+- Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
+- Faça push para a sua branch: `git push origin minha-feature`.
+
 <p align="center">
   <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>
@@ -68,12 +77,16 @@ Nosso projeto será criado utilizando as seguintes tecnologias:
     4.1. [Adicionando configuração de Mobile ao docker-compose.yml e Rodar todos os projetos juntos](#createdockercomposemobile).     
 
 5. [Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)](#connectallprojects)
+
     5.1. [Configurar conexão com o banco de dados usando Knex](#configureconectionusingknex).   
+
     5.2. [Retornando dados do Banco de dados usando uma API](#returndatausingapi)
+
     5.3. [Acessando API com Front End](#acessingapiwithfrontend)
+
     5.4. [Acessando API com o Mobile App](#acessingapiwithmobile)
 
-<br><br>
+<br>
 
 ---
 ## 1 - <a id="createdockerfile">Criar DockerFile para rodar os projetos Backend, Frontend e Mobile.</a> 
@@ -956,7 +969,7 @@ Veja a documentação completa do dockers em:
 https://docs.docker.com/engine/reference/commandline/start/
 https://docs.docker.com/compose/gettingstarted/
 
-## 5. <a id="connectallprojects">Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)</a>
+## 5. <a id="connectallprojects">Conectar Projeto Backend (server) com o SQL Server e retornar dados para o Frontend (web)</a>.
 [Come Back](#summary)
 
 Os próximos passos serão retornar dados para o frontend e mobile utilizando uma Api criada no backend. Para isso teremos que adicionar e configurar alguns componentes no nosso projeto, começando pelo [knex](http://knexjs.org/), query builder, utilizado para retornar dados de banco de dados relacionais no **Node.js**. Depois configurando **Axios** no frontend, [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) para permitir acesso do frontend a nossa API entre outros. 
@@ -968,12 +981,14 @@ Também em https://github.com/lexvieira/TSQLtoHTMLTable, projeto que permite ret
 
 ## Let's Go!
 
-    5.1. [Configurar conexão com o banco de dados usando Knex](#configureconectionusingknex). 
+### 5.1. <a id="configureconectionusingknex">[Configurar conexão com o banco de dados usando Knex]</a>. 
+[Come Back](#summary)
 
     Para accessarmos os dados no nosso banco de dados vamos utilizar um pacote(package) para Node.js chamado **Knex**, que permite construir consultas(queries) e retornar dados de forma amigável para o nosso backend.
 
 `npm install knex` - Usando o nosso docker dentro da pasta de **backend(server)**, digite o comando:
 ```
+➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ cd server
    dockerNlw1server npm install knex --save
 ```     
 
@@ -1209,7 +1224,8 @@ E nosso resultado é:
 
 <img src="img/seedsinsertusersdatabase.png" alt="Seed new users Database">
 
-## 5.2. [Retornando dados do Banco de dados usando uma API](#returndatausingapi)
+### 5.2. <a id="returndatausingapi">Retornando dados do Banco de dados usando uma API</a>.
+[Come Back](#summary)
 
 Agora que nossa base de dados está funcional, já criamos nossas tabelas, e finalmente já incluímos nossos dados, dados ficticios usando o faker. Agora vamos retornar alguns de nossos usuários utilizando nossa API.
 
@@ -1270,7 +1286,8 @@ Quando carregarmos a aplicação no endereço web http://localhost:81/users tere
 
 Não abordarei a questão de APIs Restfull e como testa-las porque irá sair muito do escopo, mas se quiserem testar suas APIs, você podem utilizar o [Insomnia](https://insomnia.rest/) ou o [Postman](https://www.postman.com/). Com eles você pode fazer testar suas APIs, fazendo requests do tipo **GET, POST, PUT, PATCH, DELETE**, além de poder fazer testes com envios de arquivos também.
 
-## 5.3. [Acessando API com Front End](#acessingapiwithfrontend)
+### 5.3. <a id="acessingapiwithfrontend">Acessando API com Front End</a>.
+[Come Back](#summary)
 
 Ok Galera, agora chegou a parte de trazer os dados que geramos para o mundo real. logo vamos fazer nossa aplicação frontend enxergar os dados gerados pelo backend.
 
@@ -1359,7 +1376,8 @@ const Home = () => {
 
 export default Home;
 ```
-`src/pages/UserList/index.tsx` - E aqui é o ponto crucial do nosso projeto, onde acessamos os dados dos usuários e retornamos para o **frontend**. Não vou colocar o código todo aqui para não ficar muito grande, mas básicamente o que estamos utilizando aqui é o **UseEffect** que irá fazer a chamada da nossa api somente quando a página for inicializada. O **UseState** para armazenar e alterar os dados recebidos da nossa **Api backend** na constante **users**. Posteriormente discutiremos mais sobre useEffect e UseState e como eles interagem com a aplicação. Acesse o arquivo completo na pasta da aplicação para 
+
+<a id="apiusersweb">src/pages/UserList/index.tsx</a> [come back to mobile api](#apiusersmobile) - E aqui é o ponto crucial do nosso projeto, onde acessamos os dados dos usuários e retornamos para o **frontend**. Não vou colocar o código todo aqui para não ficar muito grande, mas básicamente o que estamos utilizando aqui é o **UseEffect** que irá fazer a chamada da nossa api somente quando a página for inicializada. O **UseState** para armazenar e alterar os dados recebidos da nossa **Api backend** na constante **users**. Posteriormente discutiremos mais sobre useEffect e UseState e como eles interagem com a aplicação. Acesse o arquivo completo disponível na pasta da aplicação.
 
 ```typescript
 import React, { useEffect, useState } from "react";
@@ -1482,7 +1500,446 @@ E novamente **Et Voilà**
 
 E agora só falta acessar os dados com a nossa aplicação Mobile.
 
-## 5.4. [Acessando API com o Mobile App](#acessingapiwithmobile)
+### 5.4. <a id="acessingapiwithmobile">Acessando API com o Mobile App</a>.
+[Come Back](#summary)
+
+Para começar, da mesma forma que no React e no Node.js, vamos instalar alguns componentes que utilizaremos em nossa aplicação.
+
+Veja: https://reactnative.dev/, https://reactnavigation.org/docs/getting-started/
+
+```
+➜  mobile git:(master) ✗ dockerNlw1server npm install @react-navigation/native
+npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.13.12 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ @react-navigation/native@5.9.3
+added 11 packages from 3 contributors and audited 1043 packages in 17.803s
+```
+
+O próximo passo é fazer a instalação do pacote(package) `axios` que nos permitirá fazer as chamadas para as nossas APIs.
+
+`npm install axios` 
+```
+mobile git:(master) ✗ dockerNlw1server npm install axios
++ axios@0.21.1
+added 2 packages from 4 contributors and audited 1062 packages in 8.516s
+```
+Axios instalado, agora podemos retornar os dados da nossa API. 
+
+### Home Screen
+
+Vamos criar uma simples **HOME** que será a porta de entrada para o nosso app e de lá criar um rota para a nossa página de usuários.
+
+Nos Apps React Native da mesma forma quando estamos desenvolvendo apps com **Android Studio** não utilizamos tags HTML, logo no caso do **React Native** vamos utilizar tags exclusivas do mesmo. Por examplo, ao invés de utilizarmos a tag `img` do `HTML` vamos importar o componente [Image](https://reactnative.dev/docs/image) do `react-native`. Da mesma forma com o componente [Text](https://reactnative.dev/docs/text) que substitui tags como `H1, H2...H6` entre outras tags de texto que utilizariamos  no HTML, nesse caso o `Text` cumpre bem sua tarefa e com a estilização, você pode fazer maravilhas. No caso da [View](https://reactnative.dev/docs/view), totalmente important para qualquer projeto **React Native**, onde a mesma se comporta como uma `Div` html, flexível e simples de trabalhar com estilos [CSS](https://www.w3.org/Style/CSS/Overview.en.html).  
+
+Arquivo completo em [src/pages/Home/index.tsx](mobile/src/pages/Home/index.tsx).
+
+```javascript
+import { Text, Image, View } from "react-native";
+...
+const Home = () => {
+...
+return (
+        <View>
+            <Text style={styles.title}>Seu marketplace de coleta de resíduos</Text>
+            <Text style={styles.description}>Recicle conosco, encontre um ponto de reciclágem próximo</Text>                    
+        </View>
+...
+...
+...
+)}
+
+const styles = StyleSheet.create({
+
+    title: {
+      color: '#322153',
+      fontSize: 32,
+    },
+  
+    description: {
+      color: '#6C6C80',
+      fontSize: 16,
+    },
+
+```
+
+No caso da nossa Home vamos ter um botão que nos dará acesso a nossa lista de usuários. Para isso vamos utilizar adicionar um `ReactButton` com o evento `onPress` que irá nos redirecionar para a nossa lista de usuários. 
+
+```javascript
+        <View style={styles.footer}>
+            <RectButton style={styles.button}  onPress={handleNavigateToUsers}> 
+                <View style={styles.buttonIcon}>
+                    <Text>
+                        <Icon name="users" color="#FFF" size={24} />                        
+                    </Text>
+                </View>
+                <Text style={styles.buttonText}>
+                    Users List
+                </Text>
+            </RectButton>            
+        </View>
+```
+
+A função `onPress` chamará a funcão `handleNavigateToUsers` que simplesmente nos redirecioná para a tela, a tela de usuários.
+
+```typescript
+import { useNavigation } from "@react-navigation/native";
+...
+const navigation = useNavigation();
+...
+  function handleNavigateToUsers(){
+    navigation.navigate('Users');
+  }
+```
+
+Quando utilizamos o navigation, temos que importar o `useNavigation` para nos direcionar para a tela de usuários. No caso o `Users` que estamos chamando é uma rota para a página ou tela(screen) **Users** em [src/pages/Users/index.tsx](mobile/src/pages/Users/index.tsx).
+
+### Routes - Configurando nossas rotas para acessar as próximas telas Configuring our routes to access the next screens
+
+Da mesma forma que fizamos no projeto **Web**, aqui também temos que configurar nossas rotas para que possamos transitar entre nossas telas e quando tocarmos(clicarmos) no botão para acessar nossa próxima tela, o arquivo de **routes** fará o trabalho para nós. 
+
+Primeiro vamos criar nosso arquivo de [routes](mobile/src/routes.tsx), importaremos o **createStackNavigator** do `@react-navigation/stack` e o **NavigationContainer** `@react-navigation/native` para nos ajudar a criar nossas rotas. Basicamente importamos nossas páginas dentro do nosso arquivos de rotas. O próximo passo é criar um **NavigatorContainer** e adicionar nossas rotas lá usando o **AppStack.Navigator**. No AppStack.Navigator, incluímos o AppStack.Screen com dois(2) parâmetros(attibutos), name(nome da rota) e component(nome do componente que criamos). O componente Home será o primeiro a ser acessado, uma vez que é o primeiro da lista, veja em [Navigation](https://reactnative.dev/docs/navigation). Você pode inverter a ordem dos componentes para ver como se comportam.
+
+```javascript
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+
+import Home from "./pages/Home";
+import Users from "./pages/Users";
+import UserDetail from "./pages/UserDetail";
+
+const AppStack = createStackNavigator();
+
+const Routes = () => {
+    return (
+        <NavigationContainer>
+            <AppStack.Navigator headerMode="none"
+                screenOptions={{
+                    cardStyle: {
+                        backgroundColor:"#FFF"
+                    }
+                }}
+            >
+            <AppStack.Screen name="Home" component={Home} />
+            <AppStack.Screen name="Users" component={Users} />
+            <AppStack.Screen name="UserDetail" component={UserDetail} />              
+            </AppStack.Navigator>
+        </NavigationContainer>
+    )
+}
+
+export default Routes;
+```
+
+Com o arquivo de rotas completo será mais fácil gerenciar os componentes e também criar novas rotas quando necessário.
+
+Agora a partir da nossa acessaremos a tela **Users** para visualizar os dados dos usuários e de lá vamos para a UserDetail.
+
+Podemos fazer um teste com nosso App subindo nosso servido do Expo. Agora não vamos precisar rodar nosso backend porque só mostraresmos a tela de apresentação do app. No terminal rode o comando:
+
+```
+cd mobile
+docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env-file "../.env" -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm start
+```
+
+<img src="img/mobilehome.jpg" width="25%" height="25%" alt="Home App">
+
+### Tela de Usuários Users Screen
+
+Agora temos nosso App com o botão para acessar nossa lista de usuários e é isso que vamos trabalhar agora.
+
+Ah. Se quiser você pode parar o servidor do **expo** por enquanto! :D
+
+Além dos componentes habituais, vamos utilizar um novo componente chamado `react-native-table-component` que nos ajudará a trabalhar com tabelas no mobile, uma vez que o **React Native** não dispõe de uma tabela nativa.
+
+Já temos a maioria dos nossos componentes instalados, então só vamos instalar o `react-native-table-component` e o `@types/react-native-table-component`. 
+
+Note que no comando rodadmos `npm i` or invés de `npm install`, mas significa a mesma coisa. 
+
+```
+cd mobile 
+➜  mobile git:(master) ✗ dockerNlw1server npm i react-native-table-component  
+➜  mobile git:(master) ✗ dockerNlw1server npm i @types/react-native-table-component  
+```
+
+Instalados os componentes, mãos à obra!
+
+Vamos criar o nosso `Users` na pasta `src/pages/Users/index.tsx`. Como o arquivo é um pouco grande não vamos coloca-lo todo aqui, mas explicar os conceitos e o que utilizamos para cria-lo. Let's go!
+
+```typescript
+import React, { useState, useEffect} from "react";
+import { StyleSheet, View, ImageBackground, TouchableOpacity ,Text, Image } from "react-native";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import api from "../../services/api";
+```
+
+Nas importações temos basicamente os componentes normais que já utilizamos na `Home Screen`, como Text, StyleSheet, ImageBackground e etc, além do React, useState, useEffect e useNavigation. No nosso componente de tabela `react-native-table-component`, temos alguns itens como **Table, Rows, Cells** onde no caso do **Table**, acaba sendo muito comum no **HTML**, mas **Rows** e **Cells** são mais comuns com Asp.Net e outros por exemplo. Contudo no fim, são muito similares.
+
+```javascript
+  const Users = () => {
+
+   //DataExample 
+    const tableState = {
+      tableHead: ['Head', 'Head2', 'Head3', 'Head4'],
+      tableData: [
+        ['1', '2', '3', '4'],
+        ['a', 'b', 'c', 'd'],
+        ['1', '2', '3', '456\n789'],
+        ['a', 'b', 'c', 'd']
+      ]
+    }
+```
+
+Acima temos um exemplo de como gerar dados para nossa tabela. Disponível no link https://www.npmjs.com/package/react-native-table-component. Se verificarmos o objeto **tableState** no **Chrome Dev Tools** vamos notar que temos o **objeto tableState**, o mesmo tem 2 arrays, o primeiro **tablehead**, contém 4 posições com o cabeçalho da tabela, o segundo é o **tableData** com os dados da tabela, num **Array com 4 posições** também e em casa posição, outro Array com 4 posições.
+
+<img src="img/mobiletablearray.png" alt="Array Chrome Dev Tools">
+
+
+Para retornar os dados para a tabela, primeiro no atribuito **data** do elemento **Row** adicionamos o array `tableState.tableHead` com os dados de cabeçalho. No atributo **data** do elemento **Rows**, retornamos os valores do `tableState.tableData`, nesse caso o elemento Rows irá gerar o número de linhas necessárias para a tabela.
+
+```javascript
+    return (
+
+      <View style={styles.container}>
+        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+          <Row data={tableState.tableHead} style={styles.head} textStyle={styles.text}/>
+          <Rows data={tableState.tableData} textStyle={styles.text}/>
+        </Table>
+      </View>
+
+    )
+  }
+```
+
+No caso da código da nossa aplicação vamos declarar os dados do cabeçalho em um Array, mas os dados dos usuários vamos retornar da nossa <a id="apiusersmobile">Api</a> exatamente como fizemos no [frontend](#apiusersweb). Nesse caso quando retornarmos os dados do **backend** vamos converte-los em um Array, caso quisermos utilizar da mesma forma que no exemplo acima, porém como vamos adicionar um botão para acessar cada usuário individualmente, vamos usar o `map` e o componente `Cell` do `react-native-table-component` polular os dados da tabela.  
+
+```javascript
+const Users = () => {
+    const navigation = useNavigation();    
+    const [users, setUsers] = useState<Users[]>([]);
+    const [dataUser,setDataUser] = useState([]);
+
+    //DataExample 
+    const tableHead = ["First Name","Last Name","Email","Age", "Detail"];
+
+    useEffect(() => {
+        api.get('users').then(response => {
+            setUsers(response.data);
+            const userData:any = [];
+            response.data.map((user: Users ) => {
+              userData.push([
+                  user.first_name,
+                  user.last_name,
+                  user.email,
+                  user.age                
+              ]);
+            });
+            setDataUser(userData);
+        });
+    },[])
+```
+
+No caso acima, como usamos o `useEffect` para carregar os dados dos usuários somente no `onload` da tela de usuários. Retornamos os dados no da **Api users**, definimos o valor da variável `users` chamdno o `setUsers`, veja mais sobre [imutabilidade no react](https://blog.logrocket.com/immutability-in-react-ebe55253a1cc/) ou em [React Hooks](https://reactjs.org/docs/hooks-state.html).
+
+Também vamos usar o `map` para gerar um array com os valores referente aos usuários e armazena-los na variável `userData`. Assim, se quisermos retornar todos dos dados do usuários na tabela domente o elemento `Rows` e adicionamos os dados do array `userData`, dessa forma: 
+
+```javascript
+  <Rows data={userData} textStyle={styles.text}/>
+``` 
+
+Seu retorno será uma tabela como essa:
+
+<img src="img/mobileusers.jpg" alt="Users Table Rows" width="25%">
+
+Esse exemplo é basicamente o mesmo do [react-native-table-component](https://www.npmjs.com/package/react-native-table-component). No caso da nossa tabela, vamos utilizar o elemento `Cell` para retornar com um **botão** para acessar os dados do usuário na tela de **Detalhes do usuário**. O exemplo abaixo é componente de tabela completo:
+
+```javascript
+        <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+            {                    
+              users.map((user, userIndex) => {
+                return (
+                  <TableWrapper key={user.id} style={styles.row}>
+                    <Cell data={user.first_name} textStyle={styles.text} />
+                    <Cell data={user.last_name} textStyle={styles.text} />
+                    <Cell data={user.email} textStyle={styles.text} />
+                    <Cell data={user.age} textStyle={styles.text} />
+                    <Cell textStyle={styles.text}
+                      data={
+                        <TouchableOpacity onPress={() => handleNavigateToDetail(user.id)}>
+                          <View style={styles.btn}>
+                            <Icon name="user" size={20} color="#34cb79" />
+                          </View>
+                        </TouchableOpacity>                                  
+                      }
+                    >
+                    </Cell>
+                  </TableWrapper>
+                )
+              })
+            }
+        </Table>
+
+```
+
+Acima utilizamos o `TableWrapper` como se fosse as linhas da tabela e o `Cell` para retornar os dados dos usuários utilizando o `users.map`. Para cada que criamos utilizando o **TableWrapper**, adicionamos o atributo `key` como identificação única identificação de cada linha. Nossa tabela é composta de 4 colunas com dados e uma última com um **botão** para acessar os dados do usuário, logo no último elemento `Cell` no atribuito `data` retornamos o componente `TouchableOpacity` com o evento `onPress` que nos permitirá tocar no botão e executar a funcão `handleNavigateToDetail`.
+
+```javascript
+      <TouchableOpacity onPress={() => handleNavigateToDetail(user.id)}>
+```
+
+Note que para chamarmos a funcão que tem um parâmetro, temos que transformar a função em uma `Arrow function`. 
+
+Na funcão abaixo estamos navegando para a tela UserDetail e enviando os parâmetros `id`, e nesse exemplo qualquer outro parâmetro que você ache necessário. Os mesmos serão visualizados na próxima tela com o `useRoute`.  
+
+```typescript
+function handleNavigateToDetail(id: number){
+  navigation.navigate('UserDetail', { 
+      user_id: id,
+      myAnyOtherParam: ["item 1", "item 2..."]
+    });
+}     
+``` 
+
+Quando carregamos a nosso app podemos ver que o mesmo está exibindo a lista de usuários. A próxima etapa é visualizar os **detalhes do usuário**.
+
+<img src="img/mobileusers.jpg" alt="User List with Detail Link">
+
+### Criando Api para retornar detalhes do usuário
+
+Na parte final do nosso código vamos trazer os detalhes de cada usuário usando a `Api` que criamos no backend, porém enviando o parâmetro com o Id do usuário, logo temos que adicionar mais uma funcão no backend da aplicação no arquivo [usersController.ts](backend/src/controllers/usersController.ts).
+
+Basicamente, usaremos um método [HTTP get](https://www.w3schools.com/tags/ref_httpmethods.asp), mas nesse caso retornaremos somente **um registro** chamando o `métódo show`, veja mais em [Restful Api](https://restful-api-design.readthedocs.io/en/latest/methods.html).
+
+```typescript
+    async show(request: Request, response: Response) {
+        const { id } = request.params;
+
+        const user = await knex('users').where('id', id).first();
+
+        if (!user) 
+            return response.status(400)
+            .json({ message: "User Not Found"});
+
+        return response.json( user );
+    }
+```
+Nesse caso, se o registro é encontrado na nossa base de dados, os dados do usuário é retornado em formato json, caso o contrário retorna o código de **erro 400** com a informação que o usuário não foi encontrado.
+
+Para que a `Api` funcione temos que acionar uma rota para a mesma, nessa rota vamos adicionar a linha `  app.get('/users/:id',usersController.show);` abaixo da rota **users**. Essa rota tera o parâmetro `/:id`, que nesse caso é o id do usuário que queremos retornar do banco de dados. 
+
+```typescript
+  app.get('/users',usersController.index);
+  app.get('/users/:id',usersController.show);
+```
+
+Se rodamos nosso backend server e tentarmos dar um get dos dados do usuário com o `id 2` na url: [http://localhost:81/users/2], teremos o retorno abaixo:
+
+<img src="img/backendapiuser.png" alt="User Detail">
+
+### Tela de Detalhes do Usuário User Detail Screen
+
+Agora que já temos nossa `Api` funcionando, só precisamos retornar os dados do usuário para a tela de detalhes do usuário [UserDetail](mobile/src/pages/UserDetail/index.tsx).
+
+Essa tela será mais básica, além disso, a maioria dos componentes já utilizamos nas telas anteriores, então vamos lá, que vamos pegar os detalhes mais importantes, como receber os dados do usuário da tela anterior e visualizar os dados de um único usuário na tela.
+
+Vamos começar com a `interface Params` e o `useRoute`. 
+
+Criamso a interface `Params` onde conseguimos indentificar que tipo de dados temos. Nesse caso temos o `user_id: number` que é um número e esse segundo `myAnyOtherParam: any` que não estamos utilizando é somente um exemplo para qualquer outro parametros que queiramos enviar de uma tela para outra.
+
+Um pouco mais abaixo, uma funcão `hook` do tipo `useRoute()` que nos dará acesso ao objeto routes que contém os parâmetros que recebemos da outra tela.
+
+```typescript
+import { useNavigation, useRoute } from "@react-navigation/native";
+import api from "../../services/api";
+
+interface Params {
+    user_id: number,
+    myAnyOtherParam: any
+}
+...
+const UserDetail = () => {
+const [user, setUser] = useState<User>({} as User); 
+
+const route = useRoute();
+const routeParams = route.params as Params;
+
+```
+
+Abaixo temos o `useEffect` que será chamado no `onLoad` da tela. O mesmo recebe o parâmetro da tela de users e retorna na chamada da `Api` com o parâmetro `${routeParams.user_id}`.  
+
+```typescript
+useEffect(() => {
+    //console.log(routeParams.user_id);
+    api.get(`users/${routeParams.user_id}`).then(response => {
+        setUser(response.data);
+    })
+},[]);
+```
+
+No código que será exibido em tela para o usuário estamos utilizando o componente `Text` basicamente, que por sua vez está recebendo os dados da variável `user` que na está declarada dessa vez somente como um objeto do tipo `User`, dessa forma `const [user, setUser] = useState<User>({} as User)`, dessa forma **não utilizaremos** o `map` para retornar os dados, apenas chamaremos os dados diretamente dessa forma `{user.first_name}`.
+
+```javascript
+interface User {
+    id: number,
+    first_name: string,
+    last_name: string,
+    email: string,
+    dob: string,    
+    age: number,
+    user_url: string,    
+}
+...
+const UserDetail = () => {
+const [user, setUser] = useState<User>({} as User); 
+...
+return (
+    
+    <ImageBackground 
+        source={require('../../assets/home-background.png')}
+        style={styles.container}
+        imageStyle={{ width: 274, height: 368}}>
+            <View style={styles.container}>
+                <View>
+                  <Text style={styles.label}>Avatar: </Text>
+                  <Image style={styles.avatar} source={{ uri: user.user_url }}/>
+                </View>
+                <View>
+                    <Text style={styles.label}>Nome: </Text>
+                    <Text style={styles.description}>{user.first_name} {user.last_name}</Text>
+                    <Text style={styles.label}>Idade: </Text>
+                    <Text style={styles.description}>{user.age}</Text>
+                    <Text style={styles.label}>Email: </Text>                    
+                    <Text style={styles.description}>{user.email}</Text>
+                </View>                   
+            </View>
+            
+    </ImageBackground>
+)
+```
+
+Pronto, finalizamos o nosso App, temos que colocar um pouco de perfumaria para dar um trato nas telas, mas com isso já é possível enviar, receber dados e interagir com o usuário tranquilamente.
+
+Agora, vamos rodar nosso **servidor backend** e **mobile**, para ver o resultado final. Rode os comandos abaixo para carregar nossos projetos.
+
+```
+cd server
+➜  server git:(master) ✗ docker run -ti -v $(pwd):/opt/ui -p 81:3333 nlw1ecoleta:v01 npm run dev    
+
+...
+
+cd mobile
+➜  mobile git:(master) ✗ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env-file "../.env" -v "$(pwd)":/opt/ui teste:v01 npm start
+```
+
+Adicionei um pequeno bonus, mamão com açúcar, colocando uma imagem `fake` no avatar do usúario. Só dar uma olhada no `userController` no **backend server** para encontrar :D.
+
+<img src="img/mobileuserlistanddetails.png" alt="Mobile User">
+
+Espero que tenham gostado :D
 
 # CREDITOS
 
