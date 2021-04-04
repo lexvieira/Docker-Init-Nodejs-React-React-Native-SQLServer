@@ -1920,7 +1920,7 @@ cd server
 ...
 
 cd mobile
-➜  mobile git:(master) ✗ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env-file "../.env" -v "$(pwd)":/opt/ui teste:v01 npm start
+➜  mobile git:(master) ✗ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env-file "../.env" -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm start
 ```
 
 Adicionei um pequeno bonus, mamão com açúcar, colocando uma imagem `fake` no avatar do usúario. Só dar uma olhada no `userController` no **backend server** para encontrar :D.
