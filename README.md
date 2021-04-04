@@ -19,7 +19,7 @@ Compartilhem e contribuam, #ConhecimentoÉParaSerCompartilhado
 
 Projeto Desenvolvido com as seguintes tecnologias, feito do zero, tendo algumas diferenças do projeto inicial:
 
-O objetivo the projeto é criar um ambiente **backend Node.js conectando com banco de dados SQL Server, Web com React, e mobile com React Native**. Para não termos a necessidade de ter que criar o ambiente completo em sua máquina, como instalar plataformas, frameworks e outros, utilizaremos somente o  [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), supondo que você já tenha o mesmo instalado em sua máquina. 
+O objetivo the projeto é criar um ambiente **backend Node.js conectando com banco de dados SQL Server, Web com React, e mobile com React Native**. Para não termos a necessidade de ter que criar o ambiente completo em sua máquina, como instalar plataformas, frameworks e outros, utilizaremos somente o  [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), supondo que você já tenha o mesmo instalado em sua máquina. Caso não tenha, mamão com açúcar :D, siga as instruções em https://docs.docker.com/get-docker/.
 
 Esse projeto serve tanto para Linux, Mac e Windows, although para Windows, caso você tenha algum problema com a instalação, como configuração de BIOS, você pode consultar o link:
 
