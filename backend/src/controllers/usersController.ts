@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import knex from "../database/connection"; 
+import faker from "faker";
 
 class UsersController {
     async index(request: Request, response: Response) {
 
-        const users = await knex('users').select("*").limit(30);
+        const users = await knex('users').select("*").limit(3);
 
         const serialItems = users.map(user => {
             return {
@@ -23,13 +24,18 @@ class UsersController {
     async show(request: Request, response: Response) {
         const { id } = request.params;
 
-        const user = await knex('users').where('id', id).first();
+        const user = await knex('users').where('id', id).first();      
 
         if (!user) 
             return response.status(400)
             .json({ message: "User Not Found"});
 
-        return response.json( user );
+        const userDetail = {
+            ...user,
+            user_url: faker.image.people()
+        } 
+
+        return response.json( userDetail );
     }
 }
 

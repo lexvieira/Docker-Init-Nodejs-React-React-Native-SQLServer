@@ -15,6 +15,7 @@ app.get('/test', (request, response: Response) => {
 });
 
 app.get('/users',usersController.index);
+app.get('/users/:id',usersController.show);
 
 app.listen(3333);  
 

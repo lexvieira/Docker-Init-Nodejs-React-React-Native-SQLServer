@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from "react";
 import { StyleSheet, View, ImageBackground, TouchableOpacity ,Text, Image } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -19,16 +18,10 @@ const Users = () => {
     const navigation = useNavigation();    
     const [users, setUsers] = useState<Users[]>([]);
     const [dataUser,setDataUser] = useState([]);
-    const tableState = {
-      tableHead: ["First Name","Last Name","Email","Age"],
-      tableData: [
-        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 15],
-        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 16],
-        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 17],
-        ["Jeff", "Jacobs", "Julius.Sipes29@hotmail.com", 18]
-      ]      
-    }
-    
+
+    //DataExample 
+    const tableHead = ["First Name","Last Name","Email","Age", "Detail"];
+
     useEffect(() => {
         api.get('users').then(response => {
             setUsers(response.data);
@@ -55,7 +48,14 @@ const Users = () => {
           user_id: id,
           myAnyOtherParam: ["item 1", "item 2..."]
         });
-  }       
+    }       
+
+    // const element = (data:number) => (
+    //   <TouchableOpacity onPress={handleNavigateToDetail(data)}>
+    //     <Icon name="user" size={20} color="#34cb79" />
+    //   </TouchableOpacity>
+    // )
+
 
     return (
         <ImageBackground 
@@ -65,7 +65,8 @@ const Users = () => {
         >
             <TouchableOpacity onPress={handleNavigateBack}> 
                 <Icon name="arrow-left" size={20} color="#34cb79" />
-            </TouchableOpacity>               
+            </TouchableOpacity>     
+                   
             <View style={styles.container}>
                 <View style={styles.main}>
                     <Image source={require("../../assets/logo.png")} />
@@ -75,10 +76,32 @@ const Users = () => {
                     </View>
                 </View>          
             </View>
+            
             <View style={styles.container_table}>
                   <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-                    <Row data={tableState.tableHead} style={styles.head} textStyle={styles.text}/>
-                    <Rows data={dataUser} textStyle={styles.text}/>
+                    <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
+                      {                    
+                        users.map((user, userIndex) => {
+                          return (
+                            <TableWrapper key={user.id} style={styles.row}>
+                              <Cell data={user.first_name} textStyle={styles.text} />
+                              <Cell data={user.last_name} textStyle={styles.text} />
+                              <Cell data={user.email} textStyle={styles.text} />
+                              <Cell data={user.age} textStyle={styles.text} />
+                              <Cell textStyle={styles.text}
+                                data={
+                                  <TouchableOpacity onPress={() => handleNavigateToDetail(user.id)}>
+                                    <View style={styles.btn}>
+                                      <Icon name="user" size={20} color="#34cb79" />
+                                    </View>
+                                  </TouchableOpacity>                                  
+                                }
+                              >
+                              </Cell>
+                            </TableWrapper>
+                          )
+                        })
+                      }
                   </Table>
             </View>                 
         </ImageBackground>
@@ -158,7 +181,11 @@ const styles = StyleSheet.create({
 
     container_table: { flex: 1, padding: 5, paddingTop: 5, backgroundColor: '#fff' },
     head: { height: 40, backgroundColor: '#f1f8ff' },
-    text: { margin: 6 }    
+    text: { margin: 6 },
+    text_cell: { margin: 6, alignItems: "center" },    
+    row: { flexDirection: 'row', backgroundColor: '#FFF' },
+    btn: { marginLeft: 15, borderRadius: 2 },
+    btnText: { textAlign: 'center' }
   });
 
 export default Users;
