@@ -13,11 +13,13 @@ Compartilhem e contribuam, #ConhecimentoÉParaSerCompartilhado
 - Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
 - Faça push para a sua branch: `git push origin minha-feature`.
 
+Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
+
 <p align="center">
   <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>
 
-Projeto Desenvolvido do zero, tendo algumas diferenças do projeto inicial da [Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack), uma vez que o conceito deste projeto é 
+Projeto Desenvolvido do zero, tendo algumas diferenças do projeto inicial da [Rocketseact](https://github.com/rocketseat-education/nlw-01-omnistack).
 
 O objetivo the projeto é criar um ambiente **backend Node.js conectando com banco de dados SQL Server, Web com React, e mobile com React Native**. Para não termos a necessidade de ter que criar o ambiente completo em sua máquina, como instalar plataformas, frameworks e outros, utilizaremos somente o  [Docker](https://www.docker.com/) e [Docker-compose](https://docs.docker.com/compose), supondo que você já tenha o mesmo instalado em sua máquina. Caso não tenha, #MamãoComAçúcar :D, siga as instruções em https://docs.docker.com/get-docker/.
 
@@ -31,19 +33,19 @@ Sinta-se à vontade para testar e contribuir.
 
 Nosso projeto será criado utilizando as seguintes tecnologias: 
 
-* [Docker](https://www.docker.com/) - Cria container e rode projetos sem precisar criar todo o ambiente na sua máquina. 
+* [Docker](https://www.docker.com/) - Crie containers e rode projetos sem precisar criar todo o ambiente na sua máquina. 
 * [Docker-compose](https://docs.docker.com/compose) - Suba todo o ambiente com somente comando `docker-compose up`. 
-* [Node.js](https://nodejs.org/en/) - Backend da nossa aplicação, responsável pela parte de negócios
+* [Node.js](https://nodejs.org/en/) - Backend da nossa aplicação, responsável pela parte de negócios. Veja: https://www.pluralsight.com/blog/software-development/front-end-vs-back-end
 * [React](https://reactjs.org) - Frontend, responsável pela interação com o usuário. 
 * [React Native](https://facebook.github.io/react-native/) - Mobile app desenvolvido para multiplataforma, Android e IOS. 
-* [Expo](https://expo.io/), responsável por compilar o projeto mobile.
-* [SQL Server](https://hub.docker.com/_/microsoft-mssql-server/) Banco de dados relacional da Microsoft.
-* [NPM (Gerenciador de Pacotes)](https://www.npmjs.com/) para instalarmos os pacotes nas nossas 3 aplicações.
-* [KNEX Query Builder for Node.js](http://knexjs.org/)
+* [Expo](https://expo.io/) - Responsável por compilar (converter) o projeto móvel com código Javascript / Typescript e implantá-lo em telefones Android e IOS.
+* [SQL Server](https://hub.docker.com/_/microsoft-mssql-server/) - Banco de dados relacional de grande porte da Microsoft.
+* [KNEX Query Builder for Node.js](http://knexjs.org/) - Técnica que é usada para construir consultas. Ele suporta vários bancos de dados como MSSQL, Postgres, MySQL, SQLite, Oracle e alguns outros também.
+* [NPM (Gerenciador de Pacotes)](https://www.npmjs.com/) - Gerenciador de pacotes integrado com o Node que nos permite instalar os pacotes(bibliotecas) necessários em nossas 3 aplicações.
 
 ## Agora, mãos na massa. 
 
-## [Summary](#summary)
+## <a id="summary">Sumário</a>
 
 1. [Criar Dockerfile para rodar os projetos Backend, Frontend e Mobile.](#createdockerfile) `Create Docker File`
 2. [Projeto Backend usando Docker](#initiatebackendproject).
@@ -82,7 +84,7 @@ Nosso projeto será criado utilizando as seguintes tecnologias:
 
 Crie um arquivo na pasta raiz do seu projeto com o nom `Dockerfile` e insira o código abaixo.
 
-* Obs: O Dockerfile será utilizado a principio para rodar os 3 projetos, porque é mais fácil para executar os commandos e ambos os projetos utilizam **Node.js** e o **NPM** na mesma versão, porém ao final será a base somente para o projeto mobile que necessita utilizar o **expo-cli**.Para ambos Backend e Frontend nós vamos utilizar o **docker-compose** para rodar nosso projeto. 
+* Obs: O Dockerfile será utilizado a principio para criar a imagem `nlw1ecoleta:v01` que será utilizada para rodar os 3 projetos, porque é mais fácil para executar os commandos e ambos os projetos utilizam **Node.js** e o **NPM** na mesma versão `12.20.2`, porém ao final do projeto utilizaremos o `Dockerfile` somente como base para **o projeto mobile** que necessita utilizar o [expo-cli](https://docs.expo.io/workflow/expo-cli/), instalado abaixo. Não se preocupe que você irá sacar tudo enquanto estivermos criando o projeto. Aproveite :D
 
 ```
 FROM node:12.20.2
@@ -160,9 +162,9 @@ Para criarmos/iniarmos cada um dos projetos **backend, web e mobile**, rodaremos
    expo init mobile --npm 
 ```
 
-Basicamente com esses 3 comandos você pode iniciar um projeto Backend, Frontend e Mobile com Node.js, React e React Native
+Basicamente com esses 3 comandos você pode iniciar qualquer projeto Backend, Frontend e Mobile com Node.js, React e React Native.
 
-Não se preocupe, vamos passar por cada um dos ambientes detalhadamente rodando os comandos dentro de um **docker container** :)
+Não se preocupe, vamos passar por cada um dos ambientes detalhadamente rodando os comandos dentro de um **docker container** :D
 
 ---
 ## 2 - <a id="initiatebackendproject">Projeto Backend usando Docker</a>
@@ -176,18 +178,24 @@ Nesse caso vamos executer o **docker run** para criar um container temporário e
 ```
 * **docker run** - Cria um container temporário e roda os comandos dentro dele e para o container quando terminado.
 * **-ti** - Modo interativo, permite rodar comandos de texto no terminal.
-* **-v "$(pwd)":/opt/ui** - Cria um volume dividido em duas partes. Antes do :(colon), pasta na sua máquina. Depois dos :, pasta dentro do container. $(pwd), retorna o seu diretório atual (word directory). 
+* **-v "$(pwd)":/opt/ui** - Cria um volume dividido em duas partes. Antes do :(colon), pasta na sua máquina. Depois dos :(dois pontos), pasta dentro do container. $(pwd), retorna o seu diretório atual (word directory). 
 * **nlw1ecoleta:v01** - Nome da imagem (sempre em minúsculo) e tag, depois dos :(dois pontos). [Tags](https://docs.docker.com/engine/reference/commandline/tag/) podem indicar versões, como :v01 ou *:latest, :latest, :v01.test*. 
 * **/bin/bash** -  **shell** - Mais comum usado como shell padrão para login do usuário do sistema linux. O nome do shell é um acrônimo para **Bourne-again shell**.
 
 ### 2.1 - <a id="createbackendwithdocker">Iniciando projeto backend com NPM</a> 
 [Comeback](#summary)
 
+Quando voltei a programar, uma das primeiras perguntas que me venho foi, o que é esse diabos de gerenciador de pacotes. E agora está bem mais fácil comparando com antes onde se precisassemos adicionar uma biblioteca(library) jquery no projeto, tinhamos que fazer tudo manualmente. Inclusive adiconar a referência das bibliotecas(libraries) aos arquivos `HTML` ou `Asp.Net` que trabalhava na época. Hoje tudo está mais simples com o `gerenciador de pacotes`. E o que é isso exatamente? [Package manager(Gerenciador de pacotes)](https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/) basicamente te auxilia com o processo de instalação, atualização e remoção pacotes (bibliotecas/libraries) javascript dos projetos.
+
+Temos vários gerenciadores de pacotes, mas vamos focar no **NPM** e **Yarn**, nesse primeiro momento, contudo vamos utilizar o NPM nos nossos apps.
+
 * **npm vs yarn** (https://stackoverflow.com/questions/62806728/how-to-tell-if-a-project-uses-yarn)
 
 Como saber se um projeto usa Yarn ou NPM? Ambos contêm um arquivo package.json, embora as dependências do Yarn contenham um arquivo na pasta chamada yarn.lock.
 
-Ambos usam package.json com o mesmo formato JSON, mas o NPM 5 gera um arquivo package-lock.json, enquanto o Yarn gera um arquivo yarn.lock.
+Ambos usam `package.json` com o mesmo formato JSON, mas o NPM 5 gera um arquivo `package-lock.json`, enquanto o Yarn gera um arquivo `yarn.lock`.
+
+### Voltando para o projeto com o Docker 
 
 Se você ainda não acessou seu docker container, acesse com o seguinte comando na **pasta root do seu projeto**:
 
@@ -239,7 +247,7 @@ Acesse a **pasta server** dentro do seu projeto. Access the **server folder** wi
   ➜  server git:(master) ✗ ls
 ```
 
-Agora conseguimos subir nosso servidor com apenas um comando, alem disso podemos rodar outros comandos e adicionar novos pacotes da mesma forma. somente adicionando o comando necessário como último **parametro** do commando.
+Agora conseguimos acessar nosso servidor com apenas um comando, alem disso podemos rodar outros comandos e adicionar novos pacotes da mesma forma. somente adicionando o comando necessário como *último* **parametro** do commando.
 
 No exemplo abaixo já estariamos rodando o nosso servidor, adicionando a porta de entrada e saída, o volume e o comando **npm run dev** para rodar o servidor. 
 
@@ -251,7 +259,7 @@ Nesse caso, o container é iniciado, executa os comandos necessários e depois *
 
 Vamos simplificar os comandos usando docker, uma vez que os comandos começarão ficarão um pouco grandes, quando começarmos a adicionar, volume, portas, envio de variaveis etc.
 
-Por exemplo, ser formos adicionar o pacote para trabalhar com o Banco de Dados Sql Server, você precisa usar o `npm install mssql`.
+Por exemplo, se formos adicionar o pacote para trabalhar com o Banco de Dados Sql Server, você precisa usar o `npm install mssql`.
 
 ```
 docker run -ti -v $(pwd)/server:/opt/ui nlw1ecoleta:v01 npm install mssql
@@ -270,11 +278,11 @@ alias dockerNlw1server='docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01'
 ```
 
 * Observações: 
-  * O commando alias é **temporário**, significa que você terá que rodar o comando novamente quando fazer o login novamente na sua máquina, ou a melhor opção é adicionar o comando ã um dos arquivos **.bashrc | .zshrc**.
+  * O commando alias é **temporário**, significa que você terá que rodar o comando novamente quando fazer o login novamente na sua máquina, ou a melhor opção é adicionar o comando ã um dos arquivos **.bashrc** ou **.zshrc**.
   
-  * O comando adionado ao alias deve estar com entre (') aspas ou (") aspas duplas.
+  * O comando adionado ao alias deve estar com entre **'** aspas ou **"** aspas duplas.
 
-  * Não incluímos as portas para acessar nosso container no **Alias** porque usaremos o **docker-compose** para fazer isso.
+  * Não incluímos as **portas** (parâmetro **-p**) para acessar nosso container no **Alias** porque usaremos o **docker-compose** para fazer isso.
 
 Nesse caso você reduziu o nome do seu comando para apenas o alias **dockerNlw1server** e agora quando precisar executar algum comando é só digitar o nome do **alias** e o comando na frente. Podemos utilizar outro nomo também como **dockerNlw1**, uma vez que vamos utiliza-lo nos projetos Web e Mobile, mas nesse caso o nosso alias será o **dockerNlw1server**.
 Exemplo: 
@@ -298,7 +306,7 @@ cd server
 ➜  server git:(master) ✗ 
 ```
 
-Vamos falar um pouco mais sobre pacotes nos outros projetos, porém agora vamos executar só dar uma breve explicação sobre os comandos e roda-los na prática. Se tiver dúvidas sobre os comandos, você pode verifcar no link https://www.npmjs.com/package/express, o nome do pacote(package) vai sempre no final.
+Vamos falar um pouco mais sobre pacotes nos outros projetos, porém agora vamos executar os comandos e dar uma breve explicação sobre os comandos e roda-los na prática. Se tiver dúvidas sobre os comandos, você pode verifcar no link https://www.npmjs.com/package/express, o nome do pacote(package) vai sempre no final.
 
 Comandos no terminal usando o docker: 
 
@@ -314,7 +322,7 @@ No seu arquivo **/src/server.ts** você terá que importar o **express**.
     import express from 'express';
 ```
 
-* `npm install @types` - Definition Types Typescript - significa que iremos instalar as *definições de tipos* da biblioteca, trazendo informações da biblioteca/package que você está instalando no seu projeto, como tipos de variáveis, funções, parametros, retornos e outros. Algumas bibliotecas já vem com a definição de tipos instaladas e outras não. para as que não vem é só instalalas usando o comando abaixo sendo que depois da "/" é só informar o nome da biblioteca, ex `npm install @types/express -D`. Veja mais em https://www.typescriptlang.org/docs/handbook/2/type-declarations.html. 
+* `npm install @types` - Definition Types Typescript - significa que iremos instalar as *definições de tipos* da biblioteca, trazendo informações da biblioteca/package que você está instalando no seu projeto, como tipos de variáveis, funções, parametros, retornos e outros. Algumas bibliotecas já vem com a definição de tipos instaladas e outras não. para as que não vem é só instalalas usando o comando abaixo sendo que depois da "/" é só informar o nome da biblioteca, ex. `npm install @types/express -D`. Veja mais em https://www.typescriptlang.org/docs/handbook/2/type-declarations.html. 
 
 * -D option = () (-D) **DEVELOPER DEPENDENCY** - significa que somente será utilizada durante a fase de desenvolvimento.
 
@@ -349,9 +357,9 @@ dockerNlw1server npm install ts-node -D
   import express, {Response} from 'express';
 
   const app = express();
-  dir = [1, 2, 3, 4, 5]
+  const dir = [1, 2, 3, 4, 5]
   app.get('/users', (request, response: Response) => {
-      response.send(`Server is Running ${dir[2]});
+      response.send(`Server is Running ${dir[2]}`);
   })
 
   app.listen(3333);  
@@ -382,7 +390,7 @@ dockerNlw1server npm install ts-node -D
 }
 ```
 
-`npm run dev` -  Uma vez que você adicionou a linha no arquivo **package.json** para rodar o script para rodar agora você pode rodar o servidor apenas com o comando **npm run dev**, `dev` é referente à referência dev que você adicionou ao seu package.json.
+`npm run dev` -  Uma vez que você adicionou a linha no arquivo **package.json**, para rodar o script e iniciar o servidor, você precisa apenas digitar o comando **npm run dev**, `dev` é referente à referência ao **script** que você adicionou ao seu **package.json**.
 
 ```
   dockerNlw1server npm run dev
@@ -399,13 +407,13 @@ Veja mais em: https://docs.docker.com/config/containers/container-networking/.
 
 Para resolver isso vamos sair do nosso docker container com o comando **exit** e adicionar uma nova configuração para ao rodar comando **docker run**.
 
-Como disse anteriormente vamos usar o **docker-compose** para rodar o nosso servidor backend. Da mesma maneira os outros projetos Web e Mobile. As I said before, we will use **docker-compose** to run our back-end server. Likewise the other Web and Mobile projects.
+Como disse anteriormente vamos usar o **docker-compose** para rodar o nosso servidor backend. Da mesma maneira os outros projetos Web e Mobile.
 
 Contudo, caso não queiram utilizar o docker-compose vocês também podem rodar o seu servidor executando o comando abaixo dentro da pasta **server**.
 
 ```
 ➜  NLW1_Ecoleta_Docker_SQLServer git:(master) ✗ cd server
-➜  docker run -ti -p 81:3333 -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm run dev
+➜  server git:(master) ✗ docker run -ti -p 81:3333 -v "$(pwd)":/opt/ui nlw1ecoleta:v01 npm run dev
 Server is Running
 ```
 
@@ -437,7 +445,7 @@ Nesse caso rodamos o comando completo porque tivemos que adicionar o parâmetro 
 * Exemplo Terminal 2:
 <img src="img/portallocated0.png" alt="Port alread allocated">
 
-Para trabalharmos com a questão das portas de uma maneira mais fácil, vamos utilizar o docker-compose para configurar nossos serviços e deixa-los ativos enquanto estivermos utilizando-os, inclundo o serviço do SQL Server que usamos com o nosso Backend para retornar os dados para os usuários.
+Para trabalharmos com a questão das portas de uma maneira mais fácil, vamos utilizar o docker-compose para configurar nossos serviços e deixa-los ativos enquanto estivermos utilizando-os, inclundo o **serviço do SQL Server** que usamos com o nosso **Backend** para retornar os dados para os usuários.
 
 ## OK, GENIAL! OK, GREAT!
 
@@ -473,9 +481,9 @@ Salve o arquivo e na pasta raiz do seu projeto digite:
 
 <img src="img/dockercomposebackend.png" alt="Docker Compose up">
 
-Agora seu servidor Web está rodando sem parar em um terminal e você pode continuar com o código em outro terminal tranquilamente.
+Agora seu servidor Web está rodando sem parar em um **terminal** e você pode continuar com o código em outro terminal tranquilamente.
 
-No seu terminal clique no sinal de **+** ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
+No seu terminal clique no sinal de <kbd><img src="img/terminalnew.png" alt="Terminal options"></kbd> para abrir um novo terminal ou na opção <kbd><img src="img/terminalsplit.png" alt="Terminal options"></kbd>  para dar um split no terminal e poder digitar novos comandos.
 
 <img src="img/terminaloptions.png" alt="Terminal options">
 
@@ -492,15 +500,15 @@ Em outro terminal, dentro da pasta root do projeto digite ou <kbd>Ctrl</kbd> + <
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=YOUR_PASSWORD" -p 1433:1433 --name sqlserverV2017 -v $(pwd)/data:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest
 ```
 
-Escolha uma senha e adicione o caminho para a pasta que pretende armazenar os arquivos do banco de dados.
-Por exemplo se deseja adicionar um caminho absoluto, você pode incluir na opção:
+Agora vamos com os parâmetros que você precisa se preocupar. **Escolha uma senha forte** e adicione o caminho para a pasta que pretende armazenar os arquivos do banco de dados. Por exemplo se deseja adicionar um caminho absoluto, ou seja, partindo da pasta raíz do sistema `/home/myuser/data`. Se você deseja usar o caminho relativo, ou seja, a partir da pasta que você está `../data`, você pode utilizar as opções:
 
-* `-v /home/myuser/data:/var/opt/mssql`. lembrando que do lado esquerdo do ":" é o diretório na sua máquina ou servidor de arquivos e o endereço no lado direito é o endereço dentro do container. **Não altere no lado direito pois está é a pasta default do SQL Server**.
-* `-v ../data:/var/opt/mssql ` - **../data:** Nesse caso informamos que queremos voltar um nível na hierarquia das pastas e adicionar os dados do banco de dados dentro da pasta **data** disponível nesse nível anterior. 
+* **Caminho absoluto:** `-v /home/myuser/data:/var/opt/mssql`. lembrando que do lado esquerdo do ":" é o diretório na sua máquina ou servidor de arquivos e o endereço no lado direito é o endereço dentro do container. **Não altere no lado direito pois está é a pasta default do SQL Server**.
+  
+* **Caminho relativo:** `-v $(pwd)/data:/var/opt/mssql` - **$(pwd)/data:** Nesse caso, informamos que nós queremos armazenar nossos **arquivos de banco de dados** dentro da pasta **data** que está dentro da pasta do projeto. O ` $(pwd)` captura o seu caminho absoluto(pasta onde você está no momento) e concatena(coloca junto) **da pasta data**. Existem várias maneiras de informar o caminho, basta encontrar a melhor para o seu projeto.
 
 * Na opção **name** adicionamos um nome que é fácil de relacionar com a imagem existem, nesse caso **sqlserverV2017**.
 
-## START|STOP SQL SERVER
+### START|STOP SQL SERVER
 
 Depois de rodar o primeiro comando você pode iniciar ou parar o serviço quando desejar com o comando: *docker start|stop*. Ainda é possível criar um Alias para rodar esses comandos, como foi explicado anteriormente.
 
@@ -509,7 +517,7 @@ docker start sqlserverV2017
 docker stop sqlserverV2017
 ```
 
-## 2.4 - <a id="createdockercomposesql">Adicionar SQL Server ao Docker Compose `Configure Docker with SQL Server`</a>
+### 2.4 - <a id="createdockercomposesql">Adicionar SQL Server ao Docker Compose</a>
 [Come back](#summary) 
 
 Agora que aprendemos como configurar o docker para subir um container com o SQL Server, agora vamos subir os dois serviços simultâneamente usando o **docker-compose.yml**.
@@ -528,7 +536,7 @@ No seu arquivo **docker-compose.yml** adicione as seguintes linhas:
     ports:
       - "1433:1433"      
     volumes: 
-      - ${PWD}/data/sqlserver:/var/opt/mssql    
+      - ${PWD}/data:/var/opt/mssql    
 ```
 
 No **volume**, a opção **${PWD}**, indica seu **diretório atual**
@@ -541,7 +549,7 @@ Quando você criar a pasta dentro do container, a pasta virá com **permissões 
 
 <img src="img/folderpermissions.png" alt="Folder Permissions Root">
 
-Você também pode optar por salvar os dados em outra pasta como por exemplo, como a de outro projeto, como no exemplo abaixo:
+Você também pode optar por salvar os dados em outra pasta como **por exemplo**, como a de outro projeto, como no exemplo abaixo **que não vamos seguir, nesse momento, OK? :D**:
 
 ```
     volumes: 
@@ -582,7 +590,7 @@ Execute novamente o `docker-compose up --build`:
 
 <img src="img/dockercomposerunbackendeserver.png" alt="Docker compose Backend and SQL Server Running">
 
-Show, agora você tem Backend e Banco de dados configurados e rodando sem problemas.
+Show!!!, agora você tem Backend e Banco de dados configurados e rodando sem problemas.
 
 Nas próximas etapas faremos algumas inclusões de dados e conectaremos o **backend** ao banco de dados **sql server**, mas por agora, vamos proseguir iniciando o **Frontend** e **Mobile**. 
 
@@ -598,9 +606,17 @@ Iniciando projeto com o Docker container.
 
 * MODO FÁCIL, EASYWAY! 
 
-Nosso Alias **dockerNlw1server** que após tanto digitar eu notei que poderia se chamar somente **dockerNlw1** ou o nome mais significante dependendo do seu projeto :D.
+Nosso Alias **dockerNlw1server** que após tanto digitar eu notei que poderia se chamar somente **dockerNlw1** ou o nome mais significante dependendo do seu projeto :D. Você pode mudar criar o Alias que bem entender e ter diferentes Alias para cada uma de suas aplicações, como por exemplo: `dockerNlw1Server`, `dockerNlw1Web`, `dockerNlw1Mobile`. Isso vai depender de como você vai lidar com seu projeto.
 
 Então vamos usar nosso **alias** aqui para iniciar nosso projeto React com apenas um comando na pasta raiz. Se você não criou, somente não se esqueça de criar a pasta **web**, com `mkdir web` na raiz do projeto, novamente por questões de permissões de usuário.
+
+Criando a pasta `web`:
+
+```
+  Docker-Init-Nodejs-React-React-Native-SQLServer git:(master) ✗ mkdir web
+```
+
+Iniciando seu projeto `web`:
 
 ```
   dockerNlw1server npx create-react-app web --template typescript --use-npm
@@ -617,7 +633,7 @@ node@392c8d1638ba:/opt/ui$ exit
 exit
 ```
 
-Na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo comando que rodamos para criar o **projeto backend**.
+Na pasta raiz do projeto rodo o comando abaixo, esse é o mesmo comando que usamos para acessar qualquer container para o projeto **backend**, **web** ou **mobile**.
 
 ```
   docker run -ti -v "$(pwd)":/opt/ui nlw1ecoleta:v01 /bin/bash
@@ -633,14 +649,14 @@ Então agora rode o comando dentro do docker:
 node@62dd1fb8db48:/opt/ui$ npx create-react-app web --template typescript --use-npm
 ```
 
-* npx create-react-app - Comando para criar o projeto
-* web - Pasta de instalação 
-* --template typescript - Modelo do projeto
-* --use-npm - Usando npm como gerenciador de pacotes
+* **npx create-react-app** - Comando para criar o projeto
+* **web** - Pasta de instalação 
+* **--template typescript** - Modelo do projeto
+* **--use-npm** - Usando npm como gerenciador de pacotes
 
 <img src="img/reactappinstall.png" alt="Install React App">
 
-O nosso output é o mesmo, tanto usando o alias **dockerNlw1server** ou o comando completo, que também **recomendo** para aprendizado.
+O nosso output é o mesmo, tanto usando o alias **dockerNlw1server** ou o comando completo, que também **recomendo** digitar varias vezes para melhorar o aprendizado.
 
 <img src="img/reactappcreated.png" alt="Project React Created">
 
@@ -720,7 +736,7 @@ Salve o arquivo e na pasta raiz do seu projeto digite:
 
 Agora seu servidor Web está rodando sem parar em um terminal e você pode continuar com o código em outro terminal tranquilamente.
 
-No seu terminal clique no sinal de <kbd>+<kbd> ou na opção para dar um split no terminal para abrir um novo terminal e poder digitar novos comandos.
+Novamente, no seu terminal clique no sinal de <kbd><img src="img/terminalnew.png" alt="Terminal options"></kbd> para abrir um novo terminal ou na opção <kbd><img src="img/terminalsplit.png" alt="Terminal options"></kbd>  para dar um split no terminal e poder digitar novos comandos.
 
 <img src="img/terminaloptions.png" alt="Terminal options">
 
@@ -747,9 +763,15 @@ E novamente:
 
 * MODO FÁCIL, EASYWAY! :D 
 
-Nosso Alias **dockerNlw1server** que após tanto digitar eu notei que poderia se chamar somente **dockerNlw1** ou o nome mais significante dependendo do seu projeto :D.
-
 Então vamos usar nosso alias aqui para iniciar nosso projeto React com apenas um comando na pasta raiz. Se você não criou, somente não se esqueça de criar a pasta **mobile**, com `mkdir mobile` na raiz do projeto, novamente por questões de permissões de usuário.
+
+Criando a pasta `mobile`:
+
+```
+  Docker-Init-Nodejs-React-React-Native-SQLServer git:(master) ✗ mkdir mobile
+```
+
+Iniciando seu projeto `mobile`:
 
 ```
   dockerNlw1server expo init mobile --npm
@@ -809,9 +831,11 @@ Já para rodar o projeto **mobile** no nosso celular e carregar o **Expo** no no
 
 A porta padrão para o projeto mobile, no caso para carregar o Expo no navegador é a porta **19002**. 
 
-* Criando nosso **.env file** para conseguirmos passar variáveis de ambiente para nosso container Mobile. Crie um arquivo .env file na pasta root do projeto e adicione as informações abaixo.
+### Criando nosso **.env file**
 
-Note que no seu **.env** file você tem o endereço de ip que deve ser substituído pelo ip da sua máquina. No **Linux e Mac** você pode usar o **ifconfig** para encontrar o ip e no **Windows** você pode usar o **ipconfig** 
+* Usamos o **.env file** para conseguirmos passar variáveis de ambiente para nosso container Mobile. Crie um arquivo .env file na **pasta root do projeto** e adicione as informações abaixo.
+
+Note que no seu **.env** file você tem o endereço de ip que deve ser substituído pelo ip da sua máquina. No **Linux e Mac** você pode usar o **ifconfig** para encontrar o ip e no **Windows** você pode usar o **ipconfig**. Na variável **REACT_NATIVE_PACKAGER_HOSTNAME** onde o valor é **192.168.1.70**, substitua o valor com o IP da sua máquina.
 
 **.env File**
 ```
@@ -837,7 +861,7 @@ No seu navegador no endereço do seu local ip, na porta **19002** você consegui
 
 <img src="img/reactnativeapp.jpg" alt="Docker and React Native" width="300">
 
-### 4.1. <a id="createdockercomposemobile">Adding Mobile configuration in the docker-compose.yml</a>
+### 4.1. <a id="createdockercomposemobile">Adicionadno a configuração do Mobile no docker-compose.yml</a>
 [Come Back](#summary)
 
 Observações ao rodar Serviço React Native Expo.
@@ -900,7 +924,7 @@ OU
 ```
 
 >--build - Build images before starting containers.
-> -d, --detach - Detached mode: Run containers in the background, the termianl is released and you can use it. But if you want to stop the services you need to type:
+> -d, --detach - Detached mode: Roda o container em segundo plano(background), liberando o terminal para que você utilizar. Contudo, se você quiser parar o container você precisa digitar:
 
 ```
 docker-compose down
@@ -919,6 +943,10 @@ Finalmente.
 <img src="img/dockercomposecomplete.png" alt="Docker Compose Complete" >
 
 Com certeza, depois de criar as imagens utilizando o **docker-compose --build** você precisará rodar novos commandos, adicionar novos pacotes em sua aplicação, então você pode rodar os commandos dentro do docker acessando o *bash* com o *docker run*. Contudo, agora você pode acessar também as imagens geradas pelo **docker-compose**.
+
+Você também pode ver as imagens criadas e os containers rodando no **Vscode**:
+
+<img src="img/dockervscode.png" alt="Docker VsCode" >
 
 Se quiser, você também pode ver as imagens geradas utilizando o comando **docker images**:
 
@@ -969,10 +997,10 @@ Também em https://github.com/lexvieira/TSQLtoHTMLTable, projeto que permite ret
 
 ## Let's Go!
 
-### 5.1. <a id="configureconectionusingknex">[Configurar conexão com o banco de dados usando Knex]</a>. 
+### 5.1. <a id="configureconectionusingknex">Configurar conexão com o banco de dados usando Knex</a>. 
 [Come Back](#summary)
 
-    Para accessarmos os dados no nosso banco de dados vamos utilizar um pacote(package) para Node.js chamado **Knex**, que permite construir consultas(queries) e retornar dados de forma amigável para o nosso backend.
+Para accessarmos os dados no nosso banco de dados vamos utilizar um pacote(package) para Node.js chamado **Knex**, que permite construir consultas(queries) e retornar dados de forma amigável para o nosso backend.
 
 `npm install knex` - Usando o nosso docker dentro da pasta de **backend(server)**, digite o comando:
 ```
@@ -1016,7 +1044,7 @@ import { environment } from './src/environments/index';
 const ip = `${environment.ipServer}`,
 ```
 
-Quando utilizamos o Knex, temos que criar um arquivo de configuração chamado **knexfile.ts** que fica na pasta root do projeto, com a seguinte código:
+Quando utilizamos o **Knex**, temos que criar um arquivo de configuração chamado **knexfile.ts** que fica na **pasta root do projeto backend**, com a seguinte código:
 
 ```Typescript
 import { environment } from './src/environments/index';
@@ -1058,7 +1086,7 @@ const connection = knex({
 export default connection;
 ```
 
-Depois de criarmos nosso arquivo de conexão agora nos resta criar nossos arquivos de Migrations e Seeds:
+Depois de criarmos nosso arquivo de conexão agora nos resta criar nossos arquivos de **Migrations** e **Seeds**:
 
 * **Migrations:** Módulo que permite criar, alterar, deletar tabelas, entre outras coisas no banco de dados. Basicamente nós criamos um **script de migração** e depois executamos o comando para rodar a migração no servidor. Se tudo estiver correto as tabelas são criadas no servidor e conseguimos acessa-las tranquilamente. Histórico do banco de ados.
 
@@ -1079,7 +1107,7 @@ Se você preferir você pode se renomear o inicio do arquivo numerando-o para fi
 ➜  migrations git:(master) ✗ mv 20210330145952_initUsers.ts 01_20210330145952_initUsers.ts
 ```
 
-Nosso arquivo criado com o resultado do comando acima. Para saber os tipos de dados quando estiver criando as tabelas veja: [Schema](https://devhints.io/knex#schema) ou [Knex cheatsheet](https://devhints.io/knex)
+Nosso arquivo criado com o resultado do comando acima. Para saber os tipos de dados quando estiver criando as tabelas veja: [Schema](https://devhints.io/knex#schema) ou [Knex cheatsheet](https://devhints.io/knex).
 
 ```Typescript
 import { Knex } from "knex";
@@ -1133,7 +1161,7 @@ Requiring external module ts-node/register
 Batch 1 run: 4 migrations
 ```
 
-* Lembrando que estamos rodando nossos comandos dentro de um **docker container** logo nosso `dockerNlw1server` é um atalho para `docker run -ti -v $(pwd):/opt/ui nlw1ecoleta:v01 npm run dev`
+* Lembrando que estamos executando nossos comandos dentro de um **docker container** logo nosso `dockerNlw1server` é um atalho para `docker run -ti -v $(pwd):/opt/ui nlw1ecoleta:v01 npm run dev`
 
 ### Erros com **Migrations**:
 
@@ -1157,7 +1185,7 @@ migration failed with error:
   - Could not create constraint or index. See previous errors.
 ```
 
-Se rodamos nosso código no banco de dados recebemos o erro: 
+Se executamos nosso código no banco de dados recebemos o erro: 
 
 ```sql
 	Msg 1767, Level 16, State 0, Line 1
@@ -1181,7 +1209,7 @@ Requiring external module ts-node/register
 Batch 1 rolled back: 3 migrations
 ```
 
-O **rollback** nesse caso executará o código para dar um **DROP** na tabela **users**. Drop nesse caso significa deletar a tabela. 
+O **Rollback** irá executar dentro do **script de migração** que você criou o método down. O **rollback** nesse caso executará o código para dar um **DROP** na tabela **users**, que significa deletar a tabela. 
 
 ```typescript
 export async function down(knex: Knex): Promise<void> {
@@ -1189,7 +1217,7 @@ export async function down(knex: Knex): Promise<void> {
 }
 ```
 
-Nesse caso, se você fez um rollback das suas migrações é só rodar novamente com o comando:
+Se você fez um **rollback** das suas **migrações** para testar é só rodar novamente o comando `knex:migrate`:
 
 ```sql
 ➜  backend git:(master) ✗ dockerNlw1server npm run knex:migrate 
@@ -1197,9 +1225,9 @@ Nesse caso, se você fez um rollback das suas migrações é só rodar novamente
 
 ### Inserindo dados fictícios no banco de dados para teste.
 
-Nesse caso vamos inserir alguns dados fakes de usuário para testar nossa base de dados utizando o [faker.js](https://github.com/Marak/faker.js). Veja o artigo: [Seeding your Database with Thousands of Users using Knex.js and Faker.js](https://blog.bitsrc.io/seeding-your-database-with-thousands-of-users-using-knex-js-and-faker-js-6009a2e5ffbf).
+Vamos inserir alguns dados fakes de usuário para testar nossa base de dados utizando o [faker.js](https://github.com/Marak/faker.js). Veja o artigo: [Semeando seu banco de dados com milhares de usuários usando Knex.js e Faker.js](https://blog.bitsrc.io/seeding-your-database-with-thousands-of-users-using-knex-js-and-faker-js-6009a2e5ffbf).
 
-Agora vamos adicinar o **faker.js** ao nosso projeto, porém com a opção **-D**, que significa *dependência de desenvolvimento*. Também é possível utilizar a versão online em [FakerCloud](https://fakercloud.com/api). Também adicionamos o **date-diff**, uma biblioteca para realizar calculo de datas usando javascript. 
+Agora vamos adicinar o **faker.js** ao nosso projeto, porém com a opção **-D**, que significa *dependência de desenvolvimento*. Também é possível utilizar a versão online em [FakerCloud](https://fakercloud.com/api). Também adicionamos o **date-diff**, uma biblioteca para realizar calculo de datas usando javascript.
 
 ```
 dockerNlw1server npm install faker -D 
@@ -1268,20 +1296,20 @@ app.listen(3333);
 console.log('Server is Running');
 ```
 
-Quando carregarmos a aplicação no endereço web http://localhost:81/users teremos o retorno abaixo.
+Quando carregarmos a aplicação no endereço web `http://localhost:81/users` teremos o retorno abaixo.
 
 <img src="img/userscontrollerindex.png" alt="Data from User Controller">
 
 Não abordarei a questão de APIs Restfull e como testa-las porque irá sair muito do escopo, mas se quiserem testar suas APIs, você podem utilizar o [Insomnia](https://insomnia.rest/) ou o [Postman](https://www.postman.com/). Com eles você pode fazer testar suas APIs, fazendo requests do tipo **GET, POST, PUT, PATCH, DELETE**, além de poder fazer testes com envios de arquivos também.
 
-### 5.3. <a id="acessingapiwithfrontend">Acessando API com Front End</a>.
+### 5.3. <a id="acessingapiwithfrontend">Acessando API com Frontend</a>.
 [Come Back](#summary)
 
-Ok Galera, agora chegou a parte de trazer os dados que geramos para o mundo real. logo vamos fazer nossa aplicação frontend enxergar os dados gerados pelo backend.
+OK Galera, agora chegou a parte de trazer os dados que geramos para o mundo real. logo vamos fazer nossa aplicação frontend enxergar os dados gerados pelo backend.
 
 Para isso vamos criar um serviço(service) que irá se conectar com o nosso backend e retornar os dados em Json para que possamos utiliza-lo.
 
-Primeiro vamos adicionar o **axios**, biblioteca ou pacote(package) para realizar requisições http para Rest Endpoints para realizar operações CRUD (Create, Read, Update e Delete).
+Primeiro vamos adicionar o **axios**, pacote(package) para realizar requisições HTTP para retornar e/ou enviar dados para o **backend**. Veja o artigo da [Side Point](https://www.sitepoint.com/axios-beginner-guide/#:~:text=Axios%20is%20a%20popular%2C%20promise,application%20will%20need%20to%20do.).
 
 `npm install axios`
 ```typescript  
@@ -1321,15 +1349,19 @@ A variável de ambiente `process.env.REACT_APP_API_ADDR` que você está vendo e
 REACT_APP_API_ADDR='http://192.168.1.70:81'
 ```
 
-Nesse caso, a(s) variável(is) de ambiente são carregadas assim que o projeto é iniciado. Facilita muito para que você não tenha que ficar trocando o IP do site em desenvolvimento toda vez que trocar de IP na sua máquina, logo, você só precisa alterar em um único lugar.
+Nesse caso, a(s) variável/variáveis de ambiente são carregadas assim que o projeto é iniciado. Facilita muito para que você não tenha que ficar trocando o IP do site em desenvolvimento toda vez que trocar de IP na sua máquina, logo, você só precisa alterar em um único lugar.
+
+Existem varias formas de trabalharmos com variáveis de ambiente para facilitar nossa vida quando estamos criando uma aplicação web. No **backend** por exemplo, criamos o arquivo `backend/src/environments/index.ts` que nos permite criar varias variáveis e também funções para retornar de forma mais fácil nossas variáveis com endereços de IP, etc.
+
+Artigos interessantes: https://dev.to/numtostr/environment-variables-in-node-js-the-right-way-15ad e https://medium.com/ulangi-app/why-dotenv-is-unnecessary-4ca981c1253
 
 Adicionamos o **Axios** e o arquivo **.env**, agora vamos criar nossa página para retornar os dados para o frontend.
 
 Primeiro vamos criar nossa página UserList em `scr/pages/UserList/index.tsx` e também vamos incluir o arquivo `styles.css` na mesma pasta. Posteriormente o `UserList` pode virar um componente reutilizável por várias páginas na aplicação.
 
-
-`react-router-dom` e `npm install @types/react-router-dom` - Roteador de transações entre componentes do React - Router way to do the transitions between components
+`react-router-dom` e `npm install @types/react-router-dom` - Roteador de transações entre componentes do React. 
 `npm install react-icons` - Variedade de icones disponíveis para usar em Aplicações React.
+
 ```
 ➜  web git:(master) ✗ dockerNlw1server npm install react-router-dom
 ➜  web git:(master) ✗ dockerNlw1server npm install @types/react-router-dom -D
@@ -1338,7 +1370,8 @@ Primeiro vamos criar nossa página UserList em `scr/pages/UserList/index.tsx` e 
 
 Criamos nossa simples home page na pasta `src/pages/home/index.tsx` e nossa Lista de Usuários na pasta `src/pages/UserList/index.tsx`. Da mesma forma que no **backend**, no **frontend** com React também temos que criar Rotas para as nossas páginas. Nesse casso criamos um arquivo de rotas dentro da nossa pasta `src/routes.tsx`.
 
-`src/pages/home/index.tsx` - Aqui criamos nossa home page que será acessada através do endereço **http://localhost** ou **http://ip_da_sua_maquina**
+`src/pages/home/index.tsx` - Aqui criamos nossa home page que será acessada através do endereço **http://localhost** ou **http://ip_da_sua_maquina**.
+
 ```typescript
 import React from "react";
 import { Link } from "react-router-dom";
@@ -1348,14 +1381,14 @@ const Home = () => {
     return (
         <>
             <h1>
-                Home Page Ecoleta / RecycleMinds
+                Home Page Ecoleta
             </h1>
             <Link to="/user-list">
                 <span>
                     <FiLogIn />
                 </span>
                 <strong>
-                    Acesse a lista de usuários
+                    Acesse a lista de usuários.
                 </strong>               
             </Link>
         </>
@@ -1365,8 +1398,11 @@ const Home = () => {
 export default Home;
 ```
 
-<a id="apiusersweb">src/pages/UserList/index.tsx</a> [come back to mobile api](#apiusersmobile) - E aqui é o ponto crucial do nosso projeto, onde acessamos os dados dos usuários e retornamos para o **frontend**. Não vou colocar o código todo aqui para não ficar muito grande, mas básicamente o que estamos utilizando aqui é o **UseEffect** que irá fazer a chamada da nossa api somente quando a página for inicializada. O **UseState** para armazenar e alterar os dados recebidos da nossa **Api backend** na constante **users**. Posteriormente discutiremos mais sobre useEffect e UseState e como eles interagem com a aplicação. Acesse o arquivo completo disponível na pasta da aplicação.
+E aqui é o ponto crucial do nosso projeto, onde acessamos os dados dos usuários e retornamos para o **frontend**. Não vou colocar o código todo aqui para não ficar muito grande, mas básicamente o que estamos utilizando aqui é o **UseEffect** que irá fazer a chamada da nossa api somente quando a página for inicializada. O **UseState** para armazenar e alterar os dados recebidos da nossa **Api backend** na constante **users**. Posteriormente discutiremos mais sobre useEffect e UseState e como eles interagem com a aplicação. Acesse o arquivo completo disponível na pasta da aplicação. [Ver UserList](web/src/pages/UserList/index.tsx).
 
+<a id="apiusersweb" href="#apiusersmobile" target="_blank">Clique aqui para ver a parte do Mobile</a> 
+
+`web/src/pages/UserList/index.ts`
 ```typescript
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
@@ -1411,6 +1447,7 @@ const Routes = () => {
 
 export default Routes;
 ```
+
 Feito isso, rodamos nosso **backend**, **frontend** e **banco de dados**, você pode roda-los com o `docker-compose up` ou um a um com os comandos:
 
 ```
@@ -1423,22 +1460,25 @@ O banco de dados, como já criamos a nossa imagem, podemos apenas iniciar o `con
 ```
 ➜  Docker-Init-Nodejs-React-React-Native-SQLServer git:(master) ✗ docker start sqlserverv2017
 ```
+
 <img src="img/frontendbackendrun.png" alt="Run Frontend, Backend and DB">
 
 Quando rodamos nossos serviços frontend, backend e database podemos notar que conseguimos acessar nossa aplicação sem problemas e também retornar os dados da nossa Api.
 
 <img src="img/frontendapinodata.png" alt="Frontend with Api but no Cors">
 
-Contudo se prestarmos atenção a tela de Usuários, notaremos que os dados não foram renderizados na nossa aplicação. Isso é porque **aplicação backend** não está utilizando o CORS(Cross-Origin Resource Sharing) para permitir aplicações externas acessarem as api criadas.
+Contudo se prestarmos atenção a tela de Usuários, notaremos que os dados não foram renderizados na nossa aplicação. Isso é porque **aplicação backend** não está utilizando o **CORS***(Cross-Origin Resource Sharing)* para permitir aplicações externas acessarem as api criadas.
 
 <img src="img/errorusingcors.png" alt="Backend Application without use CORS">
 
 Nesse caso instalaremos o `CORS` na nossa aplicação com o comando:
+
 ```
 ➜  backend git:(master) ✗ dockerNlw1server npm install cors
 ➜  backend git:(master) ✗ dockerNlw1server npm install @types/cors -D
 ```
-Isso irá permitir que nosso frontend se comunique com o backend. Talvez seja necessário reiniciar o servidor backend para que as alterações tenham efeito.
+
+Isso irá permitir que nosso frontend se comunique com o **backend**. *Talvez seja necessário reiniciar o servidor backend para que as alterações tenham efeito.*
 
 ```
 ➜  backend git:(master) ✗ dockerNlw1server npm install cors
@@ -1513,13 +1553,13 @@ mobile git:(master) ✗ dockerNlw1server npm install axios
 + axios@0.21.1
 added 2 packages from 4 contributors and audited 1062 packages in 8.516s
 ```
-Axios instalado, agora podemos retornar os dados da nossa API. 
+`Axios` instalado, agora podemos retornar os dados da nossa API. 
 
 ### Home Screen
 
 Vamos criar uma simples **HOME** que será a porta de entrada para o nosso app e de lá criar um rota para a nossa página de usuários.
 
-Nos Apps React Native da mesma forma quando estamos desenvolvendo apps com **Android Studio** não utilizamos tags HTML, logo no caso do **React Native** vamos utilizar tags exclusivas do mesmo. Por examplo, ao invés de utilizarmos a tag `img` do `HTML` vamos importar o componente [Image](https://reactnative.dev/docs/image) do `react-native`. Da mesma forma com o componente [Text](https://reactnative.dev/docs/text) que substitui tags como `H1, H2...H6` entre outras tags de texto que utilizariamos  no HTML, nesse caso o `Text` cumpre bem sua tarefa e com a estilização, você pode fazer maravilhas. No caso da [View](https://reactnative.dev/docs/view), totalmente important para qualquer projeto **React Native**, onde a mesma se comporta como uma `Div` html, flexível e simples de trabalhar com estilos [CSS](https://www.w3.org/Style/CSS/Overview.en.html).  
+Nos Apps React Native da mesma forma quando estamos desenvolvendo apps com **Android Studio** não utilizamos tags HTML, logo no caso do **React Native** vamos utilizar tags exclusivas do mesmo. Por examplo, ao invés de utilizarmos a tag `img` do `HTML` vamos importar o componente [Image](https://reactnative.dev/docs/image) do `react-native`. Da mesma forma com o componente [Text](https://reactnative.dev/docs/text) que substitui tags como `H1, H2...H6` entre outras tags de texto que utilizariamos  no HTML, nesse caso o `Text` cumpre bem sua tarefa e com a estilização, você pode fazer maravilhas. No caso da [View](https://reactnative.dev/docs/view), totalmente important para qualquer projeto **React Native**, onde a mesma se comporta como uma `Div` HTML, flexível e simples de trabalhar com estilos [CSS](https://www.w3.org/Style/CSS/Overview.en.html).  
 
 Arquivo completo em [src/pages/Home/index.tsx](mobile/src/pages/Home/index.tsx).
 
@@ -1569,7 +1609,7 @@ No caso da nossa Home vamos ter um botão que nos dará acesso a nossa lista de 
         </View>
 ```
 
-A função `onPress` chamará a funcão `handleNavigateToUsers` que simplesmente nos redirecioná para a tela, a tela de usuários.
+A função `onPress` chamará a funcão `handleNavigateToUsers` que simplesmente nos redirecioná para a tela, a **tela de usuários**.
 
 ```typescript
 import { useNavigation } from "@react-navigation/native";
@@ -1583,11 +1623,11 @@ const navigation = useNavigation();
 
 Quando utilizamos o navigation, temos que importar o `useNavigation` para nos direcionar para a tela de usuários. No caso o `Users` que estamos chamando é uma rota para a página ou tela(screen) **Users** em [src/pages/Users/index.tsx](mobile/src/pages/Users/index.tsx).
 
-### Routes - Configurando nossas rotas para acessar as próximas telas Configuring our routes to access the next screens
+### Routes - Configurando nossas rotas para acessar as próximas telas.
 
 Da mesma forma que fizamos no projeto **Web**, aqui também temos que configurar nossas rotas para que possamos transitar entre nossas telas e quando tocarmos(clicarmos) no botão para acessar nossa próxima tela, o arquivo de **routes** fará o trabalho para nós. 
 
-Primeiro vamos criar nosso arquivo de [routes](mobile/src/routes.tsx), importaremos o **createStackNavigator** do `@react-navigation/stack` e o **NavigationContainer** `@react-navigation/native` para nos ajudar a criar nossas rotas. Basicamente importamos nossas páginas dentro do nosso arquivos de rotas. O próximo passo é criar um **NavigatorContainer** e adicionar nossas rotas lá usando o **AppStack.Navigator**. No AppStack.Navigator, incluímos o AppStack.Screen com dois(2) parâmetros(attibutos), name(nome da rota) e component(nome do componente que criamos). O componente Home será o primeiro a ser acessado, uma vez que é o primeiro da lista, veja em [Navigation](https://reactnative.dev/docs/navigation). Você pode inverter a ordem dos componentes para ver como se comportam.
+Primeiro vamos criar nosso arquivo de [routes](mobile/src/routes.tsx), importaremos o **createStackNavigator** do `@react-navigation/stack` e o **NavigationContainer** do `@react-navigation/native` para nos ajudar a criar nossas rotas. Basicamente importamos nossas páginas dentro do nosso arquivos de rotas. O próximo passo é criar um **NavigatorContainer** e adicionar nossas rotas lá usando o **AppStack.Navigator**. No AppStack.Navigator, incluímos o AppStack.Screen com dois(2) parâmetros(attibutos), name(nome da rota) e component(nome do componente que criamos). O componente Home será o primeiro a ser acessado, uma vez que é o primeiro da lista, veja em [Navigation](https://reactnative.dev/docs/navigation). Você pode inverter a ordem dos componentes para ver como se comportam.
 
 ```javascript
 import React from "react";
@@ -1624,7 +1664,7 @@ export default Routes;
 
 Com o arquivo de rotas completo será mais fácil gerenciar os componentes e também criar novas rotas quando necessário.
 
-Agora a partir da nossa acessaremos a tela **Users** para visualizar os dados dos usuários e de lá vamos para a UserDetail.
+Agora, a partir da nossa tela **HOME** acessaremos a tela **Users** para visualizar os dados dos usuários e de lá vamos para a **UserDetail**.
 
 Podemos fazer um teste com nosso App subindo nosso servido do Expo. Agora não vamos precisar rodar nosso backend porque só mostraresmos a tela de apresentação do app. No terminal rode o comando:
 
@@ -1635,7 +1675,7 @@ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 --env
 
 <img src="img/mobilehome.jpg" width="25%" height="25%" alt="Home App">
 
-### Tela de Usuários Users Screen
+### Tela de Usuários
 
 Agora temos nosso App com o botão para acessar nossa lista de usuários e é isso que vamos trabalhar agora.
 
@@ -1645,7 +1685,7 @@ Além dos componentes habituais, vamos utilizar um novo componente chamado `reac
 
 Já temos a maioria dos nossos componentes instalados, então só vamos instalar o `react-native-table-component` e o `@types/react-native-table-component`. 
 
-Note que no comando rodadmos `npm i` or invés de `npm install`, mas significa a mesma coisa. 
+Note que no comando rodadmos `npm i` or invés de `npm install`, mas significa a mesma coisa. i = install.
 
 ```
 cd mobile 
@@ -1684,7 +1724,6 @@ Nas importações temos basicamente os componentes normais que já utilizamos na
 Acima temos um exemplo de como gerar dados para nossa tabela. Disponível no link https://www.npmjs.com/package/react-native-table-component. Se verificarmos o objeto **tableState** no **Chrome Dev Tools** vamos notar que temos o **objeto tableState**, o mesmo tem 2 arrays, o primeiro **tablehead**, contém 4 posições com o cabeçalho da tabela, o segundo é o **tableData** com os dados da tabela, num **Array com 4 posições** também e em casa posição, outro Array com 4 posições.
 
 <img src="img/mobiletablearray.png" alt="Array Chrome Dev Tools">
-
 
 Para retornar os dados para a tabela, primeiro no atribuito **data** do elemento **Row** adicionamos o array `tableState.tableHead` com os dados de cabeçalho. No atributo **data** do elemento **Rows**, retornamos os valores do `tableState.tableData`, nesse caso o elemento Rows irá gerar o número de linhas necessárias para a tabela.
 
@@ -1781,7 +1820,7 @@ Acima utilizamos o `TableWrapper` como se fosse as linhas da tabela e o `Cell` p
 
 Note que para chamarmos a funcão que tem um parâmetro, temos que transformar a função em uma `Arrow function`. 
 
-Na funcão abaixo estamos navegando para a tela UserDetail e enviando os parâmetros `id`, e nesse exemplo qualquer outro parâmetro que você ache necessário. Os mesmos serão visualizados na próxima tela com o `useRoute`.  
+Na funcão abaixo estamos navegando para a tela **UserDetail** e enviando os parâmetros `id`, e nesse exemplo qualquer outro parâmetro que você ache necessário. Os mesmos serão visualizados na próxima tela com o `useRoute`.  
 
 ```typescript
 function handleNavigateToDetail(id: number){
@@ -1798,7 +1837,7 @@ Quando carregamos a nosso app podemos ver que o mesmo está exibindo a lista de 
 
 ### Criando Api para retornar detalhes do usuário
 
-Na parte final do nosso código vamos trazer os detalhes de cada usuário usando a `Api` que criamos no backend, porém enviando o parâmetro com o Id do usuário, logo temos que adicionar mais uma funcão no backend da aplicação no arquivo [usersController.ts](backend/src/controllers/usersController.ts).
+Na parte final do nosso código vamos trazer os detalhes de cada usuário usando a `Api` que criamos no **backend**, porém enviando o parâmetro com o Id do usuário, logo temos que adicionar mais uma funcão no **backend** da aplicação no arquivo [usersController.ts](backend/src/controllers/usersController.ts).
 
 Basicamente, usaremos um método [HTTP get](https://www.w3schools.com/tags/ref_httpmethods.asp), mas nesse caso retornaremos somente **um registro** chamando o `métódo show`, veja mais em [Restful Api](https://restful-api-design.readthedocs.io/en/latest/methods.html).
 
@@ -1828,7 +1867,7 @@ Se rodamos nosso backend server e tentarmos dar um get dos dados do usuário com
 
 <img src="img/backendapiuser.png" alt="User Detail">
 
-### Tela de Detalhes do Usuário User Detail Screen
+### Tela de Detalhes do Usuário
 
 Agora que já temos nossa `Api` funcionando, só precisamos retornar os dados do usuário para a tela de detalhes do usuário [UserDetail](mobile/src/pages/UserDetail/index.tsx).
 
@@ -1838,7 +1877,7 @@ Vamos começar com a `interface Params` e o `useRoute`.
 
 Criamso a interface `Params` onde conseguimos indentificar que tipo de dados temos. Nesse caso temos o `user_id: number` que é um número e esse segundo `myAnyOtherParam: any` que não estamos utilizando é somente um exemplo para qualquer outro parametros que queiramos enviar de uma tela para outra.
 
-Um pouco mais abaixo, uma funcão `hook` do tipo `useRoute()` que nos dará acesso ao objeto routes que contém os parâmetros que recebemos da outra tela.
+Um pouco mais abaixo, uma funcão `hook` do tipo `useRoute()` que nos dará acesso ao objeto **routes** que contém os parâmetros que recebemos da outra tela.
 
 ```typescript
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -1868,7 +1907,7 @@ useEffect(() => {
 },[]);
 ```
 
-No código que será exibido em tela para o usuário estamos utilizando o componente `Text` basicamente, que por sua vez está recebendo os dados da variável `user` que na está declarada dessa vez somente como um objeto do tipo `User`, dessa forma `const [user, setUser] = useState<User>({} as User)`, dessa forma **não utilizaremos** o `map` para retornar os dados, apenas chamaremos os dados diretamente dessa forma `{user.first_name}`.
+No código que será exibido em tela para o usuário estamos utilizando o componente `Text` basicamente, que por sua vez está recebendo os dados da variável `user` que na está declarada dessa vez somente como um objeto do tipo `User`, dessa forma `const [user, setUser] = useState<User>({} as User)`, dessa forma **não utilizaremos** o `map` para retornar os dados, apenas chamaremos ele diretamente dessa forma `{user.first_name}`.
 
 ```javascript
 interface User {
@@ -1959,7 +1998,7 @@ Como normalmente, as vezes temos alguns problemas para configurar um ambiente, e
 - [How to set and save an alias in Windows Command Line using doskey](https://www.youtube.com/watch?v=E_6Lklnakew)
 - [Your Must-Have PowerShell Aliases for Docker](https://blog.sixeyed.com/your-must-have-powershell-aliases-for-docker/)
 
-### Readme Format and Other Stuff ;)
+### Formatar Readme e outras coisas ;)
 
 - [GitHub Cheat Sheet](https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.md)
 - [Get started with Docker Compose](https://docs.docker.com/compose/gettingstarted/)
