@@ -15,6 +15,8 @@ Compartilhem e contribuam, #ConhecimentoÉParaSerCompartilhado
 
 Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
+Correções de código ou dúvidas, por favor me envie um e-mail (lexvieira.info@gmail.com)
+
 <p align="center">
   <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>

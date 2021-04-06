@@ -15,6 +15,8 @@ Share and contribute, #KnowledgeIsToShare
 
 After the merge of your pull request is done, you can delete your branch.
 
+Code corrections or questions, please send me an email (lexvieira.info@gmail.com)
+
 <p align="center">
   <img src="img/ecoletaproject.png" alt="Project Ecoleta Docker" width="75%" height="75%">
 </p>
